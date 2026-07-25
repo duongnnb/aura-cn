@@ -101,12 +101,12 @@ export default function LandingPage() {
             {/* Button preview */}
             <PreviewCard title="Button" href="/docs/components/button">
               <div className="flex flex-wrap gap-2">
-                <AuraButton size="sm">Primary</AuraButton>
-                <AuraButton size="sm" variant="secondary">
-                  Secondary
+                <AuraButton size="sm">Default</AuraButton>
+                <AuraButton size="sm" variant="primary">
+                  Subscribe
                 </AuraButton>
-                <AuraButton size="sm" variant="outline">
-                  Outline
+                <AuraButton size="sm" variant="accent">
+                  Accent
                 </AuraButton>
               </div>
             </PreviewCard>

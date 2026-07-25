@@ -60,9 +60,10 @@ export function ButtonDemo() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <AuraButton>Default</AuraButton>
+      <AuraButton variant="primary">Subscribe</AuraButton>
+      <AuraButton variant="accent">Accent</AuraButton>
       <AuraButton size="sm">Small</AuraButton>
       <AuraButton size="lg">Large</AuraButton>
-      <AuraButton variant="secondary">Secondary</AuraButton>
       <AuraButton variant="outline">Outline</AuraButton>
       <AuraButton variant="ghost">Ghost</AuraButton>
       <AuraButton disabled>Disabled</AuraButton>
