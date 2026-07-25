@@ -1,0 +1,34 @@
+---
+title: Aura Breadcrumb
+description: A navigation breadcrumb trail showing the current page hierarchy.
+---
+
+## Preview
+
+<ComponentPreview>
+  <BreadcrumbDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-breadcrumb" />
+
+## Usage
+
+```tsx
+import { AuraBreadcrumb } from "@/registry/aura-cn/aura-breadcrumb"
+
+<AuraBreadcrumb items={[
+  { label: "Home", href: "/" },
+  { label: "Components", href: "/components" },
+  { label: "Breadcrumb" },
+]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `BreadcrumbItem[]` | — | Array of breadcrumb items |
+| `separator` | `ReactNode` | Chevron SVG | Custom separator element |
+| `className` | `string` | — | Additional CSS classes |

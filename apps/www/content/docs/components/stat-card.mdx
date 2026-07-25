@@ -1,0 +1,32 @@
+---
+title: Aura Stat Card
+description: Dashboard metric card with value, trend indicator, and change percentage.
+---
+
+## Preview
+
+<ComponentPreview>
+  <StatCardDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-stat-card" />
+
+## Usage
+
+```tsx
+import { AuraStatCard } from "@/registry/aura-cn/aura-stat-card"
+
+<AuraStatCard label="Revenue" value="$45,231" change="+12.5%" trend="up" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Metric label |
+| `value` | `string \| number` | — | Main value |
+| `change` | `string` | — | Change text (e.g. "+12%") |
+| `trend` | `"up" \| "down" \| "neutral"` | `"neutral"` | Trend direction |
+| `icon` | `ReactNode` | — | Optional icon |

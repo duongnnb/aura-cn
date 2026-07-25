@@ -1,0 +1,30 @@
+---
+title: Aura Pagination
+description: Page navigation with smart ellipsis and prev/next controls.
+---
+
+## Preview
+
+<ComponentPreview>
+  <PaginationDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-pagination" />
+
+## Usage
+
+```tsx
+import { AuraPagination } from "@/registry/aura-cn/aura-pagination"
+
+<AuraPagination currentPage={1} totalPages={12} onPageChange={setPage} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `currentPage` | `number` | — | Active page |
+| `totalPages` | `number` | — | Total number of pages |
+| `onPageChange` | `(page: number) => void` | — | Page change callback |

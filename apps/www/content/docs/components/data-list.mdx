@@ -1,0 +1,36 @@
+---
+title: Aura Data List
+description: Key-value pairs display in vertical or horizontal grid layout.
+---
+
+## Preview
+
+<ComponentPreview>
+  <DataListDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-data-list" />
+
+## Usage
+
+```tsx
+import { AuraDataList } from "@/registry/aura-cn/aura-data-list"
+
+<AuraDataList items={[
+  { label: "Name", value: "Aura CN" },
+  { label: "Version", value: "1.0.0" },
+  { label: "License", value: "MIT" },
+]} />
+
+<AuraDataList layout="horizontal" items={[...]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `DataListItem[]` | — | Key-value pairs |
+| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | Display layout |
+| `className` | `string` | — | Additional CSS classes |

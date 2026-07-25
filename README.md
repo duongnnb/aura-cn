@@ -2,8 +2,6 @@
 
 A visual-effects focused UI component library with **3D rim light**, **dynamic cursor glow**, and **micro-interactions**. Built for React, inspired by [shadcn/ui](https://ui.shadcn.com).
 
-> YouTube Shorts–style 3D lighting effects as reusable components.
-
 ## Features
 
 - **Rim Light** — Gradient border via `mask-composite: exclude`

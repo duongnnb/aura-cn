@@ -1,0 +1,37 @@
+---
+title: Aura Notification Badge
+description: A count or dot badge overlay for icons and buttons.
+---
+
+## Preview
+
+<ComponentPreview>
+  <NotificationBadgeDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-notification-badge" />
+
+## Usage
+
+```tsx
+import { AuraNotificationBadge } from "@/registry/aura-cn/aura-notification-badge"
+
+<AuraNotificationBadge count={5}>
+  <BellIcon />
+</AuraNotificationBadge>
+
+<AuraNotificationBadge dot>
+  <ChatIcon />
+</AuraNotificationBadge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `count` | `number` | `0` | Notification count |
+| `max` | `number` | `99` | Max before showing "99+" |
+| `dot` | `boolean` | `false` | Show dot instead of count |
+| `children` | `ReactNode` | — | Target element |

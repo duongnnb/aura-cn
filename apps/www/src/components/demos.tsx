@@ -60,6 +60,25 @@ import { AuraCommand, type CommandItem } from "@/registry/aura-cn/aura-command";
 import { AuraPopover } from "@/registry/aura-cn/aura-popover";
 import { AuraTable, type AuraTableColumn } from "@/registry/aura-cn/aura-table";
 import { AuraDatePicker } from "@/registry/aura-cn/aura-datepicker";
+import { AuraBreadcrumb, type BreadcrumbItem } from "@/registry/aura-cn/aura-breadcrumb";
+import { AuraPagination } from "@/registry/aura-cn/aura-pagination";
+import { AuraDivider } from "@/registry/aura-cn/aura-divider";
+import { AuraAlert } from "@/registry/aura-cn/aura-alert";
+import { AuraOTPInput } from "@/registry/aura-cn/aura-otp-input";
+import { AuraTagInput } from "@/registry/aura-cn/aura-tag-input";
+import { AuraAutocomplete } from "@/registry/aura-cn/aura-autocomplete";
+import { AuraFileUpload } from "@/registry/aura-cn/aura-file-upload";
+import { AuraSidebar, type SidebarItem } from "@/registry/aura-cn/aura-sidebar";
+import { AuraNavbar } from "@/registry/aura-cn/aura-navbar";
+import { AuraTimeline, type TimelineItem } from "@/registry/aura-cn/aura-timeline";
+import { AuraCarousel } from "@/registry/aura-cn/aura-carousel";
+import { AuraSwitchIcon } from "@/registry/aura-cn/aura-switch-icon";
+import { AuraColorPicker } from "@/registry/aura-cn/aura-color-picker";
+import { AuraConfirmDialog } from "@/registry/aura-cn/aura-confirm-dialog";
+import { AuraNotificationBadge } from "@/registry/aura-cn/aura-notification-badge";
+import { AuraStatCard } from "@/registry/aura-cn/aura-stat-card";
+import { AuraTreeView, type TreeNode } from "@/registry/aura-cn/aura-tree-view";
+import { AuraDataList } from "@/registry/aura-cn/aura-data-list";
 
 export function ButtonDemo() {
   return (
@@ -462,4 +481,236 @@ export function TableDemo() {
 export function DatePickerDemo() {
   const [date, setDate] = React.useState<Date | undefined>();
   return <AuraDatePicker value={date} onChange={setDate} />;
+}
+
+/* ─── Batch 1 ─── */
+
+const breadcrumbItems: BreadcrumbItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Components", href: "/components" },
+  { label: "Breadcrumb" },
+];
+
+export function BreadcrumbDemo() {
+  return <AuraBreadcrumb items={breadcrumbItems} />;
+}
+
+export function PaginationDemo() {
+  const [page, setPage] = React.useState(1);
+  return <AuraPagination currentPage={page} totalPages={12} onPageChange={setPage} />;
+}
+
+export function DividerDemo() {
+  return (
+    <div className="space-y-4 max-w-sm">
+      <p className="text-sm text-[var(--text-secondary)]">Content above</p>
+      <AuraDivider />
+      <AuraDivider label="or" />
+      <p className="text-sm text-[var(--text-secondary)]">Content below</p>
+    </div>
+  );
+}
+
+export function AlertDemo() {
+  return (
+    <div className="max-w-md space-y-3">
+      <AuraAlert variant="info" title="Info">This is an informational alert.</AuraAlert>
+      <AuraAlert variant="success" title="Success">Operation completed.</AuraAlert>
+      <AuraAlert variant="warning" title="Warning">Please review your input.</AuraAlert>
+      <AuraAlert variant="error" title="Error">Something went wrong.</AuraAlert>
+    </div>
+  );
+}
+
+/* ─── Batch 2 ─── */
+
+export function OtpInputDemo() {
+  return <AuraOTPInput length={6} onChange={(otp) => console.log(otp)} />;
+}
+
+export function TagInputDemo() {
+  const [tags, setTags] = React.useState(["React", "TypeScript"]);
+  return <AuraTagInput value={tags} onChange={setTags} maxTags={5} className="max-w-sm" />;
+}
+
+export function AutocompleteDemo() {
+  return (
+    <AuraAutocomplete
+      options={["React", "Vue", "Angular", "Svelte", "Solid", "Next.js", "Nuxt", "Remix"]}
+      placeholder="Search frameworks..."
+      className="max-w-sm"
+    />
+  );
+}
+
+export function FileUploadDemo() {
+  return <AuraFileUpload accept="image/*" multiple maxSize={5} className="max-w-md" />;
+}
+
+/* ─── Batch 3 ─── */
+
+const sidebarItems: SidebarItem[] = [
+  { label: "Dashboard", active: true },
+  { label: "Components", children: [
+    { label: "Button" },
+    { label: "Card" },
+    { label: "Input" },
+  ]},
+  { label: "Settings" },
+];
+
+export function SidebarDemo() {
+  return (
+    <div className="h-64 w-60 overflow-hidden rounded-xl border border-[var(--card-border)]">
+      <AuraSidebar items={sidebarItems} />
+    </div>
+  );
+}
+
+export function NavbarDemo() {
+  return (
+    <div className="rounded-xl border border-[var(--card-border)] overflow-hidden">
+      <AuraNavbar
+        brand={<span>Aura</span>}
+        links={[
+          { label: "Docs", active: true },
+          { label: "Components" },
+          { label: "GitHub" },
+        ]}
+      />
+    </div>
+  );
+}
+
+const timelineItems: TimelineItem[] = [
+  { title: "Project created", description: "Initial setup and configuration", date: "Jan 1", active: true },
+  { title: "Components added", description: "Button, Card, Input components", date: "Jan 5" },
+  { title: "Dark mode support", description: "CSS variable theming system", date: "Jan 10" },
+  { title: "v1.0 Release", date: "Jan 15" },
+];
+
+export function TimelineDemo() {
+  return <AuraTimeline items={timelineItems} className="max-w-md" />;
+}
+
+export function CarouselDemo() {
+  return (
+    <AuraCarousel className="max-w-md h-48">
+      <div className="flex h-48 items-center justify-center rounded-xl bg-blue-500/20 text-[var(--text-primary)]">Slide 1</div>
+      <div className="flex h-48 items-center justify-center rounded-xl bg-purple-500/20 text-[var(--text-primary)]">Slide 2</div>
+      <div className="flex h-48 items-center justify-center rounded-xl bg-emerald-500/20 text-[var(--text-primary)]">Slide 3</div>
+    </AuraCarousel>
+  );
+}
+
+/* ─── Batch 4 ─── */
+
+export function SwitchIconDemo() {
+  const [checked, setChecked] = React.useState(false);
+  return <AuraSwitchIcon checked={checked} onCheckedChange={setChecked} />;
+}
+
+export function ColorPickerDemo() {
+  return <AuraColorPicker />;
+}
+
+export function ConfirmDialogDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="rounded-lg bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700 transition"
+      >
+        Delete Item
+      </button>
+      <AuraConfirmDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="Delete this item?"
+        description="This action cannot be undone. The item will be permanently removed."
+        variant="destructive"
+        confirmLabel="Delete"
+        onConfirm={() => console.log("Deleted")}
+      />
+    </>
+  );
+}
+
+export function NotificationBadgeDemo() {
+  return (
+    <div className="flex items-center gap-6">
+      <AuraNotificationBadge count={3}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--bg-surface)] text-[var(--text-primary)]">
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+        </div>
+      </AuraNotificationBadge>
+      <AuraNotificationBadge count={150}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--bg-surface)] text-[var(--text-primary)]">
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+      </AuraNotificationBadge>
+      <AuraNotificationBadge dot>
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--bg-surface)] text-[var(--text-primary)]">
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+          </svg>
+        </div>
+      </AuraNotificationBadge>
+    </div>
+  );
+}
+
+/* ─── Batch 5 ─── */
+
+export function StatCardDemo() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-3">
+      <AuraStatCard label="Revenue" value="$45,231" change="+12.5%" trend="up" />
+      <AuraStatCard label="Users" value="2,340" change="+8.2%" trend="up" />
+      <AuraStatCard label="Bounce Rate" value="24.5%" change="-3.1%" trend="down" />
+    </div>
+  );
+}
+
+const treeNodes: TreeNode[] = [
+  {
+    id: "src",
+    label: "src",
+    children: [
+      {
+        id: "components",
+        label: "components",
+        children: [
+          { id: "button", label: "button.tsx" },
+          { id: "card", label: "card.tsx" },
+        ],
+      },
+      { id: "utils", label: "utils.ts" },
+    ],
+  },
+  { id: "package", label: "package.json" },
+];
+
+export function TreeViewDemo() {
+  return <AuraTreeView nodes={treeNodes} defaultExpanded={["src", "components"]} className="max-w-sm" />;
+}
+
+export function DataListDemo() {
+  return (
+    <div className="max-w-sm space-y-6">
+      <AuraDataList
+        items={[
+          { label: "Name", value: "Aura CN" },
+          { label: "Version", value: "1.0.0" },
+          { label: "License", value: "MIT" },
+          { label: "Components", value: "40+" },
+        ]}
+      />
+    </div>
+  );
 }

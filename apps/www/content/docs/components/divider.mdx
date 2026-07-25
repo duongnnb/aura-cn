@@ -1,0 +1,32 @@
+---
+title: Aura Divider
+description: A horizontal or vertical separator line with optional label.
+---
+
+## Preview
+
+<ComponentPreview>
+  <DividerDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-divider" />
+
+## Usage
+
+```tsx
+import { AuraDivider } from "@/registry/aura-cn/aura-divider"
+
+<AuraDivider />
+<AuraDivider label="or" />
+<AuraDivider orientation="vertical" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Optional centered label |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Direction |
+| `className` | `string` | — | Additional CSS classes |

@@ -1,0 +1,31 @@
+---
+title: Aura File Upload
+description: Drag-and-drop file upload zone with file list and size validation.
+---
+
+## Preview
+
+<ComponentPreview>
+  <FileUploadDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-file-upload" />
+
+## Usage
+
+```tsx
+import { AuraFileUpload } from "@/registry/aura-cn/aura-file-upload"
+
+<AuraFileUpload accept="image/*" multiple maxSize={5} onFiles={(files) => console.log(files)} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `accept` | `string` | — | File type filter |
+| `multiple` | `boolean` | `false` | Allow multiple files |
+| `maxSize` | `number` | `10` | Max file size in MB |
+| `onFiles` | `(files: File[]) => void` | — | Files selected callback |

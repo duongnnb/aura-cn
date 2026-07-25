@@ -1,0 +1,38 @@
+---
+title: Aura Navbar
+description: Responsive top navigation bar with mobile hamburger menu.
+---
+
+## Preview
+
+<ComponentPreview>
+  <NavbarDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-navbar" />
+
+## Usage
+
+```tsx
+import { AuraNavbar } from "@/registry/aura-cn/aura-navbar"
+
+<AuraNavbar
+  brand={<span>My App</span>}
+  links={[
+    { label: "Docs", href: "/docs", active: true },
+    { label: "GitHub", href: "https://github.com" },
+  ]}
+  actions={<button>Sign In</button>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `brand` | `ReactNode` | — | Logo/brand area |
+| `links` | `NavbarLink[]` | `[]` | Navigation links |
+| `actions` | `ReactNode` | — | Right-side actions |
+| `className` | `string` | — | Additional CSS classes |

@@ -1,0 +1,31 @@
+---
+title: Aura Color Picker
+description: Color selector with presets grid and custom hex/native input.
+---
+
+## Preview
+
+<ComponentPreview>
+  <ColorPickerDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-color-picker" />
+
+## Usage
+
+```tsx
+import { AuraColorPicker } from "@/registry/aura-cn/aura-color-picker"
+
+<AuraColorPicker value="#3b82f6" onChange={(color) => console.log(color)} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | `"#3b82f6"` | Current color hex |
+| `onChange` | `(color: string) => void` | — | Color change callback |
+| `presets` | `string[]` | 10 defaults | Preset color swatches |
+| `className` | `string` | — | Additional CSS classes |

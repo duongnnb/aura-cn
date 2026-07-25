@@ -1,0 +1,32 @@
+---
+title: Aura Alert
+description: Contextual feedback messages with info, success, warning, and error variants.
+---
+
+## Preview
+
+<ComponentPreview>
+  <AlertDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-alert" />
+
+## Usage
+
+```tsx
+import { AuraAlert } from "@/registry/aura-cn/aura-alert"
+
+<AuraAlert variant="success" title="Done!">Your changes were saved.</AuraAlert>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Alert style |
+| `title` | `string` | — | Alert heading |
+| `children` | `ReactNode` | — | Body content |
+| `icon` | `boolean` | `true` | Show variant icon |
+| `className` | `string` | — | Additional CSS classes |

@@ -1,0 +1,33 @@
+---
+title: Aura Sidebar
+description: Collapsible sidebar navigation with nested items and active state.
+---
+
+## Preview
+
+<ComponentPreview>
+  <SidebarDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-sidebar" />
+
+## Usage
+
+```tsx
+import { AuraSidebar } from "@/registry/aura-cn/aura-sidebar"
+
+<AuraSidebar items={[
+  { label: "Dashboard", active: true },
+  { label: "Settings", children: [{ label: "Profile" }, { label: "Account" }] },
+]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `SidebarItem[]` | — | Navigation items |
+| `collapsed` | `boolean` | `false` | Collapsed icon-only mode |
+| `className` | `string` | — | Additional CSS classes |

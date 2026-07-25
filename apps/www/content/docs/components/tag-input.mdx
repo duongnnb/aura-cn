@@ -1,0 +1,33 @@
+---
+title: Aura Tag Input
+description: Multi-tag input with Enter/comma to add tags and backspace to remove.
+---
+
+## Preview
+
+<ComponentPreview>
+  <TagInputDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-tag-input" />
+
+## Usage
+
+```tsx
+import { AuraTagInput } from "@/registry/aura-cn/aura-tag-input"
+
+const [tags, setTags] = React.useState(["React"])
+
+<AuraTagInput value={tags} onChange={setTags} maxTags={5} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string[]` | `[]` | Current tags |
+| `onChange` | `(tags: string[]) => void` | — | Tags change callback |
+| `placeholder` | `string` | `"Add tag..."` | Input placeholder |
+| `maxTags` | `number` | — | Maximum number of tags |

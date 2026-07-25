@@ -1,0 +1,35 @@
+---
+title: Aura Carousel
+description: Slide-based carousel with prev/next controls and indicator dots.
+---
+
+## Preview
+
+<ComponentPreview>
+  <CarouselDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-carousel" />
+
+## Usage
+
+```tsx
+import { AuraCarousel } from "@/registry/aura-cn/aura-carousel"
+
+<AuraCarousel autoPlay interval={5000}>
+  <div>Slide 1</div>
+  <div>Slide 2</div>
+  <div>Slide 3</div>
+</AuraCarousel>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Slide elements |
+| `autoPlay` | `boolean` | `false` | Auto-advance slides |
+| `interval` | `number` | `4000` | Auto-play interval (ms) |
+| `className` | `string` | — | Additional CSS classes |

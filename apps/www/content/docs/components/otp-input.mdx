@@ -1,0 +1,31 @@
+---
+title: Aura OTP Input
+description: A one-time password input with auto-focus, paste support, and backspace navigation.
+---
+
+## Preview
+
+<ComponentPreview>
+  <OtpInputDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-otp-input" />
+
+## Usage
+
+```tsx
+import { AuraOtpInput } from "@/registry/aura-cn/aura-otp-input"
+
+<AuraOtpInput length={6} onChange={(otp) => console.log(otp)} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `length` | `number` | `6` | Number of digits |
+| `value` | `string` | `""` | Controlled value |
+| `onChange` | `(value: string) => void` | — | Value change callback |
+| `className` | `string` | — | Additional CSS classes |

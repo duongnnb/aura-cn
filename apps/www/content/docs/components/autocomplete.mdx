@@ -1,0 +1,35 @@
+---
+title: Aura Autocomplete
+description: Input with filtered dropdown suggestions and keyboard navigation.
+---
+
+## Preview
+
+<ComponentPreview>
+  <AutocompleteDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-autocomplete" />
+
+## Usage
+
+```tsx
+import { AuraAutocomplete } from "@/registry/aura-cn/aura-autocomplete"
+
+<AuraAutocomplete
+  options={["React", "Vue", "Angular", "Svelte"]}
+  placeholder="Search..."
+  onChange={(val) => console.log(val)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `string[]` | — | Available suggestions |
+| `value` | `string` | `""` | Controlled value |
+| `onChange` | `(value: string) => void` | — | Selection callback |
+| `placeholder` | `string` | `"Search..."` | Input placeholder |

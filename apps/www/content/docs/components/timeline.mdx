@@ -1,0 +1,32 @@
+---
+title: Aura Timeline
+description: Vertical timeline with connected dots and optional dates.
+---
+
+## Preview
+
+<ComponentPreview>
+  <TimelineDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-timeline" />
+
+## Usage
+
+```tsx
+import { AuraTimeline } from "@/registry/aura-cn/aura-timeline"
+
+<AuraTimeline items={[
+  { title: "Step 1", description: "Description", date: "Jan 1", active: true },
+  { title: "Step 2", description: "Description", date: "Jan 5" },
+]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `TimelineItem[]` | — | Timeline entries |
+| `className` | `string` | — | Additional CSS classes |

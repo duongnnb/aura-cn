@@ -1,0 +1,42 @@
+---
+title: Aura Confirm Dialog
+description: A confirmation dialog with destructive/default variants and customizable actions.
+---
+
+## Preview
+
+<ComponentPreview>
+  <ConfirmDialogDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-confirm-dialog" />
+
+## Usage
+
+```tsx
+import { AuraConfirmDialog } from "@/registry/aura-cn/aura-confirm-dialog"
+
+<AuraConfirmDialog
+  open={open}
+  onOpenChange={setOpen}
+  title="Delete item?"
+  description="This cannot be undone."
+  variant="destructive"
+  onConfirm={() => handleDelete()}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `false` | Show/hide dialog |
+| `onOpenChange` | `(open: boolean) => void` | — | Open state callback |
+| `title` | `string` | `"Are you sure?"` | Dialog heading |
+| `description` | `string` | — | Supporting text |
+| `variant` | `"default" \| "destructive"` | `"default"` | Button color |
+| `confirmLabel` | `string` | `"Confirm"` | Confirm button text |
+| `cancelLabel` | `string` | `"Cancel"` | Cancel button text |
+| `onConfirm` | `() => void` | — | Confirm callback |

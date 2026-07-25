@@ -1,0 +1,33 @@
+---
+title: Aura Switch Icon
+description: Animated icon toggle with rotate/scale transitions (e.g., sun/moon).
+---
+
+## Preview
+
+<ComponentPreview>
+  <SwitchIconDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-switch-icon" />
+
+## Usage
+
+```tsx
+import { AuraSwitchIcon } from "@/registry/aura-cn/aura-switch-icon"
+
+const [dark, setDark] = React.useState(false)
+
+<AuraSwitchIcon checked={dark} onCheckedChange={setDark} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Toggle state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | State change callback |
+| `iconOn` | `ReactNode` | Sun icon | Icon when checked |
+| `iconOff` | `ReactNode` | Moon icon | Icon when unchecked |

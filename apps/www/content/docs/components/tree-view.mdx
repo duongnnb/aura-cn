@@ -1,0 +1,39 @@
+---
+title: Aura Tree View
+description: Expandable hierarchical tree structure for file explorers and nested data.
+---
+
+## Preview
+
+<ComponentPreview>
+  <TreeViewDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-tree-view" />
+
+## Usage
+
+```tsx
+import { AuraTreeView } from "@/registry/aura-cn/aura-tree-view"
+
+<AuraTreeView
+  nodes={[
+    { id: "src", label: "src", children: [
+      { id: "utils", label: "utils.ts" },
+    ]},
+  ]}
+  defaultExpanded={["src"]}
+  onSelect={(node) => console.log(node)}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `nodes` | `TreeNode[]` | — | Tree data |
+| `defaultExpanded` | `string[]` | `[]` | Initially expanded node IDs |
+| `onSelect` | `(node: TreeNode) => void` | — | Node click callback |
+| `className` | `string` | — | Additional CSS classes |
