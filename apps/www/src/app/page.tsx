@@ -1,331 +1,314 @@
 "use client";
 
+import * as React from "react";
+import Link from "next/link";
 import { AuraButton } from "@/registry/aura-cn/aura-button";
 import {
   AuraCard,
   AuraCardHeader,
   AuraCardTitle,
   AuraCardDescription,
-  AuraCardContent,
 } from "@/registry/aura-cn/aura-card";
 import { AuraInput } from "@/registry/aura-cn/aura-input";
-import { AuraTextarea } from "@/registry/aura-cn/aura-textarea";
 import { AuraToggle } from "@/registry/aura-cn/aura-toggle";
-import { AuraChip } from "@/registry/aura-cn/aura-chip";
-import { AuraSelect } from "@/registry/aura-cn/aura-select";
-import {
-  AuraCheckbox,
-  AuraRadioGroup,
-  AuraRadioItem,
-} from "@/registry/aura-cn/aura-checkbox-radio";
 import { AuraSlider } from "@/registry/aura-cn/aura-slider";
-import {
-  AuraTabs,
-  AuraTabsList,
-  AuraTabsTrigger,
-  AuraTabsContent,
-} from "@/registry/aura-cn/aura-tabs";
-import { AuraAvatar } from "@/registry/aura-cn/aura-avatar";
 import { AuraProgress } from "@/registry/aura-cn/aura-progress";
-import {
-  AuraAccordion,
-  AuraAccordionItem,
-  AuraAccordionTrigger,
-  AuraAccordionContent,
-} from "@/registry/aura-cn/aura-accordion";
-import { AuraSkeleton } from "@/registry/aura-cn/aura-skeleton";
-import { AuraToast } from "@/registry/aura-cn/aura-toast";
 import { AuraBadge } from "@/registry/aura-cn/aura-badge";
+import { AuraChip } from "@/registry/aura-cn/aura-chip";
+import { AuraSkeleton } from "@/registry/aura-cn/aura-skeleton";
+import {
+  AuraThemeProvider,
+  AuraThemeSwitcher,
+} from "@/registry/aura-cn/aura-theme";
 
-export default function ShowcasePage() {
+export default function LandingPage() {
   return (
-    <div className="dark min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-5xl px-6 py-20">
-        {/* Hero */}
-        <header className="mb-20 text-center">
-          <h1 className="mb-4 text-6xl font-bold tracking-tight">aura-cn</h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            3D light effect UI components with rim light, dynamic cursor glow,
-            and micro-interactions. Copy-paste. Open source.
-          </p>
-          <div className="mt-6 flex justify-center gap-3">
-            <code className="rounded-md bg-secondary px-3 py-1.5 text-sm text-secondary-foreground">
-              npx shadcn@latest add https://aura-cn.dev/r/aura-button.json
-            </code>
-          </div>
-        </header>
-
-        {/* Components */}
-        <div className="space-y-16">
-          {/* Button */}
-          <Section title="Aura Button" description="Hover to see the dynamic cursor glow effect.">
-            <div className="flex flex-wrap items-center gap-3">
-              <AuraButton>Default Aura</AuraButton>
-              <AuraButton size="sm">Small</AuraButton>
-              <AuraButton size="lg">Large</AuraButton>
-              <AuraButton variant="secondary">Secondary</AuraButton>
-              <AuraButton variant="outline">Outline</AuraButton>
-              <AuraButton variant="ghost">Ghost</AuraButton>
-              <AuraButton disabled>Disabled</AuraButton>
-            </div>
-          </Section>
-
-          {/* Card */}
-          <Section title="Aura Card" description="Move your cursor over the card to see the glow.">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <AuraCard>
-                <AuraCardHeader>
-                  <AuraCardTitle>Getting Started</AuraCardTitle>
-                  <AuraCardDescription>
-                    Install aura-cn components with a single command.
-                  </AuraCardDescription>
-                </AuraCardHeader>
-                <AuraCardContent>
-                  <code className="text-xs text-muted-foreground">
-                    npx shadcn@latest add aura-button
-                  </code>
-                </AuraCardContent>
-              </AuraCard>
-              <AuraCard>
-                <AuraCardHeader>
-                  <AuraCardTitle>Customizable</AuraCardTitle>
-                  <AuraCardDescription>
-                    Built with CSS variables. Tweak colors, glow intensity, and more.
-                  </AuraCardDescription>
-                </AuraCardHeader>
-              </AuraCard>
-            </div>
-          </Section>
-
-          {/* Input & Textarea */}
-          <Section title="Aura Input & Textarea" description="Recessed style with inverted rim light and focus accent.">
-            <div className="max-w-sm space-y-4">
-              <AuraInput placeholder="Enter your email..." />
-              <AuraInput placeholder="Disabled input" disabled />
-              <AuraTextarea placeholder="Write something amazing..." />
-            </div>
-          </Section>
-
-          {/* Select */}
-          <Section title="Aura Select" description="Dropdown select with aura styling.">
-            <div className="max-w-xs">
-              <AuraSelect
-                placeholder="Choose framework"
-                options={[
-                  { value: "react", label: "React" },
-                  { value: "vue", label: "Vue" },
-                  { value: "svelte", label: "Svelte" },
-                  { value: "angular", label: "Angular" },
-                ]}
-              />
-            </div>
-          </Section>
-
-          {/* Toggle */}
-          <Section title="Aura Toggle" description="Switch with glowing thumb indicator.">
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <AuraToggle defaultChecked />
-                <span className="text-sm">Enabled</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <AuraToggle />
-                <span className="text-sm">Disabled</span>
-              </div>
-            </div>
-          </Section>
-
-          {/* Checkbox & Radio */}
-          <Section title="Aura Checkbox & Radio" description="Selection controls with rim light effects.">
-            <div className="flex gap-12">
-              <div className="space-y-3">
-                <AuraCheckbox label="Option A" defaultChecked />
-                <AuraCheckbox label="Option B" />
-                <AuraCheckbox label="Option C" />
-              </div>
-              <AuraRadioGroup defaultValue="fast">
-                <AuraRadioItem value="fast" label="Fast" />
-                <AuraRadioItem value="balanced" label="Balanced" />
-                <AuraRadioItem value="quality" label="Quality" />
-              </AuraRadioGroup>
-            </div>
-          </Section>
-
-          {/* Slider */}
-          <Section title="Aura Slider" description="Range slider with glowing track fill.">
-            <div className="max-w-sm space-y-6">
-              <AuraSlider defaultValue={65} />
-              <AuraSlider defaultValue={30} />
-            </div>
-          </Section>
-
-          {/* Tabs */}
-          <Section title="Aura Tabs" description="Tab navigation with recessed list and active rim light.">
-            <AuraTabs defaultValue="overview">
-              <AuraTabsList>
-                <AuraTabsTrigger value="overview">Overview</AuraTabsTrigger>
-                <AuraTabsTrigger value="features">Features</AuraTabsTrigger>
-                <AuraTabsTrigger value="code">Code</AuraTabsTrigger>
-              </AuraTabsList>
-              <AuraTabsContent value="overview">
-                <p className="text-sm text-muted-foreground">
-                  aura-cn brings 3D lighting effects to everyday UI components.
-                </p>
-              </AuraTabsContent>
-              <AuraTabsContent value="features">
-                <p className="text-sm text-muted-foreground">
-                  Rim light, dynamic glow, inset shadows, and smooth animations.
-                </p>
-              </AuraTabsContent>
-              <AuraTabsContent value="code">
-                <code className="text-xs text-muted-foreground">
-                  {`import { AuraButton } from "@/registry/aura-cn/aura-button"`}
-                </code>
-              </AuraTabsContent>
-            </AuraTabs>
-          </Section>
-
-          {/* Avatar */}
-          <Section title="Aura Avatar" description="Avatars with glow ring effect.">
-            <div className="flex items-center gap-4">
-              <AuraAvatar size="sm" fallback="A" alt="Alice" />
-              <AuraAvatar fallback="B" alt="Bob" />
-              <AuraAvatar size="lg" fallback="C" alt="Charlie" />
-              <AuraAvatar size="xl" fallback="D" alt="Dave" />
-            </div>
-          </Section>
-
-          {/* Progress */}
-          <Section title="Aura Progress" description="Progress bar with glowing fill.">
-            <div className="max-w-sm space-y-4">
-              <AuraProgress value={75} showLabel />
-              <AuraProgress value={40} />
-              <AuraProgress value={100} />
-            </div>
-          </Section>
-
-          {/* Accordion */}
-          <Section title="Aura Accordion" description="Collapsible sections with rim light intensity change.">
-            <div className="max-w-md">
-              <AuraAccordion defaultValue={["item-1"]}>
-                <AuraAccordionItem value="item-1">
-                  <AuraAccordionTrigger value="item-1">
-                    What is aura-cn?
-                  </AuraAccordionTrigger>
-                  <AuraAccordionContent value="item-1">
-                    A UI library with 3D light effects — rim light, dynamic cursor
-                    glow, and micro-interactions built for React.
-                  </AuraAccordionContent>
-                </AuraAccordionItem>
-                <AuraAccordionItem value="item-2">
-                  <AuraAccordionTrigger value="item-2">
-                    How do I install it?
-                  </AuraAccordionTrigger>
-                  <AuraAccordionContent value="item-2">
-                    Use the shadcn CLI to add components directly to your project.
-                  </AuraAccordionContent>
-                </AuraAccordionItem>
-                <AuraAccordionItem value="item-3">
-                  <AuraAccordionTrigger value="item-3">
-                    Is it accessible?
-                  </AuraAccordionTrigger>
-                  <AuraAccordionContent value="item-3">
-                    Yes! All components use proper ARIA attributes and keyboard navigation.
-                  </AuraAccordionContent>
-                </AuraAccordionItem>
-              </AuraAccordion>
-            </div>
-          </Section>
-
-          {/* Chips & Badges */}
-          <Section title="Aura Chip & Badge" description="Tags and badges with subtle rim light.">
-            <div className="space-y-4">
-              <div className="flex flex-wrap gap-2">
-                <AuraChip>React</AuraChip>
-                <AuraChip>TypeScript</AuraChip>
-                <AuraChip variant="outline">Tailwind</AuraChip>
-                <AuraChip variant="default">Default</AuraChip>
-                <AuraChip size="lg">Large Chip</AuraChip>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <AuraBadge>New</AuraBadge>
-                <AuraBadge variant="secondary">Beta</AuraBadge>
-                <AuraBadge variant="outline">v0.1</AuraBadge>
-                <AuraBadge variant="destructive">Breaking</AuraBadge>
-              </div>
-            </div>
-          </Section>
-
-          {/* Toast */}
-          <Section title="Aura Toast" description="Notification toasts with variants.">
-            <div className="max-w-sm space-y-3">
-              <AuraToast
-                title="Component added"
-                description="aura-button has been added to your project."
-              />
-              <AuraToast
-                variant="success"
-                title="Build successful"
-                description="Your project compiled without errors."
-                onClose={() => {}}
-              />
-              <AuraToast
-                variant="error"
-                title="Build failed"
-                description="Check the console for details."
-                onClose={() => {}}
-              />
-            </div>
-          </Section>
-
-          {/* Skeleton */}
-          <Section title="Aura Skeleton" description="Loading placeholder with shimmer animation.">
-            <div className="max-w-sm space-y-3">
-              <AuraSkeleton className="h-10 w-full" />
-              <div className="flex gap-3">
-                <AuraSkeleton className="h-10 w-10 rounded-full" />
-                <div className="flex-1 space-y-2">
-                  <AuraSkeleton className="h-4 w-3/4" />
-                  <AuraSkeleton className="h-4 w-1/2" />
-                </div>
-              </div>
-            </div>
-          </Section>
+    <AuraThemeProvider defaultTheme="blue" defaultDark={true}>
+      <div className="dark relative min-h-screen overflow-hidden bg-background text-foreground">
+        {/* Animated background grid */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--aura-wash)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,hsl(var(--background)))]" />
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
+              backgroundSize: "64px 64px",
+            }}
+          />
         </div>
 
+        {/* Navbar */}
+        <nav className="relative z-10 flex items-center justify-between px-6 py-4 md:px-12">
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold tracking-tight">aura-cn</span>
+            <AuraBadge size="sm" variant="secondary">
+              v0.1
+            </AuraBadge>
+          </div>
+          <div className="flex items-center gap-4">
+            <AuraThemeSwitcher />
+            <Link
+              href="/docs"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Docs
+            </Link>
+            <a
+              href="https://github.com/user/aura-cn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              GitHub
+            </a>
+          </div>
+        </nav>
+
+        {/* Hero */}
+        <section className="relative z-10 mx-auto max-w-5xl px-6 pb-12 pt-20 text-center md:pt-32">
+          <div className="animate-fade-in">
+            <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl">
+              <span className="bg-gradient-to-r from-[var(--aura)] via-[var(--aura-rim)] to-[var(--aura)] bg-clip-text text-transparent animate-gradient-x">
+                3D Light Effects
+              </span>
+              <br />
+              <span className="text-foreground">for Modern UI</span>
+            </h1>
+            <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+              Copy-paste React components with rim light, dynamic cursor glow, and
+              micro-interactions. Built for shadcn ecosystem.
+            </p>
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Link href="/docs">
+                <AuraButton size="lg">Get Started</AuraButton>
+              </Link>
+              <div className="group relative">
+                <code className="flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2.5 text-sm backdrop-blur-sm">
+                  <span className="text-muted-foreground">$</span>
+                  <span>npx shadcn@latest add https://aura-cn.dev/r/aura-button.json</span>
+                  <CopyButton text="npx shadcn@latest add https://aura-cn.dev/r/aura-button.json" />
+                </code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Preview Grid */}
+        <section className="relative z-10 mx-auto max-w-6xl px-6 py-16">
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* Button preview */}
+            <PreviewCard title="Button" href="/docs/components/button">
+              <div className="flex flex-wrap gap-2">
+                <AuraButton size="sm">Primary</AuraButton>
+                <AuraButton size="sm" variant="secondary">
+                  Secondary
+                </AuraButton>
+                <AuraButton size="sm" variant="outline">
+                  Outline
+                </AuraButton>
+              </div>
+            </PreviewCard>
+
+            {/* Input preview */}
+            <PreviewCard title="Input" href="/docs/components/input">
+              <AuraInput placeholder="Type something..." />
+            </PreviewCard>
+
+            {/* Toggle preview */}
+            <PreviewCard title="Toggle" href="/docs/components/toggle">
+              <div className="flex items-center gap-4">
+                <AuraToggle defaultChecked />
+                <AuraToggle />
+              </div>
+            </PreviewCard>
+
+            {/* Slider preview */}
+            <PreviewCard title="Slider" href="/docs/components/slider">
+              <AuraSlider defaultValue={65} />
+            </PreviewCard>
+
+            {/* Progress preview */}
+            <PreviewCard title="Progress" href="/docs/components/progress">
+              <div className="space-y-3">
+                <AuraProgress value={80} />
+                <AuraProgress value={45} />
+              </div>
+            </PreviewCard>
+
+            {/* Chips preview */}
+            <PreviewCard title="Chip & Badge" href="/docs/components/chip">
+              <div className="flex flex-wrap gap-2">
+                <AuraChip size="sm">React</AuraChip>
+                <AuraChip size="sm" variant="outline">
+                  TypeScript
+                </AuraChip>
+                <AuraBadge>New</AuraBadge>
+              </div>
+            </PreviewCard>
+
+            {/* Skeleton preview */}
+            <PreviewCard title="Skeleton" href="/docs/components/skeleton">
+              <div className="space-y-2">
+                <AuraSkeleton className="h-4 w-3/4" />
+                <AuraSkeleton className="h-4 w-1/2" />
+                <AuraSkeleton className="h-8 w-full" />
+              </div>
+            </PreviewCard>
+
+            {/* Card preview */}
+            <PreviewCard title="Card" href="/docs/components/card" span2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <AuraCard>
+                  <AuraCardHeader>
+                    <AuraCardTitle>Elevated</AuraCardTitle>
+                    <AuraCardDescription>
+                      Light from above, like YouTube Shorts buttons.
+                    </AuraCardDescription>
+                  </AuraCardHeader>
+                </AuraCard>
+                <AuraCard>
+                  <AuraCardHeader>
+                    <AuraCardTitle>Customizable</AuraCardTitle>
+                    <AuraCardDescription>
+                      5 color themes, dark/light modes, CSS variables.
+                    </AuraCardDescription>
+                  </AuraCardHeader>
+                </AuraCard>
+              </div>
+            </PreviewCard>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="relative z-10 mx-auto max-w-5xl px-6 py-16">
+          <div className="grid gap-8 md:grid-cols-3">
+            <FeatureItem
+              icon="✦"
+              title="3-Layer Rendering"
+              description="Rim light, static wash, and dynamic cursor glow work together for depth."
+            />
+            <FeatureItem
+              icon="◐"
+              title="Elevated & Recessed"
+              description="Buttons glow from top, inputs glow from bottom. Natural depth perception."
+            />
+            <FeatureItem
+              icon="◎"
+              title="shadcn Compatible"
+              description="Install via CLI, customize with CSS variables, works with your existing setup."
+            />
+          </div>
+        </section>
+
         {/* Footer */}
-        <footer className="mt-24 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+        <footer className="relative z-10 border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
           <p>
-            Built with React, Tailwind CSS, and love.{" "}
+            Built with React, Tailwind CSS 4, and oklch.{" "}
             <a
               href="https://github.com/user/aura-cn"
               className="underline underline-offset-4 hover:text-foreground"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              GitHub
+              Star on GitHub
             </a>
           </p>
         </footer>
       </div>
+    </AuraThemeProvider>
+  );
+}
+
+/* ─────────── Sub-components ─────────── */
+
+function PreviewCard({
+  title,
+  href,
+  children,
+  span2,
+}: {
+  title: string;
+  href: string;
+  children: React.ReactNode;
+  span2?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group block rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all hover:border-[var(--aura-rim)] hover:bg-card/60 ${
+        span2 ? "md:col-span-2" : ""
+      }`}
+    >
+      <h3 className="mb-3 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+        {title}
+      </h3>
+      <div className="pointer-events-none">{children}</div>
+    </Link>
+  );
+}
+
+function FeatureItem({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="text-center">
+      <div className="mb-3 text-3xl">{icon}</div>
+      <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+      <p className="text-sm text-muted-foreground">{description}</p>
     </div>
   );
 }
 
-function Section({
-  title,
-  description,
-  children,
-}: {
-  title: string;
-  description: string;
-  children: React.ReactNode;
-}) {
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = React.useState(false);
+
   return (
-    <section>
-      <h2 className="mb-2 text-2xl font-semibold">{title}</h2>
-      <p className="mb-6 text-sm text-muted-foreground">{description}</p>
-      <div className="rounded-xl border border-border bg-secondary/20 p-8">
-        {children}
-      </div>
-    </section>
+    <button
+      type="button"
+      onClick={() => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      className="ml-2 text-muted-foreground hover:text-foreground transition-colors"
+      aria-label="Copy to clipboard"
+    >
+      {copied ? (
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M3 8.5l3 3 7-7"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <rect
+            x="5"
+            y="5"
+            width="9"
+            height="9"
+            rx="1.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+        </svg>
+      )}
+    </button>
   );
 }
