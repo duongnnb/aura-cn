@@ -87,8 +87,8 @@ export default function LandingPage() {
               <div className="group relative">
                 <code className="flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2.5 text-sm backdrop-blur-sm">
                   <span className="text-muted-foreground">$</span>
-                  <span>npx shadcn@latest add https://aura-cn.dev/r/aura-button.json</span>
-                  <CopyButton text="npx shadcn@latest add https://aura-cn.dev/r/aura-button.json" />
+                  <span>npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json</span>
+                  <CopyButton text="npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json" />
                 </code>
               </div>
             </div>

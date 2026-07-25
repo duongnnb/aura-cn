@@ -9,13 +9,19 @@ description: Compact badge/label with rim light effect.
   <BadgeDemo />
 </ComponentPreview>
 
+## Installation
+
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-badge.json
+```
+
 ## Usage
 
 ```tsx
 import { AuraBadge } from "@/registry/aura-cn/aura-badge"
 
 <AuraBadge>New</AuraBadge>
-<AuraBadge variant="secondary">Beta</AuraBadge>
+<AuraBadge variant="accent">Accent</AuraBadge>
 <AuraBadge variant="destructive">Breaking</AuraBadge>
 <AuraBadge variant="outline">v0.1</AuraBadge>
 ```
@@ -24,5 +30,5 @@ import { AuraBadge } from "@/registry/aura-cn/aura-badge"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"aura" \| "default" \| "secondary" \| "outline" \| "destructive"` | `"aura"` | Style |
+| `variant` | `"default" \| "accent" \| "outline" \| "destructive" \| "success"` | `"default"` | Style |
 | `size` | `"sm" \| "default"` | `"default"` | Badge size |

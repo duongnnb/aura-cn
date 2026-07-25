@@ -243,7 +243,7 @@ for (const comp of components) {
 const registryIndex = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "aura-cn",
-  homepage: "https://aura-cn.dev",
+  homepage: "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r",
   items: registryItems,
 };
 
