@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { getInstallCommand } from "@/lib/site-config";
 import { AuraButton } from "@/registry/aura-cn/aura-button";
 import {
   AuraCard,
@@ -87,8 +88,8 @@ export default function LandingPage() {
               <div className="group relative">
                 <code className="flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2.5 text-sm backdrop-blur-sm">
                   <span className="text-muted-foreground">$</span>
-                  <span>npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json</span>
-                  <CopyButton text="npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json" />
+                  <span>{getInstallCommand("aura-button")}</span>
+                  <CopyButton text={getInstallCommand("aura-button")} />
                 </code>
               </div>
             </div>

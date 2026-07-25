@@ -8,6 +8,10 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
+// ─── Registry base URL (single source of truth: src/lib/site-config.ts) ───
+const REGISTRY_BASE_URL =
+  "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const REGISTRY_DIR = resolve(ROOT, "src/registry/aura-cn");
@@ -243,7 +247,7 @@ for (const comp of components) {
 const registryIndex = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "aura-cn",
-  homepage: "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r",
+  homepage: REGISTRY_BASE_URL,
   items: registryItems,
 };
 

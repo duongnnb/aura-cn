@@ -1,6 +1,7 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
 import { ComponentPreview } from './component-preview';
+import { InstallCommand } from './install-command';
 import {
   ButtonDemo,
   CardDemo,
@@ -29,6 +30,7 @@ export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
     ComponentPreview,
+    InstallCommand,
     ButtonDemo,
     CardDemo,
     InputDemo,
