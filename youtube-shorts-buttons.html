@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube 3D Light Effect — Full UI Component Library</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Dark theme (default) */
+      --bg-page: #0f0f0f;
+      --bg-surface: rgba(255,255,255,0.1);
+      --bg-surface-hover: rgba(255,255,255,0.18);
+      --bg-surface-active: rgba(255,255,255,0.25);
+      --bg-input: rgba(0,0,0,0.2);
+      --bg-input-hover: rgba(0,0,0,0.15);
+      --bg-input-focus: rgba(0,0,0,0.12);
+      --text-primary: #f1f1f1;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-placeholder: rgba(255,255,255,0.35);
+      --border-subtle: rgba(255,255,255,0.08);
+      --border-input: rgba(255,255,255,0.1);
+      --border-input-hover: rgba(255,255,255,0.2);
+      --accent: #3ea6ff;
+      --accent-glow: rgba(62,166,255,0.15);
+      --accent-glow-strong: rgba(62,166,255,0.25);
+      --rim-light: rgba(255,255,255,0.15);
+      --rim-light-input: rgba(255,255,255,0.08);
+      --wash-color: rgba(255,255,255,0.04);
+      --dynamic-light-color: rgba(255,255,255,0.22);
+      --inset-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.06);
+      --dropdown-bg: #282828;
+      --toast-bg: #303030;
+      --toggle-track: rgba(255,255,255,0.15);
+      --toggle-thumb: #aaa;
+      --star-empty: rgba(255,255,255,0.3);
+      --star-filled: #ffb800;
+      --danger: #ff4e4e;
+      --skeleton-base: rgba(255,255,255,0.06);
+      --skeleton-shine: rgba(255,255,255,0.12);
+      --table-border: rgba(255,255,255,0.06);
+      --table-hover: rgba(255,255,255,0.04);
+    }
+
+    [data-theme="light"] {
+      --bg-page: #f8f9fa;
+      --bg-surface: rgba(0,0,0,0.06);
+      --bg-surface-hover: rgba(0,0,0,0.1);
+      --bg-surface-active: rgba(0,0,0,0.14);
+      --bg-input: rgba(0,0,0,0.04);
+      --bg-input-hover: rgba(0,0,0,0.06);
+      --bg-input-focus: rgba(0,0,0,0.03);
+      --text-primary: #1a1a1a;
+      --text-secondary: rgba(0,0,0,0.6);
+      --text-placeholder: rgba(0,0,0,0.4);
+      --border-subtle: rgba(0,0,0,0.08);
+      --border-input: rgba(0,0,0,0.12);
+      --border-input-hover: rgba(0,0,0,0.2);
+      --accent: #065fd4;
+      --accent-glow: rgba(6,95,212,0.1);
+      --accent-glow-strong: rgba(6,95,212,0.2);
+      --rim-light: rgba(255,255,255,0.6);
+      --rim-light-input: rgba(255,255,255,0.4);
+      --wash-color: rgba(255,255,255,0.3);
+      --dynamic-light-color: rgba(255,255,255,0.4);
+      --inset-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+      --card-bg: #fff;
+      --card-border: rgba(0,0,0,0.08);
+      --dropdown-bg: #fff;
+      --toast-bg: #323232;
+      --toggle-track: rgba(0,0,0,0.2);
+      --toggle-thumb: #fff;
+      --star-empty: rgba(0,0,0,0.2);
+      --star-filled: #ffb800;
+      --danger: #cc0000;
+      --skeleton-base: rgba(0,0,0,0.06);
+      --skeleton-shine: rgba(0,0,0,0.1);
+      --table-border: rgba(0,0,0,0.06);
+      --table-hover: rgba(0,0,0,0.03);
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-page);
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      color: var(--text-primary);
+      padding: 60px 40px;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 600; text-align: center; margin-bottom: 12px; }
+    .subtitle { text-align: center; font-size: 0.85rem; opacity: 0.5; margin-bottom: 60px; }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px; z-index: 1000;
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-surface); padding: 8px 16px; border-radius: 24px;
+      cursor: pointer; user-select: none; border: 1px solid var(--border-subtle);
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { background: var(--bg-surface-hover); }
+    .theme-toggle .theme-icon { font-size: 16px; }
+    .theme-toggle .theme-label { font-size: 12px; font-weight: 600; opacity: 0.7; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .demo-section { display: flex; flex-direction: column; gap: 16px; }
+    .section-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.4; font-weight: 600; }
+    .section-content { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .section-content.vertical { flex-direction: column; align-items: stretch; }
+
+    /* ============================================
+       SHARED: 3D Light Effect Base
+       ============================================ */
+    .yt-light {
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s cubic-bezier(0.05, 0, 0, 1), box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .yt-light::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 0.5px;
+      background: linear-gradient(to bottom, var(--rim-light), transparent 75%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .yt-light .light-layers {
+      position: absolute; inset: 0; border-radius: inherit;
+      overflow: hidden; pointer-events: none; z-index: 1;
+    }
+
+    .yt-light .wash-light {
+      position: absolute; width: 100%; height: 100%; bottom: 50%; left: 0;
+      border-radius: inherit; background: var(--wash-color); filter: blur(10px);
+    }
+
+    .yt-light .dynamic-light {
+      position: absolute; top: 50%; left: 50%;
+      width: var(--wash-size, 0px); height: var(--wash-size, 0px);
+      transform: translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px));
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%);
+      opacity: var(--wash-opacity, 0); filter: blur(12px);
+      transition: opacity 0.25s ease;
+    }
+
+    .yt-light .elevated { position: relative; z-index: 2; pointer-events: none; }
+
+    /* ============================================
+       RIPPLE EFFECT
+       ============================================ */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      transform: scale(0);
+      animation: ripple-anim 0.6s cubic-bezier(0.05, 0, 0, 1) forwards;
+      pointer-events: none;
+      z-index: 4;
+    }
+    [data-theme="light"] .ripple {
+      background: radial-gradient(circle, rgba(0,0,0,0.12) 0%, transparent 70%);
+    }
+    @keyframes ripple-anim {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* ============================================
+       PRESS SCALE ANIMATION
+       ============================================ */
+    .yt-pressable {
+      transition: transform 0.15s cubic-bezier(0.05, 0, 0, 1), background 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .yt-pressable:active {
+      transform: scale(0.95);
+    }
+
+    /* ============================================
+       LOADING SPINNER
+       ============================================ */
+    .yt-loading {
+      position: relative;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .yt-loading .elevated { opacity: 0; }
+    .yt-loading::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 20px; height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      z-index: 5;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* ============================================
+       PULSE GLOW ANIMATION (for FAB, notifications)
+       ============================================ */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 4px 12px rgba(62,166,255,0.3); }
+      50% { box-shadow: 0 4px 24px rgba(62,166,255,0.5); }
+    }
+    .yt-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+
+    /* ============================================
+       SHAKE ANIMATION (for errors)
+       ============================================ */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .yt-shake { animation: shake 0.4s ease; }
+
+    /* ============================================
+       BOUNCE IN (for toasts, badges)
+       ============================================ */
+    @keyframes bounce-in {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .yt-bounce-in { animation: bounce-in 0.4s cubic-bezier(0.05, 0, 0, 1) forwards; }
+
+    /* ============================================
+       SLIDE UP (for elements appearing)
+       ============================================ */
+    @keyframes slide-up {
+      0% { transform: translateY(12px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .yt-slide-up { animation: slide-up 0.3s cubic-bezier(0.05, 0, 0, 1) forwards; }
+
+    /* ============================================
+       1. ICON BUTTONS
+       ============================================ */
+    .yt-icon-btn {
+      width: 48px; height: 48px; border-radius: 24px; border: none;
+      background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; outline: none;
+    }
+    .yt-icon-btn:hover { background: var(--bg-surface-hover); }
+    .yt-icon-btn:active { background: var(--bg-surface-active); }
+    .yt-icon-btn .elevated { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+    .yt-icon-btn .elevated svg { width: 100%; height: 100%; fill: currentColor; }
+    .action-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .action-item .lbl { font-size: 11px; opacity: 0.85; }
+
+    .badge-wrapper { position: relative; display: inline-flex; }
+    .badge {
+      position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px;
+      border-radius: 9px; background: var(--danger); color: #fff; font-size: 10px;
+      font-weight: 700; display: flex; align-items: center; justify-content: center;
+      padding: 0 4px; z-index: 5;
+    }
+
+    /* ============================================
+       2. TEXT BUTTONS
+       ============================================ */
+    .yt-text-btn {
+      height: 36px; padding: 0 16px; border-radius: 18px; border: none;
+      background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
+      font-size: 14px; font-weight: 500; display: inline-flex;
+      align-items: center; gap: 8px; outline: none;
+    }
+    .yt-text-btn:hover { background: var(--bg-surface-hover); }
+    .yt-text-btn.primary { background: var(--text-primary); color: var(--bg-page); }
+    .yt-text-btn.primary::before { background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 75%); }
+    .yt-text-btn.primary:hover { opacity: 0.9; }
+    .yt-text-btn .elevated { display: flex; align-items: center; gap: 8px; }
+    .yt-text-btn .elevated svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ============================================
+       3. CHIPS
+       ============================================ */
+    .yt-chip {
+      height: 32px; padding: 0 12px; border-radius: 8px; border: none;
+      background: var(--bg-surface); color: var(--text-primary); font-size: 13px;
+      font-weight: 500; cursor: pointer; display: inline-flex;
+      align-items: center; outline: none;
+    }
+    .yt-chip:hover { background: var(--bg-surface-hover); }
+    .yt-chip.active { background: var(--text-primary); color: var(--bg-page); }
+    .yt-chip.active::before { background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent 75%); }
+    .yt-chip .elevated { display: flex; align-items: center; gap: 6px; }
+
+    /* ============================================
+       4. INPUT
+       ============================================ */
+    .yt-input-wrapper {
+      border-radius: 12px;
+      background: var(--bg-input);
+      box-shadow: var(--inset-shadow);
+      border-bottom: 2px solid var(--border-input);
+      display: flex; align-items: center;
+      transition: all 0.3s;
+    }
+    .yt-input-wrapper:hover {
+      background: var(--bg-input-hover);
+      border-bottom-color: var(--border-input-hover);
+    }
+    .yt-input-wrapper:focus-within {
+      background: var(--bg-input-focus);
+      border-bottom-color: var(--accent);
+      box-shadow: var(--inset-shadow), 0 0 0 1px var(--accent-glow);
+    }
+    .yt-input-wrapper::before {
+      background: linear-gradient(to top, var(--rim-light-input), transparent 60%);
+    }
+    .yt-input-wrapper:focus-within::before {
+      background: linear-gradient(to top, var(--accent-glow-strong), transparent 60%);
+    }
+    .yt-input-wrapper input {
+      position: relative; z-index: 2; width: 100%; padding: 12px 16px;
+      background: transparent; border: none; outline: none; color: var(--text-primary);
+      font-size: 14px; font-family: inherit;
+    }
+    .yt-input-wrapper input::placeholder { color: var(--text-placeholder); }
+
+    /* ============================================
+       5. TEXTAREA
+       ============================================ */
+    .yt-textarea-wrapper {
+      border-radius: 12px;
+      background: var(--bg-input);
+      box-shadow: var(--inset-shadow);
+      border-bottom: 2px solid var(--border-input);
+      transition: all 0.3s;
+    }
+    .yt-textarea-wrapper:hover {
+      background: var(--bg-input-hover);
+      border-bottom-color: var(--border-input-hover);
+    }
+    .yt-textarea-wrapper:focus-within {
+      background: var(--bg-input-focus);
+      border-bottom-color: var(--accent);
+      box-shadow: var(--inset-shadow), 0 0 0 1px var(--accent-glow);
+    }
+    .yt-textarea-wrapper::before {
+      background: linear-gradient(to top, var(--rim-light-input), transparent 60%);
+    }
+    .yt-textarea-wrapper:focus-within::before {
+      background: linear-gradient(to top, var(--accent-glow-strong), transparent 60%);
+    }
+    .yt-textarea-wrapper textarea {
+      position: relative; z-index: 2; width: 100%; min-height: 70px; padding: 12px 16px;
+      background: transparent; border: none; outline: none; color: var(--text-primary);
+      font-size: 14px; font-family: inherit; resize: vertical;
+    }
+    .yt-textarea-wrapper textarea::placeholder { color: var(--text-placeholder); }
+
+    /* ============================================
+       6. SELECT
+       ============================================ */
+    .yt-select-wrapper {
+      border-radius: 12px;
+      background: var(--bg-input);
+      box-shadow: var(--inset-shadow);
+      border-bottom: 2px solid var(--border-input);
+      display: flex; align-items: center;
+      transition: all 0.3s;
+    }
+    .yt-select-wrapper:hover {
+      background: var(--bg-input-hover);
+      border-bottom-color: var(--border-input-hover);
+    }
+    .yt-select-wrapper:focus-within {
+      background: var(--bg-input-focus);
+      border-bottom-color: var(--accent);
+      box-shadow: var(--inset-shadow), 0 0 0 1px var(--accent-glow);
+    }
+    .yt-select-wrapper::before {
+      background: linear-gradient(to top, var(--rim-light-input), transparent 60%);
+    }
+    .yt-select-wrapper:focus-within::before {
+      background: linear-gradient(to top, var(--accent-glow-strong), transparent 60%);
+    }
+    .yt-select-wrapper select {
+      position: relative; z-index: 2; width: 100%; padding: 12px 36px 12px 16px;
+      background: transparent; border: none; outline: none; color: var(--text-primary);
+      font-size: 14px; font-family: inherit; appearance: none; cursor: pointer;
+    }
+    .yt-select-wrapper select option { background: var(--dropdown-bg); color: var(--text-primary); }
+    .yt-select-wrapper .select-arrow { position: absolute; right: 14px; z-index: 2; pointer-events: none; opacity: 0.6; }
+
+    /* ============================================
+       7. CHECKBOX
+       ============================================ */
+    .yt-checkbox {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      padding: 10px 16px; border-radius: 12px; background: var(--card-bg); user-select: none;
+    }
+    .yt-checkbox:hover { background: var(--bg-surface); }
+    .yt-checkbox .check-box {
+      width: 20px; height: 20px; border-radius: 6px; background: var(--bg-surface);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .yt-checkbox .check-box::before { background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent 75%); }
+    .yt-checkbox .checkmark { position: relative; z-index: 2; opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.05,0,0,1); }
+    .yt-checkbox input { display: none; }
+    .yt-checkbox input:checked ~ .check-box { background: var(--accent); }
+    .yt-checkbox input:checked ~ .check-box .checkmark { opacity: 1; transform: scale(1); }
+    .yt-checkbox .check-label { position: relative; z-index: 2; font-size: 14px; }
+
+    /* ============================================
+       8. RADIO
+       ============================================ */
+    .yt-radio {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      padding: 10px 16px; border-radius: 12px; background: var(--card-bg); user-select: none;
+    }
+    .yt-radio:hover { background: var(--bg-surface); }
+    .yt-radio .radio-circle {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--bg-surface);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .yt-radio .radio-dot {
+      position: relative; z-index: 2; width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; opacity: 0; transform: scale(0); transition: all 0.2s cubic-bezier(0.05,0,0,1);
+    }
+    .yt-radio input { display: none; }
+    .yt-radio input:checked ~ .radio-circle { background: var(--accent); }
+    .yt-radio input:checked ~ .radio-circle .radio-dot { opacity: 1; transform: scale(1); }
+    .yt-radio .radio-label { position: relative; z-index: 2; font-size: 14px; }
+
+    /* ============================================
+       9. TOGGLE
+       ============================================ */
+    .yt-toggle {
+      display: flex; align-items: center; gap: 12px; cursor: pointer;
+      padding: 10px 16px; border-radius: 12px; background: var(--card-bg); user-select: none;
+    }
+    .yt-toggle:hover { background: var(--bg-surface); }
+    .yt-toggle .toggle-track {
+      width: 40px; height: 22px; border-radius: 11px; background: var(--toggle-track);
+      position: relative; flex-shrink: 0; transition: background 0.3s; overflow: hidden;
+    }
+    .yt-toggle .toggle-track::before { background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent 75%); }
+    .yt-toggle .toggle-thumb {
+      position: absolute; top: 3px; left: 3px; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--toggle-thumb); z-index: 2;
+      transition: all 0.3s cubic-bezier(0.05,0,0,1); box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .yt-toggle input { display: none; }
+    .yt-toggle input:checked ~ .toggle-track { background: var(--accent); }
+    .yt-toggle input:checked ~ .toggle-track .toggle-thumb { left: 21px; background: #fff; }
+    .yt-toggle .toggle-label { position: relative; z-index: 2; font-size: 14px; }
+
+    /* ============================================
+       10. SLIDER
+       ============================================ */
+    .yt-slider-wrapper { border-radius: 12px; background: var(--card-bg); padding: 16px 20px; }
+    .yt-slider-wrapper:hover { background: var(--bg-surface); }
+    .yt-slider-wrapper .slider-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 8px; }
+    .yt-slider-wrapper .slider-header { display: flex; justify-content: space-between; font-size: 13px; opacity: 0.7; }
+    .yt-slider-wrapper input[type="range"] {
+      width: 100%; height: 4px; border-radius: 2px; background: var(--toggle-track);
+      appearance: none; outline: none; cursor: pointer;
+    }
+    .yt-slider-wrapper input[type="range"]::-webkit-slider-thumb {
+      appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .yt-slider-wrapper input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 6px var(--accent-glow);
+    }
+
+    /* ============================================
+       11. CARD
+       ============================================ */
+    .yt-card { border-radius: 16px; background: var(--card-bg); padding: 20px; cursor: pointer; border: 1px solid var(--card-border); }
+    .yt-card:hover { background: var(--bg-surface); }
+    .yt-card .elevated { display: flex; flex-direction: column; gap: 8px; }
+    .yt-card .card-title { font-size: 15px; font-weight: 600; }
+    .yt-card .card-desc { font-size: 13px; opacity: 0.6; line-height: 1.5; }
+
+    /* ============================================
+       12. TABS
+       ============================================ */
+    .yt-tabs { display: flex; gap: 0; border-radius: 12px; overflow: hidden; }
+    .yt-tab {
+      padding: 12px 20px; background: var(--card-bg); border: none;
+      color: var(--text-primary); font-size: 13px; font-weight: 500; cursor: pointer;
+      outline: none; border-radius: 0; position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .yt-tab:first-child { border-radius: 12px 0 0 12px; }
+    .yt-tab:last-child { border-radius: 0 12px 12px 0; }
+    .yt-tab:hover { background: var(--bg-surface); }
+    .yt-tab.active { background: var(--bg-surface-hover); }
+    .yt-tab.active::before { background: linear-gradient(to bottom, rgba(62,166,255,0.3), transparent 75%); }
+    .yt-tab .elevated { position: relative; z-index: 2; }
+
+    /* ============================================
+       13. TOAST / SNACKBAR
+       ============================================ */
+    .yt-toast {
+      border-radius: 12px; background: var(--toast-bg); padding: 14px 20px;
+      display: flex; align-items: center; gap: 12px; min-width: 280px;
+    }
+    .yt-toast .elevated { display: flex; align-items: center; gap: 12px; width: 100%; justify-content: space-between; }
+    .yt-toast .toast-msg { font-size: 14px; }
+    .yt-toast .toast-action { color: var(--accent); font-size: 14px; font-weight: 600; cursor: pointer; background: none; border: none; }
+
+    /* ============================================
+       14. AVATAR
+       ============================================ */
+    .yt-avatar {
+      width: 48px; height: 48px; border-radius: 50%; background: var(--bg-surface);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .yt-avatar:hover { background: var(--bg-surface-hover); }
+    .yt-avatar .elevated { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .yt-avatar .elevated svg { width: 28px; height: 28px; fill: var(--text-secondary); }
+    .yt-avatar.lg { width: 64px; height: 64px; }
+    .yt-avatar.lg .elevated svg { width: 36px; height: 36px; }
+    .yt-avatar.colored { background: var(--accent); }
+    .yt-avatar.colored .elevated svg { fill: #fff; }
+    .yt-avatar.colored::before { background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent 75%); }
+
+    /* ============================================
+       15. PROGRESS BAR
+       ============================================ */
+    .yt-progress { border-radius: 8px; background: var(--card-bg); padding: 16px 20px; }
+    .yt-progress:hover { background: var(--bg-surface); }
+    .yt-progress .progress-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+    .yt-progress .progress-header { display: flex; justify-content: space-between; font-size: 13px; opacity: 0.7; }
+    .yt-progress .progress-track { height: 6px; border-radius: 3px; background: var(--toggle-track); overflow: hidden; }
+    .yt-progress .progress-fill {
+      height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #7cc8ff);
+      transition: width 0.5s cubic-bezier(0.05,0,0,1); position: relative;
+    }
+    .yt-progress .progress-fill::after {
+      content: ''; position: absolute; top: 0; right: 0; width: 30px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+      animation: progressShimmer 1.5s infinite;
+    }
+    @keyframes progressShimmer { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
+
+    /* ============================================
+       16. ACCORDION
+       ============================================ */
+    .yt-accordion { border-radius: 12px; background: var(--card-bg); overflow: hidden; }
+    .yt-accordion:hover { background: var(--bg-surface); }
+    .yt-accordion-header {
+      padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; position: relative; z-index: 2;
+    }
+    .yt-accordion-header span { font-size: 14px; font-weight: 500; }
+    .yt-accordion-header .arrow { transition: transform 0.3s; opacity: 0.6; }
+    .yt-accordion.open .yt-accordion-header .arrow { transform: rotate(180deg); }
+    .yt-accordion-body {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.05,0,0,1);
+      position: relative; z-index: 2;
+    }
+    .yt-accordion.open .yt-accordion-body { max-height: 200px; }
+    .yt-accordion-body p { padding: 0 20px 14px; font-size: 13px; opacity: 0.6; line-height: 1.6; }
+
+    /* ============================================
+       17. FAB (Floating Action Button)
+       ============================================ */
+    .yt-fab {
+      width: 56px; height: 56px; border-radius: 16px; border: none;
+      background: var(--accent); color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; outline: none;
+      box-shadow: 0 4px 12px rgba(62,166,255,0.3);
+    }
+    .yt-fab:hover { background: #5bb8ff; box-shadow: 0 6px 20px rgba(62,166,255,0.4); }
+    .yt-fab::before { background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 75%); }
+    .yt-fab .elevated { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+    .yt-fab .elevated svg { width: 100%; height: 100%; fill: currentColor; }
+
+    /* ============================================
+       18. DROPDOWN MENU
+       ============================================ */
+    .yt-dropdown { border-radius: 12px; background: var(--dropdown-bg); padding: 8px 0; min-width: 200px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .yt-dropdown::before { background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent 75%); }
+    .yt-menu-item {
+      padding: 10px 16px; display: flex; align-items: center; gap: 12px;
+      cursor: pointer; transition: background 0.2s; position: relative; z-index: 2;
+    }
+    .yt-menu-item:hover { background: var(--bg-surface); }
+    .yt-menu-item svg { width: 20px; height: 20px; fill: currentColor; opacity: 0.7; }
+    .yt-menu-item span { font-size: 14px; }
+
+    /* ============================================
+       19. SEGMENTED CONTROL
+       ============================================ */
+    .yt-segmented { display: inline-flex; border-radius: 12px; background: var(--card-bg); padding: 4px; gap: 2px; }
+    .yt-segment {
+      padding: 8px 16px; border-radius: 8px; border: none; background: transparent;
+      color: var(--text-secondary); font-size: 13px; font-weight: 500;
+      cursor: pointer; outline: none; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .yt-segment:hover { color: var(--text-primary); background: var(--card-bg); }
+    .yt-segment.active { background: var(--bg-surface-hover); color: var(--text-primary); }
+    .yt-segment.active::before { background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent 75%); }
+    .yt-segment .elevated { position: relative; z-index: 2; }
+
+    /* ============================================
+       20. SKELETON LOADER
+       ============================================ */
+    .yt-skeleton { border-radius: 12px; background: var(--card-bg); padding: 20px; }
+    .yt-skeleton .skel-line {
+      height: 12px; border-radius: 6px; margin-bottom: 12px;
+      background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%);
+      background-size: 200% 100%; animation: skeleton-shimmer 1.5s infinite linear;
+    }
+    .yt-skeleton .skel-line:last-child { margin-bottom: 0; }
+    .yt-skeleton .skel-line.w75 { width: 75%; }
+    .yt-skeleton .skel-line.w50 { width: 50%; }
+    .yt-skeleton .skel-line.w90 { width: 90%; }
+    .yt-skeleton .skel-circle { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 16px; background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%); background-size: 200% 100%; animation: skeleton-shimmer 1.5s infinite linear; }
+    @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ============================================
+       21. RATING STARS
+       ============================================ */
+    .yt-rating { display: flex; gap: 4px; padding: 12px 16px; border-radius: 12px; background: var(--card-bg); }
+    .yt-rating:hover { background: var(--bg-surface); }
+    .yt-star {
+      width: 32px; height: 32px; border-radius: 8px; border: none; background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; outline: none; color: var(--star-empty); position: relative; overflow: hidden;
+    }
+    .yt-star:hover { background: var(--bg-surface); color: var(--star-filled); transform: scale(1.15); }
+    .yt-star.filled { color: var(--star-filled); }
+    .yt-star .elevated { position: relative; z-index: 2; }
+    .yt-star .elevated svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* ============================================
+       22. NUMBER STEPPER
+       ============================================ */
+    .yt-stepper {
+      display: inline-flex; align-items: center; gap: 0; border-radius: 12px;
+      background: var(--card-bg); overflow: hidden;
+    }
+    .yt-stepper:hover { background: var(--bg-surface); }
+    .yt-stepper-btn {
+      width: 40px; height: 40px; border: none; background: transparent; color: var(--text-primary);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: background 0.2s; position: relative; overflow: hidden;
+    }
+    .yt-stepper-btn:hover { background: var(--bg-surface-hover); }
+    .yt-stepper-btn .elevated { position: relative; z-index: 2; }
+    .yt-stepper-val {
+      min-width: 40px; text-align: center; font-size: 15px; font-weight: 600;
+      position: relative; z-index: 2;
+    }
+
+    /* ============================================
+       23. TIMELINE
+       ============================================ */
+    .yt-timeline { display: flex; flex-direction: column; gap: 0; padding-left: 20px; }
+    .yt-timeline-item {
+      display: flex; gap: 16px; padding: 12px 16px; position: relative;
+      border-radius: 12px; cursor: pointer; transition: background 0.2s;
+    }
+    .yt-timeline-item:hover { background: var(--bg-surface); }
+    .yt-timeline-item::before {
+      content: ''; position: absolute; left: -12px; top: 0; bottom: 0; width: 2px;
+      background: var(--border-subtle);
+    }
+    .yt-timeline-item:first-child::before { top: 50%; }
+    .yt-timeline-item:last-child::before { bottom: 50%; }
+    .yt-timeline-dot {
+      width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0; margin-top: 4px; position: relative; overflow: hidden;
+    }
+    .yt-timeline-dot::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 0.5px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 75%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+    .yt-timeline-content .tl-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .yt-timeline-content .tl-desc { font-size: 12px; opacity: 0.5; }
+
+    /* ============================================
+       24. NAVBAR
+       ============================================ */
+    .yt-navbar {
+      border-radius: 16px; background: var(--card-bg); padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid var(--card-border);
+    }
+    .yt-navbar::before { background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent 75%); }
+    .yt-navbar .nav-brand { font-size: 16px; font-weight: 700; position: relative; z-index: 2; color: var(--danger); }
+    .yt-navbar .nav-links { display: flex; gap: 4px; position: relative; z-index: 2; }
+    .yt-nav-link {
+      padding: 8px 14px; border-radius: 8px; background: transparent; border: none;
+      color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.2s;
+      outline: none; position: relative; overflow: hidden;
+    }
+    .yt-nav-link:hover { background: var(--bg-surface); color: var(--text-primary); }
+    .yt-nav-link.active { background: var(--bg-surface-hover); color: var(--text-primary); }
+
+    /* ============================================
+       25. TABLE
+       ============================================ */
+    .yt-table { border-radius: 12px; overflow: hidden; background: var(--card-bg); border: 1px solid var(--card-border); }
+    .yt-table::before { background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent 50%); }
+    .yt-table table { width: 100%; border-collapse: collapse; position: relative; z-index: 2; }
+    .yt-table th { padding: 12px 16px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.5; font-weight: 600; }
+    .yt-table td { padding: 12px 16px; font-size: 13px; border-top: 1px solid var(--table-border); }
+    .yt-table tr:hover td { background: var(--table-hover); }
+
+    /* Tooltip */
+    [data-tooltip] { position: relative; }
+    [data-tooltip]::after {
+      content: attr(data-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%) translateY(4px); background: #303030; color: #f1f1f1;
+      font-size: 12px; padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: all 0.2s; z-index: 100;
+    }
+    [data-tooltip]:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <h1>YouTube 3D Light Effect — Full UI Components</h1>
+  <p class="subtitle">Rim Light + Dynamic Wash Light + Ripple + Press Scale — with Light/Dark theme</p>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <span class="theme-icon" id="theme-icon">🌙</span>
+    <span class="theme-label" id="theme-label">Dark</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. Icon Buttons -->
+    <div class="demo-section">
+      <div class="section-title">1. Icon Buttons</div>
+      <div class="section-content">
+        <div class="action-item">
+          <button class="yt-icon-btn yt-light" data-light data-tooltip="Like">
+            <div class="elevated"><svg viewBox="0 0 24 24"><path d="M16.25 2.5c3.823 0 6.75 3.232 6.75 7 0 4.436-2.806 7.696-5.224 9.699-2.46 2.038-4.906 3.104-4.98 3.135l-.796.347-.797-.347c-.073-.031-2.52-1.097-4.98-3.135C3.807 17.196 1 13.936 1 9.5c0-3.768 2.927-7 6.75-7 1.629 0 3.1.596 4.25 1.565A6.559 6.559 0 0 1 16.25 2.5zm0 2c-1.861 0-3.47 1.128-4.25 2.768C11.22 5.628 9.611 4.5 7.75 4.5 5.127 4.5 3 6.74 3 9.5c0 7.09 9 11 9 11s9-3.91 9-11c0-2.76-2.127-5-4.75-5z"/></svg></div>
+            <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+          </button>
+          <span class="lbl">Like</span>
+        </div>
+        <div class="action-item">
+          <div class="badge-wrapper">
+            <button class="yt-icon-btn yt-light" data-light data-tooltip="Notifications">
+              <div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>
+              <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+            </button>
+            <span class="badge">3</span>
+          </div>
+          <span class="lbl">Alerts</span>
+        </div>
+        <div class="action-item">
+          <button class="yt-icon-btn yt-light" data-light data-tooltip="Share">
+            <div class="elevated"><svg viewBox="0 0 24 24"><path d="M15 5.63 20.66 12 15 18.37V14h-1c-3.96 0-7.14 1-9.75 3.09 1.84-4.07 5.11-6.4 9.89-7.1l.86-.13V5.63M14 3v6C6.22 10.13 3.11 15.33 2 21c2.78-3.97 6.44-6 12-6v6l8-9-8-9z"/></svg></div>
+            <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+          </button>
+          <span class="lbl">Share</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Text Buttons -->
+    <div class="demo-section">
+      <div class="section-title">2. Text Buttons</div>
+      <div class="section-content">
+        <button class="yt-text-btn primary yt-light" data-light>
+          <div class="elevated"><span>Subscribe</span></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </button>
+        <button class="yt-text-btn yt-light" data-light>
+          <div class="elevated"><span>Share</span></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </button>
+        <button class="yt-text-btn yt-light" data-light>
+          <div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Done</span></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Chips -->
+    <div class="demo-section">
+      <div class="section-title">3. Chips / Tags</div>
+      <div class="section-content">
+        <button class="yt-chip active yt-light" data-light><div class="elevated"><span>All</span></div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+        <button class="yt-chip yt-light" data-light><div class="elevated"><span>Music</span></div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+        <button class="yt-chip yt-light" data-light><div class="elevated"><span>Gaming</span></div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+        <button class="yt-chip yt-light" data-light><div class="elevated"><span>Live</span></div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+      </div>
+    </div>
+
+    <!-- 4. Input -->
+    <div class="demo-section">
+      <div class="section-title">4. Text Input</div>
+      <div class="section-content vertical">
+        <div class="yt-input-wrapper yt-light" data-light>
+          <input type="text" placeholder="Search...">
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+        <div class="yt-input-wrapper yt-light" data-light>
+          <input type="email" placeholder="Enter your email">
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Textarea -->
+    <div class="demo-section">
+      <div class="section-title">5. Textarea</div>
+      <div class="section-content vertical">
+        <div class="yt-textarea-wrapper yt-light" data-light>
+          <textarea placeholder="Add a comment..."></textarea>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Select -->
+    <div class="demo-section">
+      <div class="section-title">6. Select / Dropdown</div>
+      <div class="section-content vertical">
+        <div class="yt-select-wrapper yt-light" data-light>
+          <select><option>Sort by: Relevance</option><option>Sort by: Upload date</option><option>Sort by: View count</option></select>
+          <span class="select-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg></span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Checkbox -->
+    <div class="demo-section">
+      <div class="section-title">7. Checkbox</div>
+      <div class="section-content vertical">
+        <label class="yt-checkbox yt-light" data-light>
+          <input type="checkbox" checked>
+          <div class="check-box yt-light"><svg class="checkmark" width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <span class="check-label">Autoplay next video</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+        <label class="yt-checkbox yt-light" data-light>
+          <input type="checkbox">
+          <div class="check-box yt-light"><svg class="checkmark" width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <span class="check-label">Show notifications</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 8. Radio -->
+    <div class="demo-section">
+      <div class="section-title">8. Radio Buttons</div>
+      <div class="section-content vertical">
+        <label class="yt-radio yt-light" data-light>
+          <input type="radio" name="theme" checked>
+          <div class="radio-circle yt-light"><div class="radio-dot"></div></div>
+          <span class="radio-label">Dark theme</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+        <label class="yt-radio yt-light" data-light>
+          <input type="radio" name="theme">
+          <div class="radio-circle yt-light"><div class="radio-dot"></div></div>
+          <span class="radio-label">Light theme</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 9. Toggle -->
+    <div class="demo-section">
+      <div class="section-title">9. Toggle / Switch</div>
+      <div class="section-content vertical">
+        <label class="yt-toggle yt-light" data-light>
+          <input type="checkbox" checked>
+          <div class="toggle-track yt-light"><div class="toggle-thumb"></div></div>
+          <span class="toggle-label">Enable subtitles</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+        <label class="yt-toggle yt-light" data-light>
+          <input type="checkbox">
+          <div class="toggle-track yt-light"><div class="toggle-thumb"></div></div>
+          <span class="toggle-label">Restricted mode</span>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- 10. Slider -->
+    <div class="demo-section">
+      <div class="section-title">10. Slider / Range</div>
+      <div class="section-content vertical">
+        <div class="yt-slider-wrapper yt-light" data-light>
+          <div class="slider-content">
+            <div class="slider-header"><span>Volume</span><span id="vol-val">75%</span></div>
+            <input type="range" min="0" max="100" value="75" oninput="document.getElementById('vol-val').textContent=this.value+'%'">
+          </div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Card -->
+    <div class="demo-section">
+      <div class="section-title">11. Card</div>
+      <div class="section-content vertical">
+        <div class="yt-card yt-light" data-light>
+          <div class="elevated">
+            <div class="card-title">Premium Features</div>
+            <div class="card-desc">Background play, ad-free videos, and offline downloads.</div>
+          </div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Tabs -->
+    <div class="demo-section">
+      <div class="section-title">12. Tabs</div>
+      <div class="section-content">
+        <div class="yt-tabs">
+          <button class="yt-tab active yt-light" data-light onclick="setTab(this)"><div class="elevated">Home</div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+          <button class="yt-tab yt-light" data-light onclick="setTab(this)"><div class="elevated">Videos</div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+          <button class="yt-tab yt-light" data-light onclick="setTab(this)"><div class="elevated">Shorts</div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+          <button class="yt-tab yt-light" data-light onclick="setTab(this)"><div class="elevated">Live</div><div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Toast -->
+    <div class="demo-section">
+      <div class="section-title">13. Toast / Snackbar</div>
+      <div class="section-content vertical">
+        <div class="yt-toast yt-light" data-light>
+          <div class="elevated"><span class="toast-msg">Video added to Watch Later</span><button class="toast-action">UNDO</button></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Avatar -->
+    <div class="demo-section">
+      <div class="section-title">14. Avatar</div>
+      <div class="section-content">
+        <div class="yt-avatar yt-light" data-light>
+          <div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+        <div class="yt-avatar lg yt-light" data-light>
+          <div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+        <div class="yt-avatar colored yt-light" data-light>
+          <div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Progress Bar -->
+    <div class="demo-section">
+      <div class="section-title">15. Progress Bar</div>
+      <div class="section-content vertical">
+        <div class="yt-progress yt-light" data-light>
+          <div class="progress-content">
+            <div class="progress-header"><span>Uploading video...</span><span>72%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:72%"></div></div>
+          </div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+        <div class="yt-progress yt-light" data-light>
+          <div class="progress-content">
+            <div class="progress-header"><span>Processing...</span><span>35%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:35%"></div></div>
+          </div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16. Accordion -->
+    <div class="demo-section">
+      <div class="section-title">16. Accordion</div>
+      <div class="section-content vertical">
+        <div class="yt-accordion open yt-light" data-light onclick="this.classList.toggle('open')">
+          <div class="yt-accordion-header">
+            <span>Description</span>
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+          <div class="yt-accordion-body"><p>This video shows amazing tricks and tutorials for beginners.</p></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+        <div class="yt-accordion yt-light" data-light onclick="this.classList.toggle('open')">
+          <div class="yt-accordion-header">
+            <span>Transcript</span>
+            <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+          <div class="yt-accordion-body"><p>Auto-generated transcript will appear here once the video is processed.</p></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. FAB -->
+    <div class="demo-section">
+      <div class="section-title">17. Floating Action Button</div>
+      <div class="section-content">
+        <button class="yt-fab yt-light" data-light>
+          <div class="elevated"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </button>
+        <button class="yt-icon-btn yt-light" data-light style="width:56px;height:56px;border-radius:16px;background:rgba(255,50,50,0.15);color:#ff4e4e">
+          <div class="elevated"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.902 7.902 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.902 7.902 0 0 1 20 12c0 4.42-3.58 8-8 8z"/></svg></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- 18. Dropdown Menu -->
+    <div class="demo-section">
+      <div class="section-title">18. Dropdown Menu</div>
+      <div class="section-content vertical">
+        <div class="yt-dropdown yt-light" data-light>
+          <div class="yt-menu-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" fill="currentColor"/></svg><span>Save to playlist</span></div>
+          <div class="yt-menu-item"><svg viewBox="0 0 24 24"><path d="M15 5.63 20.66 12 15 18.37V14h-1c-3.96 0-7.14 1-9.75 3.09 1.84-4.07 5.11-6.4 9.89-7.1l.86-.13V5.63" fill="currentColor"/></svg><span>Share</span></div>
+          <div class="yt-menu-item"><svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" fill="currentColor"/></svg><span>Report</span></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 19. Segmented Control -->
+    <div class="demo-section">
+      <div class="section-title">19. Segmented Control</div>
+      <div class="section-content">
+        <div class="yt-segmented yt-light" data-light>
+          <button class="yt-segment active yt-light" onclick="setSegment(this)"><div class="elevated">Daily</div></button>
+          <button class="yt-segment yt-light" onclick="setSegment(this)"><div class="elevated">Weekly</div></button>
+          <button class="yt-segment yt-light" onclick="setSegment(this)"><div class="elevated">Monthly</div></button>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 20. Skeleton -->
+    <div class="demo-section">
+      <div class="section-title">20. Skeleton Loader</div>
+      <div class="section-content vertical">
+        <div class="yt-skeleton yt-light" data-light>
+          <div class="skel-circle"></div>
+          <div class="skel-line w90"></div>
+          <div class="skel-line w75"></div>
+          <div class="skel-line w50"></div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 21. Rating -->
+    <div class="demo-section">
+      <div class="section-title">21. Rating Stars</div>
+      <div class="section-content">
+        <div class="yt-rating yt-light" data-light id="rating">
+          <button class="yt-star filled" onclick="setRating(1)"><div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div></button>
+          <button class="yt-star filled" onclick="setRating(2)"><div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div></button>
+          <button class="yt-star filled" onclick="setRating(3)"><div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div></button>
+          <button class="yt-star" onclick="setRating(4)"><div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div></button>
+          <button class="yt-star" onclick="setRating(5)"><div class="elevated"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div></button>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 22. Number Stepper -->
+    <div class="demo-section">
+      <div class="section-title">22. Number Stepper</div>
+      <div class="section-content">
+        <div class="yt-stepper yt-light" data-light>
+          <button class="yt-stepper-btn yt-light" onclick="stepVal(-1)"><div class="elevated">−</div></button>
+          <span class="yt-stepper-val" id="step-val">1</span>
+          <button class="yt-stepper-btn yt-light" onclick="stepVal(1)"><div class="elevated">+</div></button>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 23. Timeline -->
+    <div class="demo-section">
+      <div class="section-title">23. Timeline</div>
+      <div class="section-content vertical">
+        <div class="yt-timeline">
+          <div class="yt-timeline-item">
+            <div class="yt-timeline-dot"></div>
+            <div class="yt-timeline-content"><div class="tl-title">Video uploaded</div><div class="tl-desc">2 hours ago</div></div>
+          </div>
+          <div class="yt-timeline-item">
+            <div class="yt-timeline-dot"></div>
+            <div class="yt-timeline-content"><div class="tl-title">Processing complete</div><div class="tl-desc">1 hour ago</div></div>
+          </div>
+          <div class="yt-timeline-item">
+            <div class="yt-timeline-dot"></div>
+            <div class="yt-timeline-content"><div class="tl-title">Published</div><div class="tl-desc">30 min ago</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 24. Navbar -->
+    <div class="demo-section" style="grid-column: 1 / -1;">
+      <div class="section-title">24. Navbar</div>
+      <div class="section-content vertical">
+        <nav class="yt-navbar yt-light" data-light>
+          <div class="nav-brand">YouTube</div>
+          <div class="nav-links">
+            <button class="yt-nav-link active yt-light" data-light>Home<div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+            <button class="yt-nav-link yt-light" data-light>Explore<div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+            <button class="yt-nav-link yt-light" data-light>Shorts<div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+            <button class="yt-nav-link yt-light" data-light>Subscriptions<div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+            <button class="yt-nav-link yt-light" data-light>Library<div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div></button>
+          </div>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 25. Table -->
+    <div class="demo-section" style="grid-column: 1 / -1;">
+      <div class="section-title">25. Table</div>
+      <div class="section-content vertical">
+        <div class="yt-table yt-light" data-light>
+          <table>
+            <thead><tr><th>Video</th><th>Views</th><th>Likes</th><th>Date</th></tr></thead>
+            <tbody>
+              <tr><td>Amazing Nature Documentary</td><td>1.2M</td><td>45K</td><td>Jan 15</td></tr>
+              <tr><td>Cooking Tutorial: Pasta</td><td>890K</td><td>32K</td><td>Feb 3</td></tr>
+              <tr><td>Guitar Lesson for Beginners</td><td>2.1M</td><td>78K</td><td>Mar 22</td></tr>
+            </tbody>
+          </table>
+          <div class="light-layers"><div class="wash-light"></div><div class="dynamic-light"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // === THEME TOGGLE ===
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = !html.hasAttribute('data-theme');
+      if (isDark) {
+        html.setAttribute('data-theme', 'light');
+        document.getElementById('theme-icon').textContent = '☀️';
+        document.getElementById('theme-label').textContent = 'Light';
+      } else {
+        html.removeAttribute('data-theme');
+        document.getElementById('theme-icon').textContent = '🌙';
+        document.getElementById('theme-label').textContent = 'Dark';
+      }
+    }
+
+    // === DYNAMIC LIGHT EFFECT ===
+    document.querySelectorAll('[data-light]').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const size = Math.max(rect.width, rect.height) * 1.5;
+        el.style.setProperty('--wash-x', `${x}px`);
+        el.style.setProperty('--wash-y', `${y}px`);
+        el.style.setProperty('--wash-size', `${size}px`);
+        el.style.setProperty('--wash-opacity', '1');
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.setProperty('--wash-opacity', '0');
+      });
+    });
+
+    // === RIPPLE EFFECT ===
+    document.querySelectorAll('.yt-icon-btn, .yt-text-btn, .yt-chip, .yt-tab, .yt-fab, .yt-nav-link, .yt-stepper-btn, .yt-star').forEach(btn => {
+      btn.classList.add('yt-pressable');
+      btn.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        btn.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+
+    // === TAB SWITCHING ===
+    function setTab(el) {
+      el.parentElement.querySelectorAll('.yt-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // === SEGMENTED CONTROL ===
+    function setSegment(el) {
+      el.parentElement.querySelectorAll('.yt-segment').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // === RATING ===
+    function setRating(n) {
+      const stars = document.querySelectorAll('#rating .yt-star');
+      stars.forEach((star, i) => {
+        star.classList.toggle('filled', i < n);
+        // Bounce animation on selected stars
+        if (i < n) {
+          star.style.transform = 'scale(1.3)';
+          setTimeout(() => { star.style.transform = ''; }, 150);
+        }
+      });
+    }
+
+    // === STEPPER ===
+    function stepVal(delta) {
+      const el = document.getElementById('step-val');
+      const newVal = Math.max(0, parseInt(el.textContent) + delta);
+      el.textContent = newVal;
+      // Bounce animation
+      el.style.transform = 'scale(1.3)';
+      setTimeout(() => { el.style.transform = ''; }, 150);
+    }
+
+    // === LOADING DEMO (click FAB to toggle) ===
+    document.querySelectorAll('.yt-fab').forEach(fab => {
+      fab.addEventListener('dblclick', () => {
+        fab.classList.toggle('yt-loading');
+        setTimeout(() => fab.classList.remove('yt-loading'), 2000);
+      });
+    });
+  </script>
+</body>
+</html>

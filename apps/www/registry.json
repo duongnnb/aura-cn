@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "aura-cn",
+  "homepage": "https://aura-cn.dev",
+  "items": [
+    {
+      "name": "aura-button",
+      "type": "registry:ui",
+      "title": "Aura Button",
+      "description": "A button component with 3D rim light, static wash, and dynamic cursor-following glow effect.",
+      "dependencies": ["class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
