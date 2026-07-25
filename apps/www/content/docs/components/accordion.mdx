@@ -1,0 +1,35 @@
+---
+title: Aura Accordion
+description: Collapsible content sections with rim light that intensifies on open.
+---
+
+## Usage
+
+```tsx
+import {
+  AuraAccordion,
+  AuraAccordionItem,
+  AuraAccordionTrigger,
+  AuraAccordionContent,
+} from "@/registry/aura-cn/aura-accordion"
+
+<AuraAccordion defaultValue={["item-1"]}>
+  <AuraAccordionItem value="item-1">
+    <AuraAccordionTrigger value="item-1">Section 1</AuraAccordionTrigger>
+    <AuraAccordionContent value="item-1">Content here.</AuraAccordionContent>
+  </AuraAccordionItem>
+  <AuraAccordionItem value="item-2">
+    <AuraAccordionTrigger value="item-2">Section 2</AuraAccordionTrigger>
+    <AuraAccordionContent value="item-2">More content.</AuraAccordionContent>
+  </AuraAccordionItem>
+</AuraAccordion>
+```
+
+## Props
+
+### AuraAccordion
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single" \| "multiple"` | `"single"` | Allow one or many open |
+| `defaultValue` | `string[]` | `[]` | Initially open items |

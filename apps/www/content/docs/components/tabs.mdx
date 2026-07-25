@@ -1,0 +1,35 @@
+---
+title: Aura Tabs
+description: Tab navigation with a recessed tab list and active trigger rim light.
+---
+
+## Usage
+
+```tsx
+import { AuraTabs, AuraTabsList, AuraTabsTrigger, AuraTabsContent } from "@/registry/aura-cn/aura-tabs"
+
+<AuraTabs defaultValue="tab1">
+  <AuraTabsList>
+    <AuraTabsTrigger value="tab1">Tab 1</AuraTabsTrigger>
+    <AuraTabsTrigger value="tab2">Tab 2</AuraTabsTrigger>
+  </AuraTabsList>
+  <AuraTabsContent value="tab1">Content for tab 1</AuraTabsContent>
+  <AuraTabsContent value="tab2">Content for tab 2</AuraTabsContent>
+</AuraTabs>
+```
+
+## Props
+
+### AuraTabs
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | Required | Initially active tab |
+| `value` | `string` | — | Controlled active tab |
+| `onValueChange` | `(value: string) => void` | — | Change callback |
+
+### AuraTabsTrigger
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `value` | `string` | Tab identifier |

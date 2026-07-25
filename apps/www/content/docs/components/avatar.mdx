@@ -1,0 +1,23 @@
+---
+title: Aura Avatar
+description: An avatar component with glow ring and rim light border.
+---
+
+## Usage
+
+```tsx
+import { AuraAvatar } from "@/registry/aura-cn/aura-avatar"
+
+<AuraAvatar src="/avatar.jpg" alt="John" />
+<AuraAvatar fallback="JD" alt="John Doe" size="lg" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image URL |
+| `alt` | `string` | — | Alt text (first char used as fallback) |
+| `fallback` | `string` | — | Fallback text when no image |
+| `size` | `"sm" \| "default" \| "lg" \| "xl"` | `"default"` | Avatar size |
+| `enableGlow` | `boolean` | `true` | Show outer glow ring |

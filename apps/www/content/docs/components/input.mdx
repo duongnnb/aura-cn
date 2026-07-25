@@ -1,0 +1,33 @@
+---
+title: Aura Input
+description: A text input with recessed styling — inset shadow, inverted rim light, and focus accent line.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-input.json
+```
+
+## Usage
+
+```tsx
+import { AuraInput } from "@/registry/aura-cn/aura-input"
+
+export default function Example() {
+  return <AuraInput placeholder="Enter your email..." />
+}
+```
+
+## Props
+
+All native `<input>` HTML attributes are supported.
+
+## Design
+
+The input uses a **recessed** design with:
+
+- `inset box-shadow` for depth
+- Inverted rim light (gradient from bottom)
+- A `scale-x` animated accent line on focus
+- Darker background (`rgba(0,0,0,0.2)`)

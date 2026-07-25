@@ -1,0 +1,24 @@
+---
+title: Aura Slider
+description: A range slider with glowing fill track and custom thumb.
+---
+
+## Usage
+
+```tsx
+import { AuraSlider } from "@/registry/aura-cn/aura-slider"
+
+<AuraSlider defaultValue={65} />
+<AuraSlider min={0} max={200} step={10} defaultValue={80} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Controlled value |
+| `defaultValue` | `number` | `50` | Initial value |
+| `min` | `number` | `0` | Minimum |
+| `max` | `number` | `100` | Maximum |
+| `step` | `number` | `1` | Step increment |
+| `onValueChange` | `(value: number) => void` | — | Change callback |

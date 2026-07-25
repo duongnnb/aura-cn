@@ -1,0 +1,28 @@
+---
+title: Aura Chip
+description: A tag/chip component with rim light and optional remove button.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-chip.json
+```
+
+## Usage
+
+```tsx
+import { AuraChip } from "@/registry/aura-cn/aura-chip"
+
+<AuraChip>React</AuraChip>
+<AuraChip variant="outline">Tailwind</AuraChip>
+<AuraChip onRemove={() => console.log('removed')}>Removable</AuraChip>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"aura" \| "default" \| "outline"` | `"aura"` | Visual style |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` | Chip size |
+| `onRemove` | `() => void` | — | Shows remove button when provided |

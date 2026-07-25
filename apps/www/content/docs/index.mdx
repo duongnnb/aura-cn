@@ -1,0 +1,52 @@
+---
+title: Introduction
+description: A visual-effects focused UI component library with 3D rim light, dynamic cursor glow, and micro-interactions.
+---
+
+## What is aura-cn?
+
+**aura-cn** is a collection of reusable UI components built with React, Tailwind CSS, and a unique 3D lighting technique inspired by YouTube Shorts buttons.
+
+Unlike traditional flat UI libraries, aura-cn components feature:
+
+- **Rim Light** — A gradient border rendered via `mask-composite: exclude`
+- **Static Wash** — A subtle blurred glow on the top half of elevated elements
+- **Dynamic Cursor Glow** — A radial gradient that follows the user's cursor
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-button.json
+```
+
+Or copy the component files directly into your project.
+
+## Design Philosophy
+
+### Elevated vs Recessed
+
+Components follow two visual paradigms:
+
+- **Elevated** (Buttons, Cards, Chips): Light comes from the TOP → rim light gradient flows downward
+- **Recessed** (Inputs, Textareas, Selects): Light comes from the BOTTOM → inverted rim light + inset shadow
+
+### CSS Variables
+
+All aura effects are controlled via CSS custom properties:
+
+```css
+--aura: oklch(0.623 0.214 259.815);
+--aura-glow: oklch(0.623 0.214 259.815 / 0.4);
+--aura-rim: oklch(0.882 0.059 254.128 / 0.6);
+--aura-wash: oklch(0.882 0.059 254.128 / 0.15);
+--aura-dynamic: oklch(0.882 0.059 254.128 / 0.25);
+```
+
+Override these in your CSS to change the glow color across all components.
+
+## Tech Stack
+
+- **React 19** + TypeScript
+- **Tailwind CSS 4** with CSS variables (oklch color space)
+- **class-variance-authority** for component variants
+- **tailwind-merge** + **clsx** for className composition

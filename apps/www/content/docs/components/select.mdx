@@ -1,0 +1,28 @@
+---
+title: Aura Select
+description: A dropdown select with recessed styling and custom chevron icon.
+---
+
+## Usage
+
+```tsx
+import { AuraSelect } from "@/registry/aura-cn/aura-select"
+
+<AuraSelect
+  placeholder="Choose framework"
+  options={[
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+    { value: "svelte", label: "Svelte" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `{ value: string; label: string }[]` | Required | Select options |
+| `placeholder` | `string` | — | Placeholder option text |
+
+Plus all native `<select>` HTML attributes.

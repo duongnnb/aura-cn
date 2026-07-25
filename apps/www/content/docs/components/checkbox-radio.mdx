@@ -1,0 +1,42 @@
+---
+title: Aura Checkbox & Radio
+description: Selection controls with rim light that flips direction based on checked state.
+---
+
+## Checkbox
+
+```tsx
+import { AuraCheckbox } from "@/registry/aura-cn/aura-checkbox-radio"
+
+<AuraCheckbox label="Accept terms" defaultChecked />
+<AuraCheckbox label="Subscribe to newsletter" />
+```
+
+### Checkbox Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | — | Controlled state |
+| `defaultChecked` | `boolean` | `false` | Initial state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Callback |
+| `label` | `string` | — | Label text |
+
+## Radio Group
+
+```tsx
+import { AuraRadioGroup, AuraRadioItem } from "@/registry/aura-cn/aura-checkbox-radio"
+
+<AuraRadioGroup defaultValue="react">
+  <AuraRadioItem value="react" label="React" />
+  <AuraRadioItem value="vue" label="Vue" />
+  <AuraRadioItem value="svelte" label="Svelte" />
+</AuraRadioGroup>
+```
+
+### Radio Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Controlled selected value |
+| `defaultValue` | `string` | `""` | Initial selected value |
+| `onValueChange` | `(value: string) => void` | — | Change callback |

@@ -1,0 +1,22 @@
+---
+title: Aura Toast
+description: Notification toast with rim light and variant styles.
+---
+
+## Usage
+
+```tsx
+import { AuraToast } from "@/registry/aura-cn/aura-toast"
+
+<AuraToast title="Success!" description="Your changes have been saved." />
+<AuraToast variant="error" title="Error" description="Something went wrong." onClose={() => {}} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "success" \| "error" \| "info"` | `"default"` | Toast style |
+| `title` | `string` | — | Bold title |
+| `description` | `string` | — | Description text |
+| `onClose` | `() => void` | — | Shows close button when provided |

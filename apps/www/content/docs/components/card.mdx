@@ -1,0 +1,49 @@
+---
+title: Aura Card
+description: A card container with rim light border and dynamic cursor-following glow on hover.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-card.json
+```
+
+## Usage
+
+```tsx
+import {
+  AuraCard,
+  AuraCardHeader,
+  AuraCardTitle,
+  AuraCardDescription,
+  AuraCardContent,
+} from "@/registry/aura-cn/aura-card"
+
+export default function Example() {
+  return (
+    <AuraCard>
+      <AuraCardHeader>
+        <AuraCardTitle>Card Title</AuraCardTitle>
+        <AuraCardDescription>Card description here.</AuraCardDescription>
+      </AuraCardHeader>
+      <AuraCardContent>
+        <p>Card content goes here.</p>
+      </AuraCardContent>
+    </AuraCard>
+  )
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `enableGlow` | `boolean` | `true` | Enable cursor-following glow |
+
+## Sub-components
+
+- `AuraCardHeader` — Header section with spacing
+- `AuraCardTitle` — `<h3>` heading
+- `AuraCardDescription` — Muted description text
+- `AuraCardContent` — Main content area

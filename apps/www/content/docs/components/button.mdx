@@ -1,0 +1,64 @@
+---
+title: Aura Button
+description: A button component with 3D rim light, static wash, and dynamic cursor-following glow effect.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-button.json
+```
+
+## Usage
+
+```tsx
+import { AuraButton } from "@/registry/aura-cn/aura-button"
+
+export default function Example() {
+  return <AuraButton>Click me</AuraButton>
+}
+```
+
+## Variants
+
+| Variant | Description |
+|---------|-------------|
+| `aura` | Default. Full 3-layer light effect |
+| `default` | Standard primary button (no glow) |
+| `secondary` | Secondary background |
+| `outline` | Border only |
+| `ghost` | Transparent background |
+
+```tsx
+<AuraButton variant="aura">Aura</AuraButton>
+<AuraButton variant="secondary">Secondary</AuraButton>
+<AuraButton variant="outline">Outline</AuraButton>
+<AuraButton variant="ghost">Ghost</AuraButton>
+```
+
+## Sizes
+
+```tsx
+<AuraButton size="sm">Small</AuraButton>
+<AuraButton size="default">Default</AuraButton>
+<AuraButton size="lg">Large</AuraButton>
+<AuraButton size="icon">🔥</AuraButton>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"aura" \| "default" \| "secondary" \| "outline" \| "ghost"` | `"aura"` | Visual style |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Button size |
+| `enableGlow` | `boolean` | `true` | Enable/disable cursor-following glow |
+
+Plus all native `<button>` HTML attributes.
+
+## How it works
+
+The AuraButton uses 3 decorative layers stacked with absolute positioning:
+
+1. **Rim Light** — `mask-composite: exclude` creates a 1px gradient border
+2. **Static Wash** — A fixed radial gradient glow at the top
+3. **Dynamic Glow** — Updates `--aura-x` and `--aura-y` CSS vars on `mousemove`

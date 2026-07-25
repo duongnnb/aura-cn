@@ -4,6 +4,7 @@ node_modules/
 # next.js
 apps/www/.next/
 apps/www/out/
+apps/www/.source/
 
 # turbo
 .turbo/

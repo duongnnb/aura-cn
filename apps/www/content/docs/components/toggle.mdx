@@ -1,0 +1,36 @@
+---
+title: Aura Toggle
+description: A switch/toggle component with glowing thumb and rim light track.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://aura-cn.dev/r/aura-toggle.json
+```
+
+## Usage
+
+```tsx
+import { AuraToggle } from "@/registry/aura-cn/aura-toggle"
+
+export default function Example() {
+  return <AuraToggle defaultChecked />
+}
+```
+
+## Controlled
+
+```tsx
+const [enabled, setEnabled] = useState(false)
+
+<AuraToggle checked={enabled} onCheckedChange={setEnabled} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | — | Controlled state |
+| `defaultChecked` | `boolean` | `false` | Initial uncontrolled state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | State change callback |
