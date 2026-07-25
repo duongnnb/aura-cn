@@ -16,12 +16,12 @@ const AuraProgress = React.forwardRef<HTMLDivElement, AuraProgressProps>(
     return (
       <div className={cn("w-full", className)} ref={ref} {...props}>
         {showLabel && (
-          <div className="mb-1 flex justify-between text-xs text-muted-foreground">
+          <div className="mb-1 flex justify-between text-xs text-[var(--text-secondary,rgba(255,255,255,0.7))]">
             <span>Progress</span>
             <span>{Math.round(percent)}%</span>
           </div>
         )}
-        <div className="relative h-2 w-full overflow-hidden rounded-full bg-[rgba(0,0,0,0.3)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]">
+        <div className="relative h-2 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.1)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]">
           {/* Fill */}
           <div
             className="h-full rounded-full bg-aura transition-all duration-500 ease-out"
@@ -40,10 +40,11 @@ const AuraProgress = React.forwardRef<HTMLDivElement, AuraProgressProps>(
           {/* Rim Light */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-full p-px"
+            className="pointer-events-none absolute inset-0 rounded-full z-[3]"
             style={{
+              padding: "0.5px",
               background:
-                "linear-gradient(0deg, var(--aura-rim) 0%, transparent 60%)",
+                "linear-gradient(to top, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

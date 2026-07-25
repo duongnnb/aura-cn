@@ -28,7 +28,9 @@ const AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(
         aria-checked={controlledChecked}
         className={cn(
           "relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-          controlledChecked ? "bg-aura" : "bg-muted",
+          controlledChecked
+            ? "bg-aura"
+            : "bg-[rgba(255,255,255,0.15)]",
           className
         )}
         onClick={toggle}
@@ -38,11 +40,12 @@ const AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(
         {/* Rim light on track */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-full p-px"
+          className="pointer-events-none absolute inset-0 rounded-full z-[3]"
           style={{
+            padding: "0.5px",
             background: controlledChecked
-              ? "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)"
-              : "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 60%)",
+              ? "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)"
+              : "linear-gradient(to bottom, rgba(255,255,255,0.1), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",
@@ -51,7 +54,7 @@ const AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(
         {/* Thumb */}
         <span
           className={cn(
-            "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg transition-transform duration-200",
+            "pointer-events-none relative z-[2] block h-5 w-5 rounded-full bg-[var(--text-primary,#f1f1f1)] shadow-lg transition-transform duration-200",
             controlledChecked ? "translate-x-[22px]" : "translate-x-[2px]"
           )}
         >

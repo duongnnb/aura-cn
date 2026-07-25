@@ -18,11 +18,13 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
         const el = cardRef.current;
         if (!el) return;
         const rect = el.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        el.style.setProperty("--aura-x", `${x}%`);
-        el.style.setProperty("--aura-y", `${y}%`);
-        el.style.setProperty("--aura-opacity", "1");
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const size = Math.max(rect.width, rect.height) * 1.5;
+        el.style.setProperty("--wash-x", `${x}px`);
+        el.style.setProperty("--wash-y", `${y}px`);
+        el.style.setProperty("--wash-size", `${size}px`);
+        el.style.setProperty("--wash-opacity", "1");
       },
       [enableGlow]
     );
@@ -30,7 +32,7 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
     const handleMouseLeave = React.useCallback(() => {
       const el = cardRef.current;
       if (!el) return;
-      el.style.setProperty("--aura-opacity", "0");
+      el.style.setProperty("--wash-opacity", "0");
     }, []);
 
     const setRefs = React.useCallback(
@@ -45,7 +47,9 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
     return (
       <div
         className={cn(
-          "relative overflow-hidden rounded-xl border border-border bg-background p-6 transition-all duration-200",
+          "relative overflow-hidden rounded-2xl p-5 cursor-pointer transition-all duration-200",
+          "bg-[var(--card-bg,rgba(255,255,255,0.04))] border border-[var(--card-border,rgba(255,255,255,0.06))]",
+          "hover:bg-[var(--bg-surface,rgba(255,255,255,0.1))]",
           className
         )}
         ref={setRefs}
@@ -56,10 +60,11 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
         {/* Rim Light */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
           style={{
+            padding: "0.5px",
             background:
-              "linear-gradient(180deg, var(--aura-rim) 0%, transparent 50%)",
+              "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",
@@ -69,28 +74,45 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
         {/* Static Wash */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-40"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 40% at 50% 0%, var(--aura-wash) 0%, transparent 70%)",
-          }}
-        />
+          className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-[1]"
+        >
+          <span
+            className="absolute w-full h-full left-0"
+            style={{
+              bottom: "50%",
+              background: "var(--wash-color, rgba(255,255,255,0.04))",
+              filter: "blur(10px)",
+              borderRadius: "inherit",
+            }}
+          />
+        </span>
 
         {/* Dynamic Cursor Glow */}
         {enableGlow && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-500"
-            style={{
-              background:
-                "radial-gradient(circle 120px at var(--aura-x, 50%) var(--aura-y, 50%), var(--aura-dynamic) 0%, transparent 70%)",
-              opacity: "var(--aura-opacity, 0)",
-            }}
-          />
+            className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-[1]"
+          >
+            <span
+              className="absolute rounded-full transition-opacity duration-250 ease-out"
+              style={{
+                top: "50%",
+                left: "50%",
+                width: "var(--wash-size, 0px)",
+                height: "var(--wash-size, 0px)",
+                transform:
+                  "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
+                background:
+                  "radial-gradient(circle, var(--dynamic-light-color, rgba(255,255,255,0.22)) 0%, transparent 100%)",
+                opacity: "var(--wash-opacity, 0)",
+                filter: "blur(12px)",
+              }}
+            />
+          </span>
         )}
 
         {/* Content */}
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-[2]">{children}</div>
       </div>
     );
   }

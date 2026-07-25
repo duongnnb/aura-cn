@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const auraAvatarVariants = cva(
-  "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted",
+  "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[rgba(255,255,255,0.1)]",
   {
     variants: {
       size: {
@@ -43,10 +43,11 @@ const AuraAvatar = React.forwardRef<HTMLSpanElement, AuraAvatarProps>(
         {/* Rim Light */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-full p-px"
+          className="pointer-events-none absolute inset-0 rounded-full z-[3]"
           style={{
+            padding: "0.5px",
             background:
-              "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)",
+              "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",
@@ -71,7 +72,7 @@ const AuraAvatar = React.forwardRef<HTMLSpanElement, AuraAvatarProps>(
             onError={() => setImgError(true)}
           />
         ) : (
-          <span className="relative z-10 font-medium text-muted-foreground">
+          <span className="relative z-10 font-medium text-[var(--text-secondary,rgba(255,255,255,0.7))]">
             {fallback || alt?.charAt(0)?.toUpperCase() || "?"}
           </span>
         )}

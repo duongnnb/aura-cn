@@ -47,14 +47,15 @@ export function AuraDropdown({
       {open && (
         <div
           className={cn(
-            "absolute z-50 mt-2 min-w-[180px] rounded-lg",
-            "bg-card border border-border shadow-xl",
+            "absolute z-50 mt-2 min-w-[180px] rounded-xl",
+            "bg-[var(--bg-page,#0f0f0f)] border border-[rgba(255,255,255,0.06)] shadow-xl",
             "animate-in fade-in slide-in-from-top-2 duration-150",
             // Rim light
-            "before:absolute before:inset-0 before:rounded-lg before:p-px",
-            "before:bg-[linear-gradient(180deg,var(--aura-rim),transparent_40%)]",
+            "before:absolute before:inset-0 before:rounded-xl before:z-[3]",
+            "before:bg-[linear-gradient(to_bottom,var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]",
             "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
             "before:[mask-composite:exclude]",
+            "before:[padding:0.5px]",
             "before:pointer-events-none",
             align === "right" ? "right-0" : "left-0"
           )}
@@ -64,7 +65,7 @@ export function AuraDropdown({
               item.separator ? (
                 <div
                   key={i}
-                  className="my-1 h-px bg-border"
+                  className="my-1 h-px bg-[rgba(255,255,255,0.06)]"
                 />
               ) : (
                 <button
@@ -76,10 +77,10 @@ export function AuraDropdown({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                    "hover:bg-accent hover:text-accent-foreground",
+                    "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text-primary,#f1f1f1)] transition-colors",
+                    "hover:bg-[rgba(255,255,255,0.08)]",
                     "disabled:opacity-50 disabled:pointer-events-none",
-                    item.destructive && "text-destructive hover:bg-destructive/10"
+                    item.destructive && "text-red-400 hover:bg-red-500/10"
                   )}
                 >
                   {item.icon && (

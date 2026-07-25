@@ -5,22 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const auraChipVariants = cva(
-  "relative inline-flex items-center gap-1.5 overflow-hidden rounded-full text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+  "relative inline-flex items-center gap-1.5 overflow-hidden rounded-lg text-xs font-medium transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
   {
     variants: {
       variant: {
-        default: "bg-secondary text-secondary-foreground",
-        aura: "bg-primary text-primary-foreground",
-        outline: "border border-border text-foreground",
+        default: "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.18)]",
+        active: "bg-[var(--text-primary,#f1f1f1)] text-[var(--bg-page,#0f0f0f)]",
+        outline: "bg-transparent border border-[rgba(255,255,255,0.15)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.06)]",
       },
       size: {
-        sm: "h-6 px-2.5",
-        default: "h-7 px-3",
-        lg: "h-8 px-4 text-sm",
+        sm: "h-7 px-2.5",
+        default: "h-8 px-3",
+        lg: "h-9 px-4 text-sm",
       },
     },
     defaultVariants: {
-      variant: "aura",
+      variant: "default",
       size: "default",
     },
   }
@@ -34,7 +34,7 @@ export interface AuraChipProps
 
 const AuraChip = React.forwardRef<HTMLSpanElement, AuraChipProps>(
   ({ className, variant, size, onRemove, children, ...props }, ref) => {
-    const isAura = variant === "aura" || variant === undefined;
+    const showRim = variant !== "active";
 
     return (
       <span
@@ -43,13 +43,14 @@ const AuraChip = React.forwardRef<HTMLSpanElement, AuraChipProps>(
         {...props}
       >
         {/* Rim Light */}
-        {isAura && (
+        {showRim && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
             style={{
+              padding: "0.5px",
               background:
-                "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)",
+                "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

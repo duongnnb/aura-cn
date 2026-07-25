@@ -15,7 +15,7 @@ const AuraSelect = React.forwardRef<HTMLSelectElement, AuraSelectProps>(
       <div className="relative">
         <select
           className={cn(
-            "peer flex h-10 w-full appearance-none rounded-lg border-0 bg-[rgba(0,0,0,0.2)] px-3 py-2 pr-8 text-sm text-foreground shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] outline-none transition-all duration-200",
+            "peer flex h-10 w-full appearance-none rounded-lg border-0 bg-[rgba(255,255,255,0.06)] px-3 py-2 pr-8 text-sm text-[var(--text-primary,#f1f1f1)] shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] outline-none transition-all duration-200",
             "focus:shadow-[inset_0_2px_4px_rgba(0,0,0,0.3),0_0_0_2px_var(--aura)]",
             "disabled:cursor-not-allowed disabled:opacity-50",
             className
@@ -35,7 +35,7 @@ const AuraSelect = React.forwardRef<HTMLSelectElement, AuraSelectProps>(
           ))}
         </select>
         {/* Chevron icon */}
-        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground">
+        <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[var(--text-secondary,rgba(255,255,255,0.7))]">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path
               d="M3 4.5L6 7.5L9 4.5"
@@ -51,8 +51,9 @@ const AuraSelect = React.forwardRef<HTMLSelectElement, AuraSelectProps>(
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 rounded-lg p-px"
           style={{
+            padding: "0.5px",
             background:
-              "linear-gradient(0deg, var(--aura-rim) 0%, transparent 50%)",
+              "linear-gradient(to top, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",

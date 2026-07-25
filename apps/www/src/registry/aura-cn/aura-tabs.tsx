@@ -52,24 +52,12 @@ const AuraTabsList = React.forwardRef<HTMLDivElement, AuraTabsListProps>(
       ref={ref}
       role="tablist"
       className={cn(
-        "relative inline-flex items-center gap-1 overflow-hidden rounded-lg bg-[rgba(0,0,0,0.2)] p-1 shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]",
+        "relative inline-flex items-center gap-2 overflow-hidden",
         className
       )}
       {...props}
     >
-      {/* Rim light */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
-        style={{
-          background:
-            "linear-gradient(0deg, var(--aura-rim) 0%, transparent 50%)",
-          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          WebkitMaskComposite: "xor",
-        }}
-      />
-      <div className="relative z-10 flex items-center gap-1">
+      <div className="relative z-10 flex items-center gap-2">
         {props.children}
       </div>
     </div>
@@ -94,23 +82,24 @@ const AuraTabsTrigger = React.forwardRef<HTMLButtonElement, AuraTabsTriggerProps
         role="tab"
         aria-selected={isActive}
         className={cn(
-          "relative inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "relative inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           isActive
-            ? "bg-background text-foreground shadow-sm"
-            : "text-muted-foreground hover:text-foreground",
+            ? "bg-[var(--text-primary,#f1f1f1)] text-[var(--bg-page,#0f0f0f)]"
+            : "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.18)]",
           className
         )}
         onClick={() => setActiveTab(value)}
         {...props}
       >
-        {/* Active rim light */}
-        {isActive && (
+        {/* Rim light for inactive tabs */}
+        {!isActive && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
             style={{
+              padding: "0.5px",
               background:
-                "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)",
+                "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

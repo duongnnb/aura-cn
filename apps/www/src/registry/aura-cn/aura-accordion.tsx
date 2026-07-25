@@ -66,7 +66,7 @@ function AuraAccordionItem({ value, children, className }: AuraAccordionItemProp
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-lg border border-border",
+        "relative overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)]",
         className
       )}
       data-state={isOpen ? "open" : "closed"}
@@ -74,14 +74,15 @@ function AuraAccordionItem({ value, children, className }: AuraAccordionItemProp
       {/* Rim Light */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
         style={{
+          padding: "0.5px",
           background:
-            "linear-gradient(180deg, var(--aura-rim) 0%, transparent 50%)",
+            "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
           WebkitMaskComposite: "xor",
-          opacity: isOpen ? 1 : 0.4,
+          opacity: isOpen ? 1 : 0.5,
         }}
       />
       <div className="relative z-10">{children}</div>
@@ -106,7 +107,7 @@ const AuraAccordionTrigger = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
-        "flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent/50",
+        "flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-[var(--text-primary,#f1f1f1)] transition-colors hover:bg-[rgba(255,255,255,0.06)]",
         className
       )}
       onClick={() => toggle(value)}
@@ -116,7 +117,7 @@ const AuraAccordionTrigger = React.forwardRef<
       <span>{children}</span>
       <svg
         className={cn(
-          "h-4 w-4 text-muted-foreground transition-transform duration-200",
+          "h-4 w-4 text-[var(--text-secondary,rgba(255,255,255,0.7))] transition-transform duration-200",
           isOpen && "rotate-180"
         )}
         viewBox="0 0 16 16"
@@ -154,7 +155,7 @@ function AuraAccordionContent({
   return (
     <div
       className={cn(
-        "animate-in fade-in-0 slide-in-from-top-1 border-t border-border px-4 py-3 text-sm text-muted-foreground duration-200",
+        "animate-in fade-in-0 slide-in-from-top-1 border-t border-[rgba(255,255,255,0.06)] px-4 py-3 text-sm text-[var(--text-secondary,rgba(255,255,255,0.7))] duration-200",
         className
       )}
     >

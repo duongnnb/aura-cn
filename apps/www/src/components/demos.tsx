@@ -170,8 +170,8 @@ export function ChipDemo() {
     <div className="flex flex-wrap gap-2">
       <AuraChip>React</AuraChip>
       <AuraChip>TypeScript</AuraChip>
+      <AuraChip variant="active">Active</AuraChip>
       <AuraChip variant="outline">Tailwind</AuraChip>
-      <AuraChip variant="default">Default</AuraChip>
       <AuraChip size="lg">Large Chip</AuraChip>
     </div>
   );
@@ -284,9 +284,10 @@ export function BadgeDemo() {
   return (
     <div className="flex flex-wrap gap-2">
       <AuraBadge>New</AuraBadge>
-      <AuraBadge variant="secondary">Beta</AuraBadge>
+      <AuraBadge variant="accent">Accent</AuraBadge>
       <AuraBadge variant="outline">v0.1</AuraBadge>
       <AuraBadge variant="destructive">Breaking</AuraBadge>
+      <AuraBadge variant="success">Stable</AuraBadge>
     </div>
   );
 }

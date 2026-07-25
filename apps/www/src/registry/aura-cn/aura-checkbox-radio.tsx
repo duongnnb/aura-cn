@@ -32,8 +32,8 @@ const AuraCheckbox = React.forwardRef<HTMLButtonElement, AuraCheckboxProps>(
           className={cn(
             "relative inline-flex h-5 w-5 shrink-0 items-center justify-center overflow-hidden rounded-md border-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             controlledChecked
-              ? "bg-aura text-primary-foreground"
-              : "bg-[rgba(0,0,0,0.2)] shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]",
+              ? "bg-aura text-white"
+              : "bg-[rgba(255,255,255,0.06)] shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]",
             className
           )}
           onClick={toggle}
@@ -43,11 +43,12 @@ const AuraCheckbox = React.forwardRef<HTMLButtonElement, AuraCheckboxProps>(
           {/* Rim Light */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
             style={{
+              padding: "0.5px",
               background: controlledChecked
-                ? "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)"
-                : "linear-gradient(0deg, var(--aura-rim) 0%, transparent 60%)",
+                ? "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)"
+                : "linear-gradient(to top, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",
@@ -70,7 +71,7 @@ const AuraCheckbox = React.forwardRef<HTMLButtonElement, AuraCheckboxProps>(
             </svg>
           )}
         </button>
-        {label && <span className="text-sm text-foreground">{label}</span>}
+        {label && <span className="text-sm text-[var(--text-primary,#f1f1f1)]">{label}</span>}
       </label>
     );
   }
@@ -137,7 +138,7 @@ const AuraRadioItem = React.forwardRef<HTMLButtonElement, AuraRadioItemProps>(
             "relative inline-flex h-5 w-5 shrink-0 items-center justify-center overflow-hidden rounded-full border-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             isSelected
               ? "bg-aura"
-              : "bg-[rgba(0,0,0,0.2)] shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]",
+              : "bg-[rgba(255,255,255,0.06)] shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]",
             className
           )}
           onClick={() => ctx.onChange(value)}
@@ -147,11 +148,12 @@ const AuraRadioItem = React.forwardRef<HTMLButtonElement, AuraRadioItemProps>(
           {/* Rim Light */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-full p-px"
+            className="pointer-events-none absolute inset-0 rounded-full z-[3]"
             style={{
+              padding: "0.5px",
               background: isSelected
-                ? "linear-gradient(180deg, var(--aura-rim) 0%, transparent 60%)"
-                : "linear-gradient(0deg, var(--aura-rim) 0%, transparent 60%)",
+                ? "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)"
+                : "linear-gradient(to top, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",
@@ -159,10 +161,10 @@ const AuraRadioItem = React.forwardRef<HTMLButtonElement, AuraRadioItemProps>(
           />
           {/* Dot */}
           {isSelected && (
-            <span className="relative z-10 h-2 w-2 rounded-full bg-primary-foreground" />
+            <span className="relative z-10 h-2 w-2 rounded-full bg-white" />
           )}
         </button>
-        {label && <span className="text-sm text-foreground">{label}</span>}
+        {label && <span className="text-sm text-[var(--text-primary,#f1f1f1)]">{label}</span>}
       </label>
     );
   }

@@ -5,14 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const auraToastVariants = cva(
-  "relative overflow-hidden rounded-lg border border-border p-4 shadow-lg transition-all duration-300",
+  "relative overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] p-4 shadow-lg transition-all duration-300",
   {
     variants: {
       variant: {
-        default: "bg-background text-foreground",
-        success: "bg-background text-foreground border-green-500/30",
-        error: "bg-background text-foreground border-red-500/30",
-        info: "bg-background text-foreground border-aura/30",
+        default: "bg-[var(--bg-page,#0f0f0f)] text-[var(--text-primary,#f1f1f1)]",
+        success: "bg-[var(--bg-page,#0f0f0f)] text-[var(--text-primary,#f1f1f1)] border-green-500/30",
+        error: "bg-[var(--bg-page,#0f0f0f)] text-[var(--text-primary,#f1f1f1)] border-red-500/30",
+        info: "bg-[var(--bg-page,#0f0f0f)] text-[var(--text-primary,#f1f1f1)] border-aura/30",
       },
     },
     defaultVariants: {
@@ -41,10 +41,11 @@ const AuraToast = React.forwardRef<HTMLDivElement, AuraToastProps>(
         {/* Rim Light */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-[inherit] p-px"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
           style={{
+            padding: "0.5px",
             background:
-              "linear-gradient(180deg, var(--aura-rim) 0%, transparent 50%)",
+              "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",
@@ -57,7 +58,7 @@ const AuraToast = React.forwardRef<HTMLDivElement, AuraToastProps>(
               <p className="text-sm font-semibold">{title}</p>
             )}
             {description && (
-              <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+              <p className="mt-1 text-sm text-[var(--text-secondary,rgba(255,255,255,0.7))]">{description}</p>
             )}
             {children}
           </div>
@@ -65,7 +66,7 @@ const AuraToast = React.forwardRef<HTMLDivElement, AuraToastProps>(
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-muted-foreground hover:text-foreground"
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-[var(--text-secondary,rgba(255,255,255,0.7))] hover:text-[var(--text-primary,#f1f1f1)]"
               aria-label="Close"
             >
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">

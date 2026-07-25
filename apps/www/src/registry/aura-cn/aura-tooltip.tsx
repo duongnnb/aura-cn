@@ -40,14 +40,15 @@ export function AuraTooltip({
         <div
           role="tooltip"
           className={cn(
-            "absolute z-50 whitespace-nowrap rounded-md px-3 py-1.5",
-            "bg-card border border-border text-sm text-foreground shadow-lg",
+            "absolute z-50 whitespace-nowrap rounded-lg px-3 py-1.5",
+            "bg-[var(--bg-page,#0f0f0f)] border border-[rgba(255,255,255,0.06)] text-sm text-[var(--text-primary,#f1f1f1)] shadow-lg",
             "animate-in fade-in zoom-in-95 duration-150",
             // Rim light
-            "before:absolute before:inset-0 before:rounded-md before:p-px",
-            "before:bg-[linear-gradient(180deg,var(--aura-rim),transparent_50%)]",
+            "before:absolute before:inset-0 before:rounded-lg before:z-[3]",
+            "before:bg-[linear-gradient(to_bottom,var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]",
             "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
             "before:[mask-composite:exclude]",
+            "before:[padding:0.5px]",
             "before:pointer-events-none",
             positionClasses[side],
             className
