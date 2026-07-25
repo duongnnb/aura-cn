@@ -1,0 +1,76 @@
+---
+title: Aura Drawer
+description: Slide-out panel with rim light from the opening edge.
+---
+
+## Usage
+
+```tsx
+import {
+  AuraDrawer,
+  AuraDrawerHeader,
+  AuraDrawerTitle,
+  AuraDrawerContent,
+  AuraDrawerFooter,
+} from "@/registry/aura-cn/aura-drawer"
+import { AuraButton } from "@/registry/aura-cn/aura-button"
+
+const [open, setOpen] = useState(false)
+
+<AuraButton onClick={() => setOpen(true)}>Open Drawer</AuraButton>
+
+<AuraDrawer open={open} onOpenChange={setOpen} side="right">
+  <AuraDrawerHeader>
+    <AuraDrawerTitle>Settings</AuraDrawerTitle>
+  </AuraDrawerHeader>
+  <AuraDrawerContent>
+    <p>Drawer body content goes here.</p>
+  </AuraDrawerContent>
+  <AuraDrawerFooter>
+    <AuraButton variant="ghost" onClick={() => setOpen(false)}>
+      Cancel
+    </AuraButton>
+    <AuraButton onClick={() => setOpen(false)}>
+      Save
+    </AuraButton>
+  </AuraDrawerFooter>
+</AuraDrawer>
+```
+
+## Side Variants
+
+```tsx
+// Left drawer
+<AuraDrawer open={open} onOpenChange={setOpen} side="left">
+  ...
+</AuraDrawer>
+
+// Bottom sheet
+<AuraDrawer open={open} onOpenChange={setOpen} side="bottom">
+  ...
+</AuraDrawer>
+```
+
+## Props
+
+### AuraDrawer
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controls visibility |
+| `onOpenChange` | `(open: boolean) => void` | — | Called on backdrop click |
+| `side` | `"left" \| "right" \| "bottom"` | `"right"` | Slide direction |
+
+### Sub-components
+
+- `AuraDrawerHeader` — Top section
+- `AuraDrawerTitle` — `<h2>` heading
+- `AuraDrawerContent` — Scrollable body (flex-1)
+- `AuraDrawerFooter` — Bottom actions
+
+## Design Notes
+
+- Rim light radiates from the **opening edge** (left drawer → light from left)
+- Bottom variant gets `rounded-t-xl` and 60vh height
+- Backdrop with blur + 50% overlay
+- `slide-in-from-{side}` entrance animation

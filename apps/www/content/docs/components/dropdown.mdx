@@ -1,0 +1,64 @@
+---
+title: Aura Dropdown
+description: Dropdown menu with rim light and slide-in animation.
+---
+
+## Usage
+
+```tsx
+import { AuraDropdown } from "@/registry/aura-cn/aura-dropdown"
+import { AuraButton } from "@/registry/aura-cn/aura-button"
+
+<AuraDropdown
+  trigger={<AuraButton variant="outline">Actions</AuraButton>}
+  items={[
+    { label: "Edit", onClick: () => console.log("edit") },
+    { label: "Duplicate", onClick: () => console.log("duplicate") },
+    { separator: true },
+    { label: "Delete", destructive: true, onClick: () => console.log("delete") },
+  ]}
+/>
+```
+
+## Right-aligned
+
+```tsx
+<AuraDropdown
+  align="right"
+  trigger={<AuraButton size="sm">Menu</AuraButton>}
+  items={[
+    { label: "Profile" },
+    { label: "Settings" },
+    { separator: true },
+    { label: "Sign out" },
+  ]}
+/>
+```
+
+## Props
+
+### AuraDropdown
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `trigger` | `ReactNode` | — | Element that opens the menu |
+| `items` | `DropdownItem[]` | — | Menu items array |
+| `align` | `"left" \| "right"` | `"left"` | Horizontal alignment |
+
+### DropdownItem
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `label` | `string` | Display text |
+| `onClick` | `() => void` | Click handler |
+| `icon` | `ReactNode` | Optional leading icon |
+| `disabled` | `boolean` | Disable interaction |
+| `destructive` | `boolean` | Red text styling |
+| `separator` | `boolean` | Renders a divider line instead |
+
+## Design Notes
+
+- Rim light from top (elevated pattern)
+- `slide-in-from-top-2` animation on open
+- Closes on outside click or item selection
+- Destructive items get `text-destructive` color

@@ -1,0 +1,50 @@
+---
+title: Aura Tooltip
+description: Tooltip with rim light border and multi-directional positioning.
+---
+
+## Usage
+
+```tsx
+import { AuraTooltip } from "@/registry/aura-cn/aura-tooltip"
+import { AuraButton } from "@/registry/aura-cn/aura-button"
+
+<AuraTooltip content="Save your changes">
+  <AuraButton>Save</AuraButton>
+</AuraTooltip>
+```
+
+## Positioning
+
+```tsx
+<AuraTooltip content="Above" side="top">
+  <span>Top</span>
+</AuraTooltip>
+
+<AuraTooltip content="Below" side="bottom">
+  <span>Bottom</span>
+</AuraTooltip>
+
+<AuraTooltip content="Left side" side="left">
+  <span>Left</span>
+</AuraTooltip>
+
+<AuraTooltip content="Right side" side="right">
+  <span>Right</span>
+</AuraTooltip>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `content` | `ReactNode` | — | Tooltip content |
+| `children` | `ReactNode` | — | Trigger element |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Position relative to trigger |
+
+## Design Notes
+
+- Rim light gradient from top (elevated pattern)
+- Appears on hover and focus (accessible)
+- `zoom-in-95` + `fade-in` entrance animation
+- Auto-centered relative to trigger

@@ -1,0 +1,62 @@
+---
+title: Aura FAB
+description: Floating Action Button with rim light glow and size variants.
+---
+
+## Usage
+
+```tsx
+import { AuraFAB } from "@/registry/aura-cn/aura-fab"
+
+// Icon FAB
+<AuraFAB>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+</AuraFAB>
+
+// Extended FAB with label
+<AuraFAB size="extended" label="Create">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+</AuraFAB>
+```
+
+## Sizes
+
+```tsx
+<AuraFAB size="sm">+</AuraFAB>
+<AuraFAB>+</AuraFAB>
+<AuraFAB size="lg">+</AuraFAB>
+<AuraFAB size="extended" label="New Item">+</AuraFAB>
+```
+
+## Variants
+
+```tsx
+// Primary (default) — solid aura color
+<AuraFAB>+</AuraFAB>
+
+// Secondary — card background with border
+<AuraFAB variant="secondary">+</AuraFAB>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"sm" \| "default" \| "lg" \| "extended"` | `"default"` | Button size |
+| `variant` | `"default" \| "secondary"` | `"default"` | Visual style |
+| `icon` | `ReactNode` | — | Icon content (alternative to children) |
+| `label` | `string` | — | Text label (shown only with `extended` size) |
+
+Also accepts all native `<button>` HTML attributes.
+
+## Design Notes
+
+- Rim light gradient from top (elevated pattern)
+- Radial glow wash from top center
+- `hover:scale-105` + `active:scale-95` for tactile feedback
+- Hover triggers `box-shadow` with `--aura-glow` color
+- Extended size switches to pill shape with text
