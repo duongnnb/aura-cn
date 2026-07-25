@@ -1,0 +1,41 @@
+---
+title: Aura Table
+description: A data table component with rim light, striped rows, and hover effects.
+---
+
+## Preview
+
+<ComponentPreview>
+  <TableDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-table" />
+
+## Usage
+
+```tsx
+import { AuraTable, type AuraTableColumn } from "@/registry/aura-cn/aura-table"
+
+const columns: AuraTableColumn<{ name: string; role: string }>[] = [
+  { key: "name", header: "Name" },
+  { key: "role", header: "Role" },
+]
+
+const data = [
+  { name: "Alice", role: "Admin" },
+  { name: "Bob", role: "User" },
+]
+
+<AuraTable columns={columns} data={data} striped />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `AuraTableColumn<T>[]` | — | Column definitions |
+| `data` | `T[]` | — | Row data |
+| `striped` | `boolean` | `false` | Alternating row backgrounds |
+| `hoverable` | `boolean` | `true` | Highlight rows on hover |

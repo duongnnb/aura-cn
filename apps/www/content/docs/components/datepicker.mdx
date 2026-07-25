@@ -1,0 +1,32 @@
+---
+title: Aura DatePicker
+description: A calendar-based date picker with month navigation and today highlight.
+---
+
+## Preview
+
+<ComponentPreview>
+  <DatePickerDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-datepicker" />
+
+## Usage
+
+```tsx
+import { AuraDatePicker } from "@/registry/aura-cn/aura-datepicker"
+
+const [date, setDate] = React.useState<Date | undefined>()
+
+<AuraDatePicker value={date} onChange={setDate} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `Date` | — | Selected date |
+| `onChange` | `(date: Date) => void` | — | Selection callback |
+| `placeholder` | `string` | `"Select date"` | Placeholder text |

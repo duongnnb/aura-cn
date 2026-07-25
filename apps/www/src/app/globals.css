@@ -54,6 +54,20 @@
   --aura-rim: oklch(0.882 0.059 254.128 / 0.6);
   --aura-wash: oklch(0.882 0.059 254.128 / 0.15);
   --aura-dynamic: oklch(0.882 0.059 254.128 / 0.25);
+
+  /* Surface tokens (light mode) */
+  --bg-page: #ffffff;
+  --bg-surface: rgba(0,0,0,0.05);
+  --bg-surface-hover: rgba(0,0,0,0.08);
+  --bg-surface-active: rgba(0,0,0,0.12);
+  --text-primary: #0f0f0f;
+  --text-secondary: rgba(0,0,0,0.6);
+  --rim-light: rgba(0,0,0,0.08);
+  --wash-color: rgba(0,0,0,0.03);
+  --dynamic-light-color: rgba(0,0,0,0.1);
+  --inset-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+  --card-bg: rgba(0,0,0,0.03);
+  --card-border: rgba(0,0,0,0.08);
 }
 
 .dark {
@@ -79,7 +93,7 @@
   --aura-wash: oklch(0.882 0.059 254.128 / 0.1);
   --aura-dynamic: oklch(0.882 0.059 254.128 / 0.35);
 
-  /* YouTube Shorts–style surface tokens */
+  /* Surface tokens (dark mode) */
   --bg-page: #0f0f0f;
   --bg-surface: rgba(255,255,255,0.1);
   --bg-surface-hover: rgba(255,255,255,0.18);
@@ -90,6 +104,8 @@
   --wash-color: rgba(255,255,255,0.04);
   --dynamic-light-color: rgba(255,255,255,0.22);
   --inset-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.06);
 }
 
 @layer base {
@@ -97,7 +113,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[var(--bg-page)] text-[var(--text-primary)];
   }
 }
 

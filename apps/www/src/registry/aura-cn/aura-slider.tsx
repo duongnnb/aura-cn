@@ -40,7 +40,7 @@ const AuraSlider = React.forwardRef<HTMLInputElement, AuraSliderProps>(
     return (
       <div className={cn("relative flex w-full items-center", className)}>
         {/* Track background */}
-        <div className="relative h-2 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.1)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]">
+        <div className="relative h-2 w-full overflow-hidden rounded-full bg-[var(--bg-surface)] shadow-[var(--inset-shadow)]">
           {/* Filled portion */}
           <div
             className="absolute inset-y-0 left-0 rounded-full bg-aura"
@@ -62,7 +62,7 @@ const AuraSlider = React.forwardRef<HTMLInputElement, AuraSliderProps>(
             style={{
               padding: "0.5px",
               background:
-                "linear-gradient(to top, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+                "linear-gradient(to top, var(--rim-light), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",
@@ -83,7 +83,7 @@ const AuraSlider = React.forwardRef<HTMLInputElement, AuraSliderProps>(
         />
         {/* Custom thumb */}
         <div
-          className="pointer-events-none absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-aura bg-[var(--text-primary,#f1f1f1)] shadow-lg"
+          className="pointer-events-none absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-aura bg-[var(--text-primary)] shadow-lg"
           style={{ left: `${percent}%` }}
         >
           <span

@@ -55,6 +55,11 @@ import {
   AuraDrawerFooter,
 } from "@/registry/aura-cn/aura-drawer";
 import { AuraFAB } from "@/registry/aura-cn/aura-fab";
+import { AuraMotion, AuraStagger } from "@/registry/aura-cn/aura-motion";
+import { AuraCommand, type CommandItem } from "@/registry/aura-cn/aura-command";
+import { AuraPopover } from "@/registry/aura-cn/aura-popover";
+import { AuraTable, type AuraTableColumn } from "@/registry/aura-cn/aura-table";
+import { AuraDatePicker } from "@/registry/aura-cn/aura-datepicker";
 
 export function ButtonDemo() {
   return (
@@ -378,4 +383,83 @@ export function FABDemo() {
       <AuraFAB size="extended" label="Create">+</AuraFAB>
     </div>
   );
+}
+
+export function MotionDemo() {
+  return (
+    <div className="space-y-6">
+      <AuraMotion preset="fade-up">
+        <AuraButton>Fade Up</AuraButton>
+      </AuraMotion>
+      <AuraMotion preset="scale" delay={0.1}>
+        <AuraButton variant="accent">Scale In</AuraButton>
+      </AuraMotion>
+      <AuraMotion preset="blur" delay={0.2}>
+        <AuraButton variant="outline">Blur In</AuraButton>
+      </AuraMotion>
+      <AuraStagger stagger={0.1} preset="fade-up">
+        <AuraChip>Item 1</AuraChip>
+        <AuraChip>Item 2</AuraChip>
+        <AuraChip>Item 3</AuraChip>
+        <AuraChip>Item 4</AuraChip>
+      </AuraStagger>
+    </div>
+  );
+}
+
+const commandItems: CommandItem[] = [
+  { id: "1", label: "Search files", shortcut: "⌘P", group: "Navigation" },
+  { id: "2", label: "Open settings", shortcut: "⌘,", group: "Navigation" },
+  { id: "3", label: "Toggle dark mode", group: "Actions" },
+  { id: "4", label: "Copy current URL", group: "Actions" },
+  { id: "5", label: "New file", shortcut: "⌘N", group: "File" },
+  { id: "6", label: "Save all", shortcut: "⌘S", group: "File" },
+];
+
+export function CommandDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div>
+      <AuraButton onClick={() => setOpen(true)} variant="outline">
+        ⌘K Open Command
+      </AuraButton>
+      <AuraCommand items={commandItems} open={open} onOpenChange={setOpen} />
+    </div>
+  );
+}
+
+export function PopoverDemo() {
+  return (
+    <AuraPopover
+      trigger={<AuraButton variant="outline">Open Popover</AuraButton>}
+    >
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-[var(--text-primary)]">Popover Content</p>
+        <p className="text-xs text-[var(--text-secondary)]">This is a rich content popover with any elements inside.</p>
+        <AuraButton size="sm">Action</AuraButton>
+      </div>
+    </AuraPopover>
+  );
+}
+
+const tableData = [
+  { name: "Button", category: "Action", status: "Stable" },
+  { name: "Card", category: "Layout", status: "Stable" },
+  { name: "Modal", category: "Overlay", status: "Beta" },
+  { name: "DatePicker", category: "Input", status: "New" },
+];
+
+const tableColumns: AuraTableColumn<typeof tableData[number]>[] = [
+  { key: "name", header: "Component" },
+  { key: "category", header: "Category" },
+  { key: "status", header: "Status" },
+];
+
+export function TableDemo() {
+  return <AuraTable columns={tableColumns} data={tableData} striped />;
+}
+
+export function DatePickerDemo() {
+  const [date, setDate] = React.useState<Date | undefined>();
+  return <AuraDatePicker value={date} onChange={setDate} />;
 }

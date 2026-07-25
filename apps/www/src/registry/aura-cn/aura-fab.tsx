@@ -13,14 +13,14 @@ const fabVariants = cva(
     "hover:scale-105 active:scale-95",
     // Rim light
     "before:absolute before:inset-0 before:rounded-full before:z-[3]",
-    "before:bg-[linear-gradient(to_bottom,var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]",
+    "before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]",
     "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
     "before:[mask-composite:exclude]",
     "before:[padding:0.5px]",
     "before:pointer-events-none",
     // Wash glow
     "after:absolute after:inset-0 after:rounded-full",
-    "after:bg-[radial-gradient(circle_at_50%_0%,var(--wash-color,rgba(255,255,255,0.04)),transparent_70%)]",
+    "after:bg-[radial-gradient(circle_at_50%_0%,var(--wash-color),transparent_70%)]",
     "after:pointer-events-none",
   ],
   {
@@ -33,7 +33,7 @@ const fabVariants = cva(
       },
       variant: {
         default: "bg-[var(--aura)] text-white hover:shadow-[0_4px_24px_var(--aura-glow)]",
-        secondary: "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)] border border-[rgba(255,255,255,0.06)] hover:bg-[rgba(255,255,255,0.18)]",
+        secondary: "bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--card-border)] hover:bg-[var(--bg-surface-hover)]",
       },
     },
     defaultVariants: {

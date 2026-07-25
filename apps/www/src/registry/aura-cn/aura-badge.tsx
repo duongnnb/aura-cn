@@ -7,9 +7,9 @@ const auraBadgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)]",
+        default: "bg-[var(--bg-surface)] text-[var(--text-primary)]",
         accent: "bg-aura text-white",
-        outline: "bg-transparent border border-[rgba(255,255,255,0.15)] text-[var(--text-primary,#f1f1f1)]",
+        outline: "bg-transparent border border-[var(--rim-light)] text-[var(--text-primary)]",
         destructive: "bg-red-500/20 text-red-400 border border-red-500/20",
         success: "bg-green-500/20 text-green-400 border border-green-500/20",
       },
@@ -47,7 +47,7 @@ const AuraBadge = React.forwardRef<HTMLSpanElement, AuraBadgeProps>(
             style={{
               padding: "0.5px",
               background:
-                "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+                "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

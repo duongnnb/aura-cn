@@ -25,11 +25,11 @@ export function AuraModal({ open, onOpenChange, children }: AuraModalProps) {
       <div
         className={cn(
           "relative z-10 w-full max-w-lg mx-4 rounded-2xl",
-          "bg-[var(--bg-page,#0f0f0f)] border border-[rgba(255,255,255,0.06)] shadow-2xl",
+          "bg-[var(--bg-page)] border border-[var(--card-border)] shadow-2xl",
           "animate-in fade-in zoom-in-95 duration-200",
           // Rim light
           "before:absolute before:inset-0 before:rounded-2xl before:z-[3]",
-          "before:bg-[linear-gradient(to_bottom,var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]",
+          "before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]",
           "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
           "before:[mask-composite:exclude]",
           "before:[padding:0.5px]",
@@ -64,7 +64,7 @@ export function AuraModalTitle({
   className?: string;
 }) {
   return (
-    <h2 className={cn("text-lg font-semibold text-[var(--text-primary,#f1f1f1)]", className)}>
+    <h2 className={cn("text-lg font-semibold text-[var(--text-primary)]", className)}>
       {children}
     </h2>
   );
@@ -78,7 +78,7 @@ export function AuraModalDescription({
   className?: string;
 }) {
   return (
-    <p className={cn("text-sm text-[var(--text-secondary,rgba(255,255,255,0.7))] mt-1", className)}>
+    <p className={cn("text-sm text-[var(--text-secondary)] mt-1", className)}>
       {children}
     </p>
   );

@@ -66,7 +66,7 @@ function AuraAccordionItem({ value, children, className }: AuraAccordionItemProp
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)]",
+        "relative overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)]",
         className
       )}
       data-state={isOpen ? "open" : "closed"}
@@ -78,7 +78,7 @@ function AuraAccordionItem({ value, children, className }: AuraAccordionItemProp
         style={{
           padding: "0.5px",
           background:
-            "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+            "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
           WebkitMaskComposite: "xor",
@@ -107,7 +107,7 @@ const AuraAccordionTrigger = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
-        "flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-[var(--text-primary,#f1f1f1)] transition-colors hover:bg-[rgba(255,255,255,0.06)]",
+        "flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-surface)]",
         className
       )}
       onClick={() => toggle(value)}
@@ -117,7 +117,7 @@ const AuraAccordionTrigger = React.forwardRef<
       <span>{children}</span>
       <svg
         className={cn(
-          "h-4 w-4 text-[var(--text-secondary,rgba(255,255,255,0.7))] transition-transform duration-200",
+          "h-4 w-4 text-[var(--text-secondary)] transition-transform duration-200",
           isOpen && "rotate-180"
         )}
         viewBox="0 0 16 16"
@@ -155,7 +155,7 @@ function AuraAccordionContent({
   return (
     <div
       className={cn(
-        "animate-in fade-in-0 slide-in-from-top-1 border-t border-[rgba(255,255,255,0.06)] px-4 py-3 text-sm text-[var(--text-secondary,rgba(255,255,255,0.7))] duration-200",
+        "animate-in fade-in-0 slide-in-from-top-1 border-t border-[var(--card-border)] px-4 py-3 text-sm text-[var(--text-secondary)] duration-200",
         className
       )}
     >

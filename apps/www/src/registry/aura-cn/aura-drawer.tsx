@@ -44,9 +44,9 @@ export function AuraDrawer({
       {/* Panel */}
       <div
         className={cn(
-          "absolute bg-[var(--bg-page,#0f0f0f)] border-[rgba(255,255,255,0.06)] shadow-2xl",
+          "absolute bg-[var(--bg-page)] border-[var(--card-border)] shadow-2xl",
           "before:absolute before:inset-0 before:z-[3]",
-          `before:bg-[linear-gradient(${rimDirection[side]},var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]`,
+          `before:bg-[linear-gradient(${rimDirection[side]},var(--rim-light),transparent_75%)]`,
           "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
           "before:[mask-composite:exclude]",
           "before:[padding:0.5px]",
@@ -84,7 +84,7 @@ export function AuraDrawerTitle({
   className?: string;
 }) {
   return (
-    <h2 className={cn("text-lg font-semibold text-[var(--text-primary,#f1f1f1)]", className)}>
+    <h2 className={cn("text-lg font-semibold text-[var(--text-primary)]", className)}>
       {children}
     </h2>
   );

@@ -48,11 +48,11 @@ export function AuraDropdown({
         <div
           className={cn(
             "absolute z-50 mt-2 min-w-[180px] rounded-xl",
-            "bg-[var(--bg-page,#0f0f0f)] border border-[rgba(255,255,255,0.06)] shadow-xl",
+            "bg-[var(--bg-page)] border border-[var(--card-border)] shadow-xl",
             "animate-in fade-in slide-in-from-top-2 duration-150",
             // Rim light
             "before:absolute before:inset-0 before:rounded-xl before:z-[3]",
-            "before:bg-[linear-gradient(to_bottom,var(--rim-light,rgba(255,255,255,0.15)),transparent_75%)]",
+            "before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]",
             "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
             "before:[mask-composite:exclude]",
             "before:[padding:0.5px]",
@@ -65,7 +65,7 @@ export function AuraDropdown({
               item.separator ? (
                 <div
                   key={i}
-                  className="my-1 h-px bg-[rgba(255,255,255,0.06)]"
+                  className="my-1 h-px bg-[var(--card-border)]"
                 />
               ) : (
                 <button
@@ -77,8 +77,8 @@ export function AuraDropdown({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text-primary,#f1f1f1)] transition-colors",
-                    "hover:bg-[rgba(255,255,255,0.08)]",
+                    "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] transition-colors",
+                    "hover:bg-[var(--bg-surface)]",
                     "disabled:opacity-50 disabled:pointer-events-none",
                     item.destructive && "text-red-400 hover:bg-red-500/10"
                   )}

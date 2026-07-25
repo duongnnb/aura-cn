@@ -1,0 +1,47 @@
+---
+title: Aura Command
+description: A command palette (⌘K) with keyboard navigation, search filtering, and grouped results.
+---
+
+## Preview
+
+<ComponentPreview>
+  <CommandDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-command" />
+
+## Usage
+
+```tsx
+import { AuraCommand, type CommandItem } from "@/registry/aura-cn/aura-command"
+
+const items: CommandItem[] = [
+  { id: "1", label: "Search files", shortcut: "⌘P", group: "Navigation" },
+  { id: "2", label: "Toggle theme", group: "Actions", onSelect: () => {} },
+]
+
+<AuraCommand items={items} open={open} onOpenChange={setOpen} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `CommandItem[]` | — | List of command items |
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Open state callback |
+| `placeholder` | `string` | `"Type a command..."` | Search input placeholder |
+
+## CommandItem
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique identifier |
+| `label` | `string` | Display text |
+| `icon` | `ReactNode` | Optional icon |
+| `shortcut` | `string` | Keyboard shortcut display |
+| `onSelect` | `() => void` | Selection callback |
+| `group` | `string` | Group heading |

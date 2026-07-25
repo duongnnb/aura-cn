@@ -1,0 +1,63 @@
+---
+title: Aura Motion
+description: Entrance animation wrappers powered by Framer Motion with preset animations and stagger support.
+---
+
+## Preview
+
+<ComponentPreview>
+  <MotionDemo />
+</ComponentPreview>
+
+## Installation
+
+<InstallCommand name="aura-motion" />
+
+## Usage
+
+```tsx
+import { AuraMotion, AuraStagger } from "@/registry/aura-cn/aura-motion"
+
+{/* Single element animation */}
+<AuraMotion preset="fade-up">
+  <AuraButton>Animated Button</AuraButton>
+</AuraMotion>
+
+{/* Staggered children */}
+<AuraStagger stagger={0.1} preset="fade-up">
+  <AuraChip>Item 1</AuraChip>
+  <AuraChip>Item 2</AuraChip>
+  <AuraChip>Item 3</AuraChip>
+</AuraStagger>
+```
+
+## Presets
+
+| Preset | Effect |
+|--------|--------|
+| `fade-up` | Fade in + slide up (default) |
+| `fade-down` | Fade in + slide down |
+| `scale` | Fade in + scale from 92% |
+| `slide-left` | Fade in + slide from left |
+| `slide-right` | Fade in + slide from right |
+| `blur` | Fade in + blur reveal |
+
+## AuraMotion Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `preset` | `AuraMotionPreset` | `"fade-up"` | Animation preset |
+| `duration` | `number` | `0.5` | Duration in seconds |
+| `delay` | `number` | `0` | Delay before animation starts |
+| `once` | `boolean` | `true` | Animate only once on viewport enter |
+| `variants` | `Variants` | — | Custom Framer Motion variants |
+
+## AuraStagger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `stagger` | `number` | `0.08` | Delay between each child |
+| `duration` | `number` | `0.4` | Duration of each child animation |
+| `delay` | `number` | `0` | Initial delay before first child |
+| `preset` | `AuraMotionPreset` | `"fade-up"` | Animation preset for children |
+| `once` | `boolean` | `true` | Trigger once in viewport |

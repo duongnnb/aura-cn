@@ -30,7 +30,7 @@ const AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(
           "relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
           controlledChecked
             ? "bg-aura"
-            : "bg-[rgba(255,255,255,0.15)]",
+            : "bg-[var(--rim-light)]",
           className
         )}
         onClick={toggle}
@@ -44,8 +44,8 @@ const AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(
           style={{
             padding: "0.5px",
             background: controlledChecked
-              ? "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)"
-              : "linear-gradient(to bottom, rgba(255,255,255,0.1), transparent 75%)",
+              ? "linear-gradient(to bottom, var(--rim-light), transparent 75%)"
+              : "linear-gradient(to bottom, var(--bg-surface), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",

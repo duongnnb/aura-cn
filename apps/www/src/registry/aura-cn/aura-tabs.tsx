@@ -84,8 +84,8 @@ const AuraTabsTrigger = React.forwardRef<HTMLButtonElement, AuraTabsTriggerProps
         className={cn(
           "relative inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           isActive
-            ? "bg-[var(--text-primary,#f1f1f1)] text-[var(--bg-page,#0f0f0f)]"
-            : "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.18)]",
+            ? "bg-[var(--text-primary)] text-[var(--bg-page)]"
+            : "bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]",
           className
         )}
         onClick={() => setActiveTab(value)}
@@ -99,7 +99,7 @@ const AuraTabsTrigger = React.forwardRef<HTMLButtonElement, AuraTabsTriggerProps
             style={{
               padding: "0.5px",
               background:
-                "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+                "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

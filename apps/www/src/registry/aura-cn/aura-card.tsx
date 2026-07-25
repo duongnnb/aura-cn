@@ -48,8 +48,8 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
       <div
         className={cn(
           "relative overflow-hidden rounded-2xl p-5 cursor-pointer transition-all duration-200",
-          "bg-[var(--card-bg,rgba(255,255,255,0.04))] border border-[var(--card-border,rgba(255,255,255,0.06))]",
-          "hover:bg-[var(--bg-surface,rgba(255,255,255,0.1))]",
+          "bg-[var(--card-bg)] border border-[var(--card-border)]",
+          "hover:bg-[var(--bg-surface)]",
           className
         )}
         ref={setRefs}
@@ -64,7 +64,7 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
           style={{
             padding: "0.5px",
             background:
-              "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+              "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
             mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             maskComposite: "exclude",
             WebkitMaskComposite: "xor",
@@ -80,7 +80,7 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
             className="absolute w-full h-full left-0"
             style={{
               bottom: "50%",
-              background: "var(--wash-color, rgba(255,255,255,0.04))",
+              background: "var(--wash-color)",
               filter: "blur(10px)",
               borderRadius: "inherit",
             }}
@@ -103,7 +103,7 @@ const AuraCard = React.forwardRef<HTMLDivElement, AuraCardProps>(
                 transform:
                   "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
                 background:
-                  "radial-gradient(circle, var(--dynamic-light-color, rgba(255,255,255,0.22)) 0%, transparent 100%)",
+                  "radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%)",
                 opacity: "var(--wash-opacity, 0)",
                 filter: "blur(12px)",
               }}

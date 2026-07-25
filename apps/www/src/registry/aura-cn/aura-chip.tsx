@@ -9,9 +9,9 @@ const auraChipVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.18)]",
-        active: "bg-[var(--text-primary,#f1f1f1)] text-[var(--bg-page,#0f0f0f)]",
-        outline: "bg-transparent border border-[rgba(255,255,255,0.15)] text-[var(--text-primary,#f1f1f1)] hover:bg-[rgba(255,255,255,0.06)]",
+        default: "bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]",
+        active: "bg-[var(--text-primary)] text-[var(--bg-page)]",
+        outline: "bg-transparent border border-[var(--rim-light)] text-[var(--text-primary)] hover:bg-[var(--wash-color)]",
       },
       size: {
         sm: "h-7 px-2.5",
@@ -50,7 +50,7 @@ const AuraChip = React.forwardRef<HTMLSpanElement, AuraChipProps>(
             style={{
               padding: "0.5px",
               background:
-                "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+                "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",

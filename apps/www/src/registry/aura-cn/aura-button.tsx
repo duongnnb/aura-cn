@@ -29,14 +29,13 @@ const auraButtonVariants = cva(
       variant: {
         default: [
           "rounded-full",
-          "bg-[rgba(255,255,255,0.1)] text-[var(--text-primary,#f1f1f1)]",
-          "hover:bg-[rgba(255,255,255,0.18)]",
-          "dark:bg-[rgba(255,255,255,0.1)] dark:hover:bg-[rgba(255,255,255,0.18)]",
+          "bg-[var(--bg-surface)] text-[var(--text-primary)]",
+          "hover:bg-[var(--bg-surface-hover)]",
           "border-0",
         ],
         primary: [
           "rounded-full",
-          "bg-[var(--text-primary,#f1f1f1)] text-[var(--bg-page,#0f0f0f)]",
+          "bg-[var(--text-primary)] text-[var(--bg-page)]",
           "hover:opacity-90",
         ],
         accent: [
@@ -48,21 +47,21 @@ const auraButtonVariants = cva(
         ],
         outline: [
           "rounded-full",
-          "bg-transparent border border-[rgba(255,255,255,0.15)]",
-          "text-[var(--text-primary,#f1f1f1)]",
-          "hover:bg-[rgba(255,255,255,0.08)]",
-          "hover:border-[rgba(255,255,255,0.25)]",
+          "bg-transparent border border-[var(--rim-light)]",
+          "text-[var(--text-primary)]",
+          "hover:bg-[var(--bg-surface)]",
+          "hover:border-[var(--bg-surface-hover)]",
         ],
         ghost: [
           "rounded-full",
-          "bg-transparent text-[var(--text-primary,#f1f1f1)]",
-          "hover:bg-[rgba(255,255,255,0.08)]",
+          "bg-transparent text-[var(--text-primary)]",
+          "hover:bg-[var(--bg-surface)]",
         ],
         secondary: [
           "rounded-full",
-          "bg-[rgba(255,255,255,0.06)] text-[var(--text-secondary,rgba(255,255,255,0.7))]",
-          "hover:bg-[rgba(255,255,255,0.12)]",
-          "hover:text-[var(--text-primary,#f1f1f1)]",
+          "bg-[var(--wash-color)] text-[var(--text-secondary)]",
+          "hover:bg-[var(--bg-surface)]",
+          "hover:text-[var(--text-primary)]",
         ],
       },
       size: {
@@ -145,7 +144,7 @@ const AuraButton = React.forwardRef<HTMLButtonElement, AuraButtonProps>(
                   ? "linear-gradient(to bottom, rgba(255,255,255,0.4), transparent 75%)"
                   : variant === "accent"
                   ? "linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 75%)"
-                  : "linear-gradient(to bottom, var(--rim-light, rgba(255,255,255,0.15)), transparent 75%)",
+                  : "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
               mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
               maskComposite: "exclude",
               WebkitMaskComposite: "xor",
@@ -163,7 +162,7 @@ const AuraButton = React.forwardRef<HTMLButtonElement, AuraButtonProps>(
               className="absolute w-full h-full left-0"
               style={{
                 bottom: "50%",
-                background: "var(--wash-color, rgba(255,255,255,0.04))",
+                background: "var(--wash-color)",
                 filter: "blur(10px)",
                 borderRadius: "inherit",
               }}
@@ -187,7 +186,7 @@ const AuraButton = React.forwardRef<HTMLButtonElement, AuraButtonProps>(
                 transform:
                   "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
                 background:
-                  "radial-gradient(circle, var(--dynamic-light-color, rgba(255,255,255,0.22)) 0%, transparent 100%)",
+                  "radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%)",
                 opacity: "var(--wash-opacity, 0)",
                 filter: "blur(12px)",
               }}

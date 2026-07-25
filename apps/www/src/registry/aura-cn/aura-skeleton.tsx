@@ -9,7 +9,7 @@ const AuraSkeleton = React.forwardRef<HTMLDivElement, AuraSkeletonProps>(
       <div
         ref={ref}
         className={cn(
-          "relative overflow-hidden rounded-lg bg-[rgba(255,255,255,0.06)]",
+          "relative overflow-hidden rounded-lg bg-[var(--bg-surface)]",
           className
         )}
         {...props}
@@ -20,7 +20,7 @@ const AuraSkeleton = React.forwardRef<HTMLDivElement, AuraSkeletonProps>(
           className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite]"
           style={{
             background:
-              "linear-gradient(90deg, transparent 0%, var(--wash-color, rgba(255,255,255,0.04)) 50%, transparent 100%)",
+              "linear-gradient(90deg, transparent 0%, var(--wash-color) 50%, transparent 100%)",
           }}
         />
       </div>
