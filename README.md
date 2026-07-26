@@ -19,16 +19,19 @@ A visual-effects focused UI component library with **3D rim light**, **dynamic c
 npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json
 ```
 
-## Components (27)
+## Components (46)
 
 | Category | Components |
 |----------|-----------|
-| **Actions** | Button, FAB, Chip |
-| **Input** | Input, Textarea, Select, Toggle, Slider, Checkbox, Radio, DatePicker |
-| **Layout** | Card, Accordion, Tabs, Table |
-| **Overlay** | Modal, Drawer, Dropdown, Popover, Command Palette, Tooltip, Toast |
-| **Display** | Badge, Avatar, Progress, Skeleton |
+| **Actions** | Button, FAB, Chip, Badge |
+| **Inputs** | Input, Textarea, Select, Toggle, Switch Icon, Checkbox, Radio, Slider, DatePicker, OTP Input, Tag Input, Autocomplete, File Upload, Color Picker |
+| **Navigation** | Navbar, Sidebar, Breadcrumb, Pagination, Tabs, Command Palette, Dropdown |
+| **Feedback** | Alert, Toast, Progress, Skeleton, Tooltip, Notification Badge |
+| **Overlays** | Modal, Drawer, Popover, Confirm Dialog |
+| **Layout** | Card, Accordion, Divider, Timeline, Carousel |
+| **Data Display** | Table, Avatar, Stat Card, Tree View, Data List |
 | **Animation** | Motion (entrance presets), Stagger |
+| **Theming** | Theme provider with color presets |
 
 ## Quick Start
 
