@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-switch-icon",
+  "type": "registry:ui",
+  "title": "Aura Switch Icon",
+  "description": "Animated icon toggle with rotate/scale transitions (e.g., sun/moon).",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-switch-icon.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Switch Icon (Animated Toggle) ─── */\r\n\r\ninterface AuraSwitchIconProps {\r\n  checked?: boolean;\r\n  onCheckedChange?: (checked: boolean) => void;\r\n  iconOn?: React.ReactNode;\r\n  iconOff?: React.ReactNode;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraSwitchIcon({\r\n  checked = false,\r\n  onCheckedChange,\r\n  iconOn,\r\n  iconOff,\r\n  className,\r\n}: AuraSwitchIconProps) {\r\n  const defaultOn = (\r\n    <svg className=\"h-4 w-4\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\r\n      <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z\" />\r\n    </svg>\r\n  );\r\n  const defaultOff = (\r\n    <svg className=\"h-4 w-4\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\r\n      <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z\" />\r\n    </svg>\r\n  );\r\n\r\n  return (\r\n    <button\r\n      type=\"button\"\r\n      role=\"switch\"\r\n      aria-checked={checked}\r\n      onClick={() => onCheckedChange?.(!checked)}\r\n      className={cn(\r\n        \"relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300\",\r\n        \"bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-hover)] text-[var(--text-primary)]\",\r\n        \"shadow-[var(--inset-shadow)]\",\r\n        className\r\n      )}\r\n    >\r\n      <span\r\n        className={cn(\r\n          \"absolute transition-all duration-300\",\r\n          checked ? \"rotate-0 scale-100 opacity-100\" : \"rotate-90 scale-0 opacity-0\"\r\n        )}\r\n      >\r\n        {iconOn || defaultOn}\r\n      </span>\r\n      <span\r\n        className={cn(\r\n          \"absolute transition-all duration-300\",\r\n          !checked ? \"rotate-0 scale-100 opacity-100\" : \"-rotate-90 scale-0 opacity-0\"\r\n        )}\r\n      >\r\n        {iconOff || defaultOff}\r\n      </span>\r\n    </button>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

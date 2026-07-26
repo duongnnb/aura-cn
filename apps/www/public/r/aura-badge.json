@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-badge",
+  "type": "registry:ui",
+  "title": "Aura Badge",
+  "description": "Compact badge/label with rim light effect.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst auraBadgeVariants = cva(\r\n  \"relative inline-flex items-center overflow-hidden rounded-full text-xs font-medium\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-[var(--bg-surface)] text-[var(--text-primary)]\",\r\n        accent: \"bg-aura text-white\",\r\n        outline: \"bg-transparent border border-[var(--rim-light)] text-[var(--text-primary)]\",\r\n        destructive: \"bg-red-500/20 text-red-400 border border-red-500/20\",\r\n        success: \"bg-green-500/20 text-green-400 border border-green-500/20\",\r\n      },\r\n      size: {\r\n        sm: \"h-5 px-2\",\r\n        default: \"h-6 px-2.5\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      variant: \"default\",\r\n      size: \"default\",\r\n    },\r\n  }\r\n);\r\n\r\nexport interface AuraBadgeProps\r\n  extends React.HTMLAttributes<HTMLSpanElement>,\r\n    VariantProps<typeof auraBadgeVariants> {}\r\n\r\nconst AuraBadge = React.forwardRef<HTMLSpanElement, AuraBadgeProps>(\r\n  ({ className, variant, size, children, ...props }, ref) => {\r\n    const showRim = variant !== \"accent\";\r\n\r\n    return (\r\n      <span\r\n        className={cn(auraBadgeVariants({ variant, size, className }))}\r\n        ref={ref}\r\n        {...props}\r\n      >\r\n        {/* Rim Light */}\r\n        {showRim && (\r\n          <span\r\n            aria-hidden=\"true\"\r\n            className=\"pointer-events-none absolute inset-0 rounded-[inherit] z-[3]\"\r\n            style={{\r\n              padding: \"0.5px\",\r\n              background:\r\n                \"linear-gradient(to bottom, var(--rim-light), transparent 75%)\",\r\n              mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n              maskComposite: \"exclude\",\r\n              WebkitMaskComposite: \"xor\",\r\n            }}\r\n          />\r\n        )}\r\n        <span className=\"relative z-10\">{children}</span>\r\n      </span>\r\n    );\r\n  }\r\n);\r\n\r\nAuraBadge.displayName = \"AuraBadge\";\r\n\r\nexport { AuraBadge, auraBadgeVariants };\r\n"
+    }
+  ]
+}

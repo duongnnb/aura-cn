@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-toast",
+  "type": "registry:ui",
+  "title": "Aura Toast",
+  "description": "Notification toast with rim light and variant styles.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-toast.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst auraToastVariants = cva(\r\n  \"relative overflow-hidden rounded-xl border border-[var(--card-border)] p-4 shadow-lg transition-all duration-300\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-[var(--bg-page)] text-[var(--text-primary)]\",\r\n        success: \"bg-[var(--bg-page)] text-[var(--text-primary)] border-green-500/30\",\r\n        error: \"bg-[var(--bg-page)] text-[var(--text-primary)] border-red-500/30\",\r\n        info: \"bg-[var(--bg-page)] text-[var(--text-primary)] border-aura/30\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      variant: \"default\",\r\n    },\r\n  }\r\n);\r\n\r\nexport interface AuraToastProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof auraToastVariants> {\r\n  title?: string;\r\n  description?: string;\r\n  onClose?: () => void;\r\n}\r\n\r\nconst AuraToast = React.forwardRef<HTMLDivElement, AuraToastProps>(\r\n  ({ className, variant, title, description, onClose, children, ...props }, ref) => {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        className={cn(auraToastVariants({ variant, className }))}\r\n        role=\"alert\"\r\n        {...props}\r\n      >\r\n        {/* Rim Light */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"pointer-events-none absolute inset-0 rounded-[inherit] z-[3]\"\r\n          style={{\r\n            padding: \"0.5px\",\r\n            background:\r\n              \"linear-gradient(to bottom, var(--rim-light), transparent 75%)\",\r\n            mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            maskComposite: \"exclude\",\r\n            WebkitMaskComposite: \"xor\",\r\n          }}\r\n        />\r\n\r\n        <div className=\"relative z-10 flex items-start gap-3\">\r\n          <div className=\"flex-1\">\r\n            {title && (\r\n              <p className=\"text-sm font-semibold\">{title}</p>\r\n            )}\r\n            {description && (\r\n              <p className=\"mt-1 text-sm text-[var(--text-secondary)]\">{description}</p>\r\n            )}\r\n            {children}\r\n          </div>\r\n          {onClose && (\r\n            <button\r\n              type=\"button\"\r\n              onClick={onClose}\r\n              className=\"inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)]\"\r\n              aria-label=\"Close\"\r\n            >\r\n              <svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\">\r\n                <path\r\n                  d=\"M1 1L9 9M9 1L1 9\"\r\n                  stroke=\"currentColor\"\r\n                  strokeWidth=\"1.5\"\r\n                  strokeLinecap=\"round\"\r\n                />\r\n              </svg>\r\n            </button>\r\n          )}\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\n\r\nAuraToast.displayName = \"AuraToast\";\r\n\r\nexport { AuraToast, auraToastVariants };\r\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-popover",
+  "type": "registry:ui",
+  "title": "Aura Popover",
+  "description": "Floating popover panel with rim light and click-outside handling.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-popover.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Popover ─── */\r\n\r\ninterface AuraPopoverProps {\r\n  trigger: React.ReactNode;\r\n  children: React.ReactNode;\r\n  align?: \"left\" | \"center\" | \"right\";\r\n  side?: \"top\" | \"bottom\";\r\n  className?: string;\r\n}\r\n\r\nexport function AuraPopover({\r\n  trigger,\r\n  children,\r\n  align = \"center\",\r\n  side = \"bottom\",\r\n  className,\r\n}: AuraPopoverProps) {\r\n  const [open, setOpen] = React.useState(false);\r\n  const ref = React.useRef<HTMLDivElement>(null);\r\n\r\n  React.useEffect(() => {\r\n    function handleClick(e: MouseEvent) {\r\n      if (ref.current && !ref.current.contains(e.target as Node)) {\r\n        setOpen(false);\r\n      }\r\n    }\r\n    document.addEventListener(\"mousedown\", handleClick);\r\n    return () => document.removeEventListener(\"mousedown\", handleClick);\r\n  }, []);\r\n\r\n  const alignClasses = {\r\n    left: \"left-0\",\r\n    center: \"left-1/2 -translate-x-1/2\",\r\n    right: \"right-0\",\r\n  };\r\n\r\n  const sideClasses = {\r\n    top: \"bottom-full mb-2\",\r\n    bottom: \"top-full mt-2\",\r\n  };\r\n\r\n  return (\r\n    <div ref={ref} className={cn(\"relative inline-block\", className)}>\r\n      <div onClick={() => setOpen(!open)}>{trigger}</div>\r\n\r\n      {open && (\r\n        <div\r\n          className={cn(\r\n            \"absolute z-50 min-w-[200px] rounded-xl\",\r\n            \"bg-[var(--bg-page)] border border-[var(--card-border)] shadow-xl\",\r\n            \"animate-in fade-in zoom-in-95 duration-150\",\r\n            // Rim light\r\n            \"before:absolute before:inset-0 before:rounded-xl before:z-[3]\",\r\n            \"before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]\",\r\n            \"before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]\",\r\n            \"before:[mask-composite:exclude]\",\r\n            \"before:[padding:0.5px]\",\r\n            \"before:pointer-events-none\",\r\n            alignClasses[align],\r\n            sideClasses[side]\r\n          )}\r\n        >\r\n          <div className=\"relative z-10 p-4\">{children}</div>\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

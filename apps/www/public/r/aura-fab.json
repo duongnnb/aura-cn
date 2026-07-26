@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-fab",
+  "type": "registry:ui",
+  "title": "Aura FAB",
+  "description": "Floating action button with rim light glow.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-fab.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\n\r\n/* ─── Floating Action Button ─── */\r\n\r\nconst fabVariants = cva(\r\n  [\r\n    \"relative inline-flex items-center justify-center rounded-full\",\r\n    \"font-medium shadow-lg transition-all duration-200\",\r\n    \"hover:scale-105 active:scale-95\",\r\n    // Rim light\r\n    \"before:absolute before:inset-0 before:rounded-full before:z-[3]\",\r\n    \"before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]\",\r\n    \"before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]\",\r\n    \"before:[mask-composite:exclude]\",\r\n    \"before:[padding:0.5px]\",\r\n    \"before:pointer-events-none\",\r\n    // Wash glow\r\n    \"after:absolute after:inset-0 after:rounded-full\",\r\n    \"after:bg-[radial-gradient(circle_at_50%_0%,var(--wash-color),transparent_70%)]\",\r\n    \"after:pointer-events-none\",\r\n  ],\r\n  {\r\n    variants: {\r\n      size: {\r\n        sm: \"h-10 w-10\",\r\n        default: \"h-14 w-14\",\r\n        lg: \"h-16 w-16\",\r\n        extended: \"h-14 gap-2 rounded-full px-6\",\r\n      },\r\n      variant: {\r\n        default: \"bg-[var(--aura)] text-white hover:shadow-[0_4px_24px_var(--aura-glow)]\",\r\n        secondary: \"bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--card-border)] hover:bg-[var(--bg-surface-hover)]\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      size: \"default\",\r\n      variant: \"default\",\r\n    },\r\n  }\r\n);\r\n\r\ninterface AuraFABProps\r\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\r\n    VariantProps<typeof fabVariants> {\r\n  icon?: React.ReactNode;\r\n  label?: string;\r\n}\r\n\r\nexport const AuraFAB = React.forwardRef<HTMLButtonElement, AuraFABProps>(\r\n  ({ className, size, variant, icon, label, children, ...props }, ref) => {\r\n    return (\r\n      <button\r\n        ref={ref}\r\n        className={cn(fabVariants({ size, variant }), className)}\r\n        {...props}\r\n      >\r\n        <span className=\"relative z-10 flex items-center gap-2\">\r\n          {icon || children}\r\n          {label && size === \"extended\" && (\r\n            <span className=\"text-sm font-medium\">{label}</span>\r\n          )}\r\n        </span>\r\n      </button>\r\n    );\r\n  }\r\n);\r\nAuraFAB.displayName = \"AuraFAB\";\r\n"
+    }
+  ]
+}

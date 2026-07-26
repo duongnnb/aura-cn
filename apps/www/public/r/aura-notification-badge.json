@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-notification-badge",
+  "type": "registry:ui",
+  "title": "Aura Notification Badge",
+  "description": "Count or dot badge overlay for icons and buttons.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-notification-badge.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Notification Badge ─── */\r\n\r\ninterface AuraNotificationBadgeProps {\r\n  count?: number;\r\n  max?: number;\r\n  dot?: boolean;\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraNotificationBadge({\r\n  count = 0,\r\n  max = 99,\r\n  dot = false,\r\n  children,\r\n  className,\r\n}: AuraNotificationBadgeProps) {\r\n  const show = dot || count > 0;\r\n  const display = count > max ? `${max}+` : String(count);\r\n\r\n  return (\r\n    <div className={cn(\"relative inline-flex\", className)}>\r\n      {children}\r\n      {show && (\r\n        <span\r\n          className={cn(\r\n            \"absolute -right-1 -top-1 flex items-center justify-center rounded-full bg-red-500 text-white font-medium animate-in zoom-in-50 duration-200\",\r\n            dot\r\n              ? \"h-2.5 w-2.5\"\r\n              : \"min-w-[18px] h-[18px] px-1 text-[10px] leading-none\"\r\n          )}\r\n        >\r\n          {!dot && display}\r\n        </span>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

@@ -12,8 +12,7 @@ apps/www/.source/
 # build outputs
 dist/
 
-# generated registry
-apps/www/public/r/
+# NOTE: apps/www/public/r/ is committed intentionally — registry JSONs are served via raw.githubusercontent.com
 
 # env files
 .env

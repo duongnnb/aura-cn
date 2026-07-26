@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-chip",
+  "type": "registry:ui",
+  "title": "Aura Chip",
+  "description": "A tag/chip with rim light and optional remove button.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-chip.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst auraChipVariants = cva(\r\n  \"relative inline-flex items-center gap-1.5 overflow-hidden rounded-lg text-xs font-medium transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]\",\r\n        active: \"bg-[var(--text-primary)] text-[var(--bg-page)]\",\r\n        outline: \"bg-transparent border border-[var(--rim-light)] text-[var(--text-primary)] hover:bg-[var(--wash-color)]\",\r\n      },\r\n      size: {\r\n        sm: \"h-7 px-2.5\",\r\n        default: \"h-8 px-3\",\r\n        lg: \"h-9 px-4 text-sm\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      variant: \"default\",\r\n      size: \"default\",\r\n    },\r\n  }\r\n);\r\n\r\nexport interface AuraChipProps\r\n  extends React.HTMLAttributes<HTMLSpanElement>,\r\n    VariantProps<typeof auraChipVariants> {\r\n  onRemove?: () => void;\r\n}\r\n\r\nconst AuraChip = React.forwardRef<HTMLSpanElement, AuraChipProps>(\r\n  ({ className, variant, size, onRemove, children, ...props }, ref) => {\r\n    const showRim = variant !== \"active\";\r\n\r\n    return (\r\n      <span\r\n        className={cn(auraChipVariants({ variant, size, className }))}\r\n        ref={ref}\r\n        {...props}\r\n      >\r\n        {/* Rim Light */}\r\n        {showRim && (\r\n          <span\r\n            aria-hidden=\"true\"\r\n            className=\"pointer-events-none absolute inset-0 rounded-[inherit] z-[3]\"\r\n            style={{\r\n              padding: \"0.5px\",\r\n              background:\r\n                \"linear-gradient(to bottom, var(--rim-light), transparent 75%)\",\r\n              mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n              maskComposite: \"exclude\",\r\n              WebkitMaskComposite: \"xor\",\r\n            }}\r\n          />\r\n        )}\r\n\r\n        <span className=\"relative z-10 flex items-center gap-1.5\">\r\n          {children}\r\n          {onRemove && (\r\n            <button\r\n              type=\"button\"\r\n              onClick={onRemove}\r\n              className=\"ml-0.5 inline-flex h-3.5 w-3.5 items-center justify-center rounded-full hover:bg-foreground/20\"\r\n              aria-label=\"Remove\"\r\n            >\r\n              <svg width=\"8\" height=\"8\" viewBox=\"0 0 8 8\" fill=\"none\">\r\n                <path\r\n                  d=\"M1 1L7 7M7 1L1 7\"\r\n                  stroke=\"currentColor\"\r\n                  strokeWidth=\"1.5\"\r\n                  strokeLinecap=\"round\"\r\n                />\r\n              </svg>\r\n            </button>\r\n          )}\r\n        </span>\r\n      </span>\r\n    );\r\n  }\r\n);\r\n\r\nAuraChip.displayName = \"AuraChip\";\r\n\r\nexport { AuraChip, auraChipVariants };\r\n"
+    }
+  ]
+}

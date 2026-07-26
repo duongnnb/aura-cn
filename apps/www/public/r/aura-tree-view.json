@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-tree-view",
+  "type": "registry:ui",
+  "title": "Aura Tree View",
+  "description": "Expandable hierarchical tree structure for file explorers and nested data.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-tree-view.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Tree View ─── */\r\n\r\nexport interface TreeNode {\r\n  id: string;\r\n  label: string;\r\n  icon?: React.ReactNode;\r\n  children?: TreeNode[];\r\n}\r\n\r\ninterface AuraTreeViewProps {\r\n  nodes: TreeNode[];\r\n  defaultExpanded?: string[];\r\n  onSelect?: (node: TreeNode) => void;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraTreeView({ nodes, defaultExpanded = [], onSelect, className }: AuraTreeViewProps) {\r\n  return (\r\n    <div className={cn(\"space-y-0.5 text-sm\", className)}>\r\n      {nodes.map((node) => (\r\n        <TreeItem key={node.id} node={node} level={0} defaultExpanded={defaultExpanded} onSelect={onSelect} />\r\n      ))}\r\n    </div>\r\n  );\r\n}\r\n\r\nfunction TreeItem({\r\n  node,\r\n  level,\r\n  defaultExpanded,\r\n  onSelect,\r\n}: {\r\n  node: TreeNode;\r\n  level: number;\r\n  defaultExpanded: string[];\r\n  onSelect?: (node: TreeNode) => void;\r\n}) {\r\n  const [expanded, setExpanded] = React.useState(defaultExpanded.includes(node.id));\r\n  const hasChildren = node.children && node.children.length > 0;\r\n\r\n  return (\r\n    <div>\r\n      <div\r\n        className={cn(\r\n          \"flex items-center gap-1.5 rounded-md px-2 py-1 cursor-pointer transition-colors\",\r\n          \"hover:bg-[var(--bg-surface)] text-[var(--text-primary)]\"\r\n        )}\r\n        style={{ paddingLeft: `${level * 16 + 8}px` }}\r\n        onClick={() => {\r\n          if (hasChildren) setExpanded(!expanded);\r\n          onSelect?.(node);\r\n        }}\r\n      >\r\n        {/* Expand icon */}\r\n        {hasChildren ? (\r\n          <svg\r\n            className={cn(\"h-3.5 w-3.5 shrink-0 text-[var(--text-secondary)] transition-transform\", expanded && \"rotate-90\")}\r\n            fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"\r\n          >\r\n            <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M9 5l7 7-7 7\" />\r\n          </svg>\r\n        ) : (\r\n          <span className=\"w-3.5\" />\r\n        )}\r\n        {node.icon && <span className=\"h-4 w-4 shrink-0\">{node.icon}</span>}\r\n        <span className=\"truncate\">{node.label}</span>\r\n      </div>\r\n      {expanded && hasChildren && (\r\n        <div>\r\n          {node.children!.map((child) => (\r\n            <TreeItem key={child.id} node={child} level={level + 1} defaultExpanded={defaultExpanded} onSelect={onSelect} />\r\n          ))}\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

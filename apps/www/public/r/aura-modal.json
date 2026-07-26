@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-modal",
+  "type": "registry:ui",
+  "title": "Aura Modal",
+  "description": "Dialog/modal overlay with rim light and backdrop blur.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-modal.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Modal / Dialog ─── */\r\n\r\ninterface AuraModalProps {\r\n  open?: boolean;\r\n  onOpenChange?: (open: boolean) => void;\r\n  children: React.ReactNode;\r\n}\r\n\r\nexport function AuraModal({ open, onOpenChange, children }: AuraModalProps) {\r\n  if (!open) return null;\r\n\r\n  return (\r\n    <div className=\"fixed inset-0 z-50 flex items-center justify-center\">\r\n      {/* Backdrop */}\r\n      <div\r\n        className=\"absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in\"\r\n        onClick={() => onOpenChange?.(false)}\r\n      />\r\n      {/* Content */}\r\n      <div\r\n        className={cn(\r\n          \"relative z-10 w-full max-w-lg mx-4 rounded-2xl\",\r\n          \"bg-[var(--bg-page)] border border-[var(--card-border)] shadow-2xl\",\r\n          \"animate-in fade-in zoom-in-95 duration-200\",\r\n          // Rim light\r\n          \"before:absolute before:inset-0 before:rounded-2xl before:z-[3]\",\r\n          \"before:bg-[linear-gradient(to_bottom,var(--rim-light),transparent_75%)]\",\r\n          \"before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]\",\r\n          \"before:[mask-composite:exclude]\",\r\n          \"before:[padding:0.5px]\",\r\n          \"before:pointer-events-none\"\r\n        )}\r\n      >\r\n        {children}\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport function AuraModalHeader({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <div className={cn(\"px-6 pt-6 pb-2\", className)}>\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n\r\nexport function AuraModalTitle({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <h2 className={cn(\"text-lg font-semibold text-[var(--text-primary)]\", className)}>\r\n      {children}\r\n    </h2>\r\n  );\r\n}\r\n\r\nexport function AuraModalDescription({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <p className={cn(\"text-sm text-[var(--text-secondary)] mt-1\", className)}>\r\n      {children}\r\n    </p>\r\n  );\r\n}\r\n\r\nexport function AuraModalContent({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return <div className={cn(\"px-6 py-4\", className)}>{children}</div>;\r\n}\r\n\r\nexport function AuraModalFooter({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"flex items-center justify-end gap-2 px-6 pb-6 pt-2\",\r\n        className\r\n      )}\r\n    >\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

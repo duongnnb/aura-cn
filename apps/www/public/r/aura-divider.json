@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-divider",
+  "type": "registry:ui",
+  "title": "Aura Divider",
+  "description": "Horizontal or vertical separator line with optional label.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-divider.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Divider ─── */\r\n\r\ninterface AuraDividerProps {\r\n  orientation?: \"horizontal\" | \"vertical\";\r\n  label?: string;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraDivider({\r\n  orientation = \"horizontal\",\r\n  label,\r\n  className,\r\n}: AuraDividerProps) {\r\n  if (orientation === \"vertical\") {\r\n    return (\r\n      <div\r\n        role=\"separator\"\r\n        aria-orientation=\"vertical\"\r\n        className={cn(\"inline-block h-full w-px bg-[var(--card-border)]\", className)}\r\n      />\r\n    );\r\n  }\r\n\r\n  if (label) {\r\n    return (\r\n      <div role=\"separator\" className={cn(\"flex items-center gap-3\", className)}>\r\n        <span className=\"h-px flex-1 bg-[var(--card-border)]\" />\r\n        <span className=\"text-xs text-[var(--text-secondary)]\">{label}</span>\r\n        <span className=\"h-px flex-1 bg-[var(--card-border)]\" />\r\n      </div>\r\n    );\r\n  }\r\n\r\n  return (\r\n    <hr\r\n      className={cn(\"h-px w-full border-0 bg-[var(--card-border)]\", className)}\r\n    />\r\n  );\r\n}\r\n"
+    }
+  ]
+}

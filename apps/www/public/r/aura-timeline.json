@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-timeline",
+  "type": "registry:ui",
+  "title": "Aura Timeline",
+  "description": "Vertical timeline with connected dots and optional dates.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-timeline.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Timeline ─── */\r\n\r\nexport interface TimelineItem {\r\n  title: string;\r\n  description?: string;\r\n  date?: string;\r\n  icon?: React.ReactNode;\r\n  active?: boolean;\r\n}\r\n\r\ninterface AuraTimelineProps {\r\n  items: TimelineItem[];\r\n  className?: string;\r\n}\r\n\r\nexport function AuraTimeline({ items, className }: AuraTimelineProps) {\r\n  return (\r\n    <div className={cn(\"relative space-y-0\", className)}>\r\n      {items.map((item, i) => (\r\n        <div key={i} className=\"relative flex gap-4 pb-8 last:pb-0\">\r\n          {/* Vertical line */}\r\n          {i < items.length - 1 && (\r\n            <div className=\"absolute left-[11px] top-6 h-full w-px bg-[var(--card-border)]\" />\r\n          )}\r\n          {/* Dot */}\r\n          <div\r\n            className={cn(\r\n              \"relative z-10 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2\",\r\n              item.active\r\n                ? \"border-[var(--aura)] bg-[var(--aura)]/20\"\r\n                : \"border-[var(--card-border)] bg-[var(--bg-surface)]\"\r\n            )}\r\n          >\r\n            {item.icon ? (\r\n              <span className=\"h-3 w-3\">{item.icon}</span>\r\n            ) : (\r\n              <span\r\n                className={cn(\r\n                  \"h-2 w-2 rounded-full\",\r\n                  item.active ? \"bg-[var(--aura)]\" : \"bg-[var(--text-secondary)]\"\r\n                )}\r\n              />\r\n            )}\r\n          </div>\r\n          {/* Content */}\r\n          <div className=\"flex-1 pt-0.5\">\r\n            <div className=\"flex items-center gap-2\">\r\n              <p className=\"text-sm font-medium text-[var(--text-primary)]\">{item.title}</p>\r\n              {item.date && (\r\n                <span className=\"text-xs text-[var(--text-secondary)]\">{item.date}</span>\r\n              )}\r\n            </div>\r\n            {item.description && (\r\n              <p className=\"mt-1 text-sm text-[var(--text-secondary)]\">{item.description}</p>\r\n            )}\r\n          </div>\r\n        </div>\r\n      ))}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

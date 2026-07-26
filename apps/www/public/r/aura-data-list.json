@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-data-list",
+  "type": "registry:ui",
+  "title": "Aura Data List",
+  "description": "Key-value pairs display in vertical or horizontal grid layout.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-data-list.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Data List ─── */\r\n\r\nexport interface DataListItem {\r\n  label: string;\r\n  value: React.ReactNode;\r\n}\r\n\r\ninterface AuraDataListProps {\r\n  items: DataListItem[];\r\n  layout?: \"vertical\" | \"horizontal\";\r\n  className?: string;\r\n}\r\n\r\nexport function AuraDataList({ items, layout = \"vertical\", className }: AuraDataListProps) {\r\n  if (layout === \"horizontal\") {\r\n    return (\r\n      <dl className={cn(\"grid grid-cols-2 gap-4 sm:grid-cols-3\", className)}>\r\n        {items.map((item, i) => (\r\n          <div key={i} className=\"space-y-1\">\r\n            <dt className=\"text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]\">\r\n              {item.label}\r\n            </dt>\r\n            <dd className=\"text-sm font-medium text-[var(--text-primary)]\">{item.value}</dd>\r\n          </div>\r\n        ))}\r\n      </dl>\r\n    );\r\n  }\r\n\r\n  return (\r\n    <dl className={cn(\"divide-y divide-[var(--card-border)]\", className)}>\r\n      {items.map((item, i) => (\r\n        <div key={i} className=\"flex items-center justify-between py-3 first:pt-0 last:pb-0\">\r\n          <dt className=\"text-sm text-[var(--text-secondary)]\">{item.label}</dt>\r\n          <dd className=\"text-sm font-medium text-[var(--text-primary)]\">{item.value}</dd>\r\n        </div>\r\n      ))}\r\n    </dl>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-skeleton",
+  "type": "registry:ui",
+  "title": "Aura Skeleton",
+  "description": "Loading placeholder with aura shimmer animation.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nexport interface AuraSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}\r\n\r\nconst AuraSkeleton = React.forwardRef<HTMLDivElement, AuraSkeletonProps>(\r\n  ({ className, ...props }, ref) => {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        className={cn(\r\n          \"relative overflow-hidden rounded-lg bg-[var(--bg-surface)]\",\r\n          className\r\n        )}\r\n        {...props}\r\n      >\r\n        {/* Shimmer animation */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite]\"\r\n          style={{\r\n            background:\r\n              \"linear-gradient(90deg, transparent 0%, var(--wash-color) 50%, transparent 100%)\",\r\n          }}\r\n        />\r\n      </div>\r\n    );\r\n  }\r\n);\r\n\r\nAuraSkeleton.displayName = \"AuraSkeleton\";\r\n\r\nexport { AuraSkeleton };\r\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-toggle",
+  "type": "registry:ui",
+  "title": "Aura Toggle",
+  "description": "A switch/toggle with glowing thumb and rim light track.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-toggle.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nexport interface AuraToggleProps\r\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"onChange\"> {\r\n  checked?: boolean;\r\n  defaultChecked?: boolean;\r\n  onCheckedChange?: (checked: boolean) => void;\r\n}\r\n\r\nconst AuraToggle = React.forwardRef<HTMLButtonElement, AuraToggleProps>(\r\n  ({ className, checked, defaultChecked = false, onCheckedChange, ...props }, ref) => {\r\n    const [isChecked, setIsChecked] = React.useState(defaultChecked);\r\n    const controlledChecked = checked !== undefined ? checked : isChecked;\r\n\r\n    const toggle = () => {\r\n      const next = !controlledChecked;\r\n      if (checked === undefined) setIsChecked(next);\r\n      onCheckedChange?.(next);\r\n    };\r\n\r\n    return (\r\n      <button\r\n        type=\"button\"\r\n        role=\"switch\"\r\n        aria-checked={controlledChecked}\r\n        className={cn(\r\n          \"relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50\",\r\n          controlledChecked\r\n            ? \"bg-aura\"\r\n            : \"bg-[var(--rim-light)]\",\r\n          className\r\n        )}\r\n        onClick={toggle}\r\n        ref={ref}\r\n        {...props}\r\n      >\r\n        {/* Rim light on track */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"pointer-events-none absolute inset-0 rounded-full z-[3]\"\r\n          style={{\r\n            padding: \"0.5px\",\r\n            background: controlledChecked\r\n              ? \"linear-gradient(to bottom, var(--rim-light), transparent 75%)\"\r\n              : \"linear-gradient(to bottom, var(--bg-surface), transparent 75%)\",\r\n            mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            maskComposite: \"exclude\",\r\n            WebkitMaskComposite: \"xor\",\r\n          }}\r\n        />\r\n        {/* Thumb */}\r\n        <span\r\n          className={cn(\r\n            \"pointer-events-none relative z-[2] block h-5 w-5 rounded-full bg-[var(--text-primary,#f1f1f1)] shadow-lg transition-transform duration-200\",\r\n            controlledChecked ? \"translate-x-[22px]\" : \"translate-x-[2px]\"\r\n          )}\r\n        >\r\n          {/* Thumb glow when active */}\r\n          {controlledChecked && (\r\n            <span\r\n              aria-hidden=\"true\"\r\n              className=\"absolute inset-0 rounded-full\"\r\n              style={{\r\n                boxShadow: \"0 0 8px 2px var(--aura-glow)\",\r\n              }}\r\n            />\r\n          )}\r\n        </span>\r\n      </button>\r\n    );\r\n  }\r\n);\r\n\r\nAuraToggle.displayName = \"AuraToggle\";\r\n\r\nexport { AuraToggle };\r\n"
+    }
+  ]
+}

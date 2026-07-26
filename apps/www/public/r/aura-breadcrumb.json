@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-breadcrumb",
+  "type": "registry:ui",
+  "title": "Aura Breadcrumb",
+  "description": "Navigation breadcrumb trail showing the current page hierarchy.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-breadcrumb.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Breadcrumb ─── */\r\n\r\nexport interface BreadcrumbItem {\r\n  label: string;\r\n  href?: string;\r\n}\r\n\r\ninterface AuraBreadcrumbProps {\r\n  items: BreadcrumbItem[];\r\n  separator?: React.ReactNode;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraBreadcrumb({\r\n  items,\r\n  separator,\r\n  className,\r\n}: AuraBreadcrumbProps) {\r\n  const sep = separator || (\r\n    <svg className=\"h-3.5 w-3.5 text-[var(--text-secondary)]\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\r\n      <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M9 5l7 7-7 7\" />\r\n    </svg>\r\n  );\r\n\r\n  return (\r\n    <nav aria-label=\"Breadcrumb\" className={cn(\"flex items-center gap-1.5 text-sm\", className)}>\r\n      {items.map((item, i) => (\r\n        <React.Fragment key={i}>\r\n          {i > 0 && <span aria-hidden=\"true\" className=\"shrink-0\">{sep}</span>}\r\n          {item.href && i < items.length - 1 ? (\r\n            <a\r\n              href={item.href}\r\n              className=\"text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors\"\r\n            >\r\n              {item.label}\r\n            </a>\r\n          ) : (\r\n            <span\r\n              className={cn(\r\n                i === items.length - 1\r\n                  ? \"font-medium text-[var(--text-primary)]\"\r\n                  : \"text-[var(--text-secondary)]\"\r\n              )}\r\n              aria-current={i === items.length - 1 ? \"page\" : undefined}\r\n            >\r\n              {item.label}\r\n            </span>\r\n          )}\r\n        </React.Fragment>\r\n      ))}\r\n    </nav>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

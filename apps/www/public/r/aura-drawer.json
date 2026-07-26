@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-drawer",
+  "type": "registry:ui",
+  "title": "Aura Drawer",
+  "description": "Slide-out panel with rim light from the opening edge.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-drawer.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Drawer ─── */\r\n\r\ninterface AuraDrawerProps {\r\n  open?: boolean;\r\n  onOpenChange?: (open: boolean) => void;\r\n  side?: \"left\" | \"right\" | \"bottom\";\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraDrawer({\r\n  open,\r\n  onOpenChange,\r\n  side = \"right\",\r\n  children,\r\n  className,\r\n}: AuraDrawerProps) {\r\n  if (!open) return null;\r\n\r\n  const sideClasses = {\r\n    left: \"left-0 top-0 h-full w-80 animate-in slide-in-from-left duration-300\",\r\n    right: \"right-0 top-0 h-full w-80 animate-in slide-in-from-right duration-300\",\r\n    bottom: \"bottom-0 left-0 w-full h-[60vh] rounded-t-xl animate-in slide-in-from-bottom duration-300\",\r\n  };\r\n\r\n  const rimDirection = {\r\n    left: \"to right\",\r\n    right: \"to left\",\r\n    bottom: \"to bottom\",\r\n  };\r\n\r\n  return (\r\n    <div className=\"fixed inset-0 z-50\">\r\n      {/* Backdrop */}\r\n      <div\r\n        className=\"absolute inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in\"\r\n        onClick={() => onOpenChange?.(false)}\r\n      />\r\n      {/* Panel */}\r\n      <div\r\n        className={cn(\r\n          \"absolute bg-[var(--bg-page)] border-[var(--card-border)] shadow-2xl\",\r\n          \"before:absolute before:inset-0 before:z-[3]\",\r\n          `before:bg-[linear-gradient(${rimDirection[side]},var(--rim-light),transparent_75%)]`,\r\n          \"before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]\",\r\n          \"before:[mask-composite:exclude]\",\r\n          \"before:[padding:0.5px]\",\r\n          \"before:pointer-events-none\",\r\n          side === \"left\" && \"border-r\",\r\n          side === \"right\" && \"border-l\",\r\n          side === \"bottom\" && \"border-t before:rounded-t-xl\",\r\n          sideClasses[side],\r\n          className\r\n        )}\r\n      >\r\n        <div className=\"relative z-10 flex h-full flex-col overflow-y-auto p-6\">\r\n          {children}\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport function AuraDrawerHeader({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return <div className={cn(\"mb-4\", className)}>{children}</div>;\r\n}\r\n\r\nexport function AuraDrawerTitle({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <h2 className={cn(\"text-lg font-semibold text-[var(--text-primary)]\", className)}>\r\n      {children}\r\n    </h2>\r\n  );\r\n}\r\n\r\nexport function AuraDrawerContent({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return <div className={cn(\"flex-1\", className)}>{children}</div>;\r\n}\r\n\r\nexport function AuraDrawerFooter({\r\n  children,\r\n  className,\r\n}: {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n}) {\r\n  return (\r\n    <div className={cn(\"mt-4 flex items-center justify-end gap-2\", className)}>\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-sidebar",
+  "type": "registry:ui",
+  "title": "Aura Sidebar",
+  "description": "Collapsible sidebar navigation with nested items and active state.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-sidebar.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\n/* ─── Sidebar ─── */\r\n\r\nexport interface SidebarItem {\r\n  label: string;\r\n  icon?: React.ReactNode;\r\n  href?: string;\r\n  active?: boolean;\r\n  children?: SidebarItem[];\r\n}\r\n\r\ninterface AuraSidebarProps {\r\n  items: SidebarItem[];\r\n  collapsed?: boolean;\r\n  className?: string;\r\n}\r\n\r\nexport function AuraSidebar({ items, collapsed = false, className }: AuraSidebarProps) {\r\n  return (\r\n    <aside\r\n      className={cn(\r\n        \"flex h-full flex-col gap-1 border-r border-[var(--card-border)] bg-[var(--card-bg)] p-3 transition-all\",\r\n        collapsed ? \"w-16\" : \"w-60\",\r\n        className\r\n      )}\r\n    >\r\n      {items.map((item, i) => (\r\n        <SidebarEntry key={i} item={item} collapsed={collapsed} />\r\n      ))}\r\n    </aside>\r\n  );\r\n}\r\n\r\nfunction SidebarEntry({ item, collapsed }: { item: SidebarItem; collapsed: boolean }) {\r\n  const [open, setOpen] = React.useState(false);\r\n\r\n  const content = (\r\n    <div\r\n      className={cn(\r\n        \"flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer\",\r\n        item.active\r\n          ? \"bg-[var(--bg-surface-active)] text-[var(--text-primary)] font-medium\"\r\n          : \"text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]\"\r\n      )}\r\n      onClick={() => item.children && setOpen(!open)}\r\n    >\r\n      {item.icon && <span className=\"shrink-0 h-5 w-5\">{item.icon}</span>}\r\n      {!collapsed && <span className=\"flex-1 truncate\">{item.label}</span>}\r\n      {!collapsed && item.children && (\r\n        <svg\r\n          className={cn(\"h-4 w-4 transition-transform\", open && \"rotate-90\")}\r\n          fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"\r\n        >\r\n          <path strokeLinecap=\"round\" strokeLinejoin=\"round\" strokeWidth={2} d=\"M9 5l7 7-7 7\" />\r\n        </svg>\r\n      )}\r\n    </div>\r\n  );\r\n\r\n  return (\r\n    <div>\r\n      {item.href ? <a href={item.href}>{content}</a> : content}\r\n      {!collapsed && open && item.children && (\r\n        <div className=\"ml-4 mt-0.5 space-y-0.5\">\r\n          {item.children.map((child, i) => (\r\n            <SidebarEntry key={i} item={child} collapsed={false} />\r\n          ))}\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n"
+    }
+  ]
+}

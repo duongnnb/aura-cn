@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-textarea",
+  "type": "registry:ui",
+  "title": "Aura Textarea",
+  "description": "A multi-line text input with recessed styling matching AuraInput.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-textarea.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nexport interface AuraTextareaProps\r\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\r\n\r\nconst AuraTextarea = React.forwardRef<HTMLTextAreaElement, AuraTextareaProps>(\r\n  ({ className, ...props }, ref) => {\r\n    return (\r\n      <div className=\"relative\">\r\n        <textarea\r\n          className={cn(\r\n            \"peer flex min-h-[80px] w-full rounded-lg border-0 bg-[var(--bg-surface)] px-3 py-2 text-sm text-[var(--text-primary)] shadow-[var(--inset-shadow)] outline-none transition-all duration-200 resize-y\",\r\n            \"placeholder:text-[var(--text-secondary)]\",\r\n            \"focus:shadow-[var(--inset-shadow),0_0_0_2px_var(--aura)]\",\r\n            \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n            className\r\n          )}\r\n          ref={ref}\r\n          {...props}\r\n        />\r\n        {/* Inverted Rim Light (bottom) */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"pointer-events-none absolute inset-0 rounded-lg p-px\"\r\n          style={{\r\n            padding: \"0.5px\",\r\n            background:\r\n              \"linear-gradient(to top, var(--rim-light), transparent 75%)\",\r\n            mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            maskComposite: \"exclude\",\r\n            WebkitMaskComposite: \"xor\",\r\n          }}\r\n        />\r\n        {/* Bottom accent border on focus */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"pointer-events-none absolute inset-x-0 bottom-0 h-0.5 scale-x-0 rounded-full bg-aura transition-transform duration-200 peer-focus:scale-x-100\"\r\n        />\r\n      </div>\r\n    );\r\n  }\r\n);\r\n\r\nAuraTextarea.displayName = \"AuraTextarea\";\r\n\r\nexport { AuraTextarea };\r\n"
+    }
+  ]
+}

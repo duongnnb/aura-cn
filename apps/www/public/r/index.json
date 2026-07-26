@@ -1,0 +1,748 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "aura-cn",
+  "homepage": "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r",
+  "items": [
+    {
+      "name": "aura-button",
+      "type": "registry:ui",
+      "title": "Aura Button",
+      "description": "A button with 3D rim light, static wash, and dynamic cursor-following glow.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-card",
+      "type": "registry:ui",
+      "title": "Aura Card",
+      "description": "A card container with rim light and dynamic cursor-following glow on hover.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-input",
+      "type": "registry:ui",
+      "title": "Aura Input",
+      "description": "A text input with recessed styling, inset shadow, and focus accent.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-textarea",
+      "type": "registry:ui",
+      "title": "Aura Textarea",
+      "description": "A multi-line text input with recessed styling matching AuraInput.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-select",
+      "type": "registry:ui",
+      "title": "Aura Select",
+      "description": "A dropdown select with recessed styling and custom chevron.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-toggle",
+      "type": "registry:ui",
+      "title": "Aura Toggle",
+      "description": "A switch/toggle with glowing thumb and rim light track.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-checkbox-radio",
+      "type": "registry:ui",
+      "title": "Aura Checkbox & Radio",
+      "description": "Selection controls with rim light that flips direction on checked state.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-checkbox-radio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-chip",
+      "type": "registry:ui",
+      "title": "Aura Chip",
+      "description": "A tag/chip with rim light and optional remove button.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-chip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-slider",
+      "type": "registry:ui",
+      "title": "Aura Slider",
+      "description": "A range slider with glowing fill track and custom thumb.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-tabs",
+      "type": "registry:ui",
+      "title": "Aura Tabs",
+      "description": "Tab navigation with recessed list and active trigger rim light.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-avatar",
+      "type": "registry:ui",
+      "title": "Aura Avatar",
+      "description": "An avatar with glow ring and rim light border.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-progress",
+      "type": "registry:ui",
+      "title": "Aura Progress",
+      "description": "A progress bar with glowing fill and rim light track.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-accordion",
+      "type": "registry:ui",
+      "title": "Aura Accordion",
+      "description": "Collapsible sections with rim light intensity change on open.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-skeleton",
+      "type": "registry:ui",
+      "title": "Aura Skeleton",
+      "description": "Loading placeholder with aura shimmer animation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-toast",
+      "type": "registry:ui",
+      "title": "Aura Toast",
+      "description": "Notification toast with rim light and variant styles.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-badge",
+      "type": "registry:ui",
+      "title": "Aura Badge",
+      "description": "Compact badge/label with rim light effect.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-modal",
+      "type": "registry:ui",
+      "title": "Aura Modal",
+      "description": "Dialog/modal overlay with rim light and backdrop blur.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-modal.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-dropdown",
+      "type": "registry:ui",
+      "title": "Aura Dropdown",
+      "description": "Dropdown menu with rim light and slide animation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-dropdown.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-tooltip",
+      "type": "registry:ui",
+      "title": "Aura Tooltip",
+      "description": "Tooltip with rim light and positioning support.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-drawer",
+      "type": "registry:ui",
+      "title": "Aura Drawer",
+      "description": "Slide-out panel with rim light from the opening edge.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-fab",
+      "type": "registry:ui",
+      "title": "Aura FAB",
+      "description": "Floating action button with rim light glow.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-fab.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-theme",
+      "type": "registry:ui",
+      "title": "Aura Theme",
+      "description": "Theme provider with 5 color presets and dark/light toggle.",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-theme.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-motion",
+      "type": "registry:ui",
+      "title": "Aura Motion",
+      "description": "Entrance animation wrappers with 6 presets, powered by Framer Motion.",
+      "dependencies": [
+        "framer-motion",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-motion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-command",
+      "type": "registry:ui",
+      "title": "Aura Command",
+      "description": "Command palette (⌘K) with fuzzy search and keyboard navigation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-popover",
+      "type": "registry:ui",
+      "title": "Aura Popover",
+      "description": "Floating popover panel with rim light and click-outside handling.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-table",
+      "type": "registry:ui",
+      "title": "Aura Table",
+      "description": "Data table with rim light container, striped rows, and typed columns.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-datepicker",
+      "type": "registry:ui",
+      "title": "Aura DatePicker",
+      "description": "Calendar-based date picker with month navigation and today highlight.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-datepicker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-breadcrumb",
+      "type": "registry:ui",
+      "title": "Aura Breadcrumb",
+      "description": "Navigation breadcrumb trail showing the current page hierarchy.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-pagination",
+      "type": "registry:ui",
+      "title": "Aura Pagination",
+      "description": "Page navigation with smart ellipsis and prev/next controls.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-divider",
+      "type": "registry:ui",
+      "title": "Aura Divider",
+      "description": "Horizontal or vertical separator line with optional label.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-divider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-alert",
+      "type": "registry:ui",
+      "title": "Aura Alert",
+      "description": "Contextual feedback messages with info, success, warning, and error variants.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-otp-input",
+      "type": "registry:ui",
+      "title": "Aura OTP Input",
+      "description": "One-time password input with auto-focus, paste support, and backspace navigation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-otp-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-tag-input",
+      "type": "registry:ui",
+      "title": "Aura Tag Input",
+      "description": "Multi-tag input with Enter/comma to add tags and backspace to remove.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-tag-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-autocomplete",
+      "type": "registry:ui",
+      "title": "Aura Autocomplete",
+      "description": "Input with filtered dropdown suggestions and keyboard navigation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-autocomplete.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-file-upload",
+      "type": "registry:ui",
+      "title": "Aura File Upload",
+      "description": "Drag-and-drop file upload zone with file list and size validation.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-file-upload.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-sidebar",
+      "type": "registry:ui",
+      "title": "Aura Sidebar",
+      "description": "Collapsible sidebar navigation with nested items and active state.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-navbar",
+      "type": "registry:ui",
+      "title": "Aura Navbar",
+      "description": "Responsive top navigation bar with mobile hamburger menu.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-navbar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-timeline",
+      "type": "registry:ui",
+      "title": "Aura Timeline",
+      "description": "Vertical timeline with connected dots and optional dates.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-carousel",
+      "type": "registry:ui",
+      "title": "Aura Carousel",
+      "description": "Slide-based carousel with prev/next controls and indicator dots.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-carousel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-switch-icon",
+      "type": "registry:ui",
+      "title": "Aura Switch Icon",
+      "description": "Animated icon toggle with rotate/scale transitions (e.g., sun/moon).",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-switch-icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-color-picker",
+      "type": "registry:ui",
+      "title": "Aura Color Picker",
+      "description": "Color selector with presets grid and custom hex/native input.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-color-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-confirm-dialog",
+      "type": "registry:ui",
+      "title": "Aura Confirm Dialog",
+      "description": "Confirmation dialog with destructive/default variants and customizable actions.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-confirm-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-notification-badge",
+      "type": "registry:ui",
+      "title": "Aura Notification Badge",
+      "description": "Count or dot badge overlay for icons and buttons.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-stat-card",
+      "type": "registry:ui",
+      "title": "Aura Stat Card",
+      "description": "Dashboard metric card with value, trend indicator, and change percentage.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-stat-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-tree-view",
+      "type": "registry:ui",
+      "title": "Aura Tree View",
+      "description": "Expandable hierarchical tree structure for file explorers and nested data.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-tree-view.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aura-data-list",
+      "type": "registry:ui",
+      "title": "Aura Data List",
+      "description": "Key-value pairs display in vertical or horizontal grid layout.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-cn/aura-data-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

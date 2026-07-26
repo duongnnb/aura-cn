@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aura-avatar",
+  "type": "registry:ui",
+  "title": "Aura Avatar",
+  "description": "An avatar with glow ring and rim light border.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aura-cn/aura-avatar.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst auraAvatarVariants = cva(\r\n  \"relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--bg-surface)]\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        sm: \"h-8 w-8 text-xs\",\r\n        default: \"h-10 w-10 text-sm\",\r\n        lg: \"h-14 w-14 text-base\",\r\n        xl: \"h-20 w-20 text-lg\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      size: \"default\",\r\n    },\r\n  }\r\n);\r\n\r\nexport interface AuraAvatarProps\r\n  extends React.HTMLAttributes<HTMLSpanElement>,\r\n    VariantProps<typeof auraAvatarVariants> {\r\n  src?: string;\r\n  alt?: string;\r\n  fallback?: string;\r\n  enableGlow?: boolean;\r\n}\r\n\r\nconst AuraAvatar = React.forwardRef<HTMLSpanElement, AuraAvatarProps>(\r\n  ({ className, size, src, alt, fallback, enableGlow = true, ...props }, ref) => {\r\n    const [imgError, setImgError] = React.useState(false);\r\n\r\n    return (\r\n      <span\r\n        className={cn(auraAvatarVariants({ size, className }))}\r\n        ref={ref}\r\n        {...props}\r\n      >\r\n        {/* Rim Light */}\r\n        <span\r\n          aria-hidden=\"true\"\r\n          className=\"pointer-events-none absolute inset-0 rounded-full z-[3]\"\r\n          style={{\r\n            padding: \"0.5px\",\r\n            background:\r\n              \"linear-gradient(to bottom, var(--rim-light), transparent 75%)\",\r\n            mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            maskComposite: \"exclude\",\r\n            WebkitMaskComposite: \"xor\",\r\n          }}\r\n        />\r\n\r\n        {/* Glow ring */}\r\n        {enableGlow && (\r\n          <span\r\n            aria-hidden=\"true\"\r\n            className=\"pointer-events-none absolute -inset-0.5 rounded-full opacity-50\"\r\n            style={{ boxShadow: \"0 0 10px 2px var(--aura-glow)\" }}\r\n          />\r\n        )}\r\n\r\n        {/* Image or Fallback */}\r\n        {src && !imgError ? (\r\n          <img\r\n            src={src}\r\n            alt={alt || \"\"}\r\n            className=\"h-full w-full rounded-full object-cover\"\r\n            onError={() => setImgError(true)}\r\n          />\r\n        ) : (\r\n          <span className=\"relative z-10 font-medium text-[var(--text-secondary)]\">\r\n            {fallback || alt?.charAt(0)?.toUpperCase() || \"?\"}\r\n          </span>\r\n        )}\r\n      </span>\r\n    );\r\n  }\r\n);\r\n\r\nAuraAvatar.displayName = \"AuraAvatar\";\r\n\r\nexport { AuraAvatar, auraAvatarVariants };\r\n"
+    }
+  ]
+}
