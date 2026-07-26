@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 /* ─── Alert ─── */
 
 const alertVariants = cva(
-  "relative flex items-start gap-3 rounded-xl border p-4 text-sm",
+  "relative overflow-hidden flex items-start gap-3 rounded-xl border p-4 text-sm",
   {
     variants: {
       variant: {
@@ -65,6 +65,19 @@ export function AuraAlert({
       className={cn(alertVariants({ variant, className }))}
       {...props}
     >
+      {/* Rim Light */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       {icon && icons[variant || "info"]}
       <div className="flex-1">
         {title && <p className="font-medium">{title}</p>}

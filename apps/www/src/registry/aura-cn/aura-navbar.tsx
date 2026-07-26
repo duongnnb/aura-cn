@@ -28,6 +28,19 @@ export function AuraNavbar({ brand, links = [], actions, className }: AuraNavbar
         className
       )}
     >
+      {/* Rim Light */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[3]"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         {/* Brand */}
         <div className="flex items-center gap-2 font-semibold text-[var(--text-primary)]">

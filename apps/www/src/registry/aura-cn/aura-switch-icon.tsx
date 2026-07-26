@@ -44,6 +44,19 @@ export function AuraSwitchIcon({
         className
       )}
     >
+      {/* Inverted Rim Light (bottom) */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to top, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       <span
         className={cn(
           "absolute transition-all duration-300",

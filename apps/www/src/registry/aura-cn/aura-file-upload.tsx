@@ -51,12 +51,25 @@ export function AuraFileUpload({
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
         className={cn(
-          "flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 transition-colors",
+          "relative flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 transition-colors",
           dragging
             ? "border-[var(--aura)] bg-[var(--aura)]/5"
             : "border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--bg-surface-hover)]"
         )}
       >
+        {/* Inverted Rim Light (bottom, recessed zone) */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          style={{
+            padding: "0.5px",
+            background:
+              "linear-gradient(to top, var(--rim-light), transparent 75%)",
+            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            maskComposite: "exclude",
+            WebkitMaskComposite: "xor",
+          }}
+        />
         <svg className="mb-3 h-8 w-8 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
         </svg>

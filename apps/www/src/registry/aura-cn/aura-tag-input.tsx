@@ -47,12 +47,25 @@ export function AuraTagInput({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center gap-1.5 rounded-lg bg-[var(--bg-surface)] px-3 py-2 shadow-[var(--inset-shadow)] transition-all",
+        "relative flex flex-wrap items-center gap-1.5 rounded-lg bg-[var(--bg-surface)] px-3 py-2 shadow-[var(--inset-shadow)] transition-all",
         "focus-within:ring-2 focus-within:ring-[var(--aura)]",
         className
       )}
       onClick={() => inputRef.current?.focus()}
     >
+      {/* Inverted Rim Light (bottom) */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to top, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       {value.map((tag, i) => (
         <span
           key={i}

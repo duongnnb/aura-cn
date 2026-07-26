@@ -45,8 +45,21 @@ export function AuraColorPicker({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 rounded-lg bg-[var(--bg-surface)] px-3 py-2 shadow-[var(--inset-shadow)] transition hover:bg-[var(--bg-surface-hover)]"
+        className="relative flex items-center gap-2 rounded-lg bg-[var(--bg-surface)] px-3 py-2 shadow-[var(--inset-shadow)] transition hover:bg-[var(--bg-surface-hover)]"
       >
+        {/* Inverted Rim Light (bottom) */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          style={{
+            padding: "0.5px",
+            background:
+              "linear-gradient(to top, var(--rim-light), transparent 75%)",
+            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            maskComposite: "exclude",
+            WebkitMaskComposite: "xor",
+          }}
+        />
         <span
           className="h-5 w-5 rounded-full border border-[var(--card-border)]"
           style={{ backgroundColor: color }}
@@ -55,7 +68,20 @@ export function AuraColorPicker({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-2 w-56 rounded-xl border border-[var(--card-border)] bg-[var(--bg-page)] p-3 shadow-xl animate-in fade-in zoom-in-95 duration-100">
+        <div className="absolute z-50 mt-2 w-56 overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--bg-page)] p-3 shadow-xl animate-in fade-in zoom-in-95 duration-100">
+          {/* Rim Light */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+            style={{
+              padding: "0.5px",
+              background:
+                "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
           {/* Presets */}
           <div className="mb-3 grid grid-cols-5 gap-2">
             {presets.map((c) => (

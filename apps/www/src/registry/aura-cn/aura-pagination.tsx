@@ -59,13 +59,28 @@ export function AuraPagination({
             type="button"
             onClick={() => onPageChange(page)}
             className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors",
+              "relative inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg text-sm font-medium transition-colors",
               page === currentPage
                 ? "bg-[var(--text-primary)] text-[var(--bg-page)]"
                 : "text-[var(--text-primary)] hover:bg-[var(--bg-surface)]"
             )}
             aria-current={page === currentPage ? "page" : undefined}
           >
+            {page === currentPage && (
+              /* Rim Light */
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+                style={{
+                  padding: "0.5px",
+                  background:
+                    "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude",
+                  WebkitMaskComposite: "xor",
+                }}
+              />
+            )}
             {page}
           </button>
         )

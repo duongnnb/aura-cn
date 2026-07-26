@@ -77,8 +77,34 @@ export function AuraAutocomplete({
         placeholder={placeholder}
         className="flex h-10 w-full rounded-lg border-0 bg-[var(--bg-surface)] px-3 py-2 text-sm text-[var(--text-primary)] shadow-[var(--inset-shadow)] outline-none placeholder:text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--aura)]"
       />
+      {/* Inverted Rim Light (bottom) */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 top-0 h-10 rounded-lg"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to top, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       {open && filtered.length > 0 && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-[var(--card-border)] bg-[var(--bg-page)] p-1 shadow-xl animate-in fade-in zoom-in-95 duration-100">
+        <div className="absolute z-50 mt-1 w-full overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--bg-page)] p-1 shadow-xl animate-in fade-in zoom-in-95 duration-100">
+          {/* Rim Light */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+            style={{
+              padding: "0.5px",
+              background:
+                "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
           {filtered.slice(0, 8).map((opt, i) => (
             <button
               key={opt}

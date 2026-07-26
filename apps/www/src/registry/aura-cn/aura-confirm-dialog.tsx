@@ -38,7 +38,20 @@ export function AuraConfirmDialog({
         onClick={() => { onCancel?.(); onOpenChange?.(false); }}
       />
       {/* Dialog */}
-      <div className="relative z-10 w-full max-w-sm rounded-2xl border border-[var(--card-border)] bg-[var(--bg-page)] p-6 shadow-2xl animate-in zoom-in-95 fade-in duration-200">
+      <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--bg-page)] p-6 shadow-2xl animate-in zoom-in-95 fade-in duration-200">
+        {/* Rim Light */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+          style={{
+            padding: "0.5px",
+            background:
+              "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            maskComposite: "exclude",
+            WebkitMaskComposite: "xor",
+          }}
+        />
         <h3 className="text-lg font-semibold text-[var(--text-primary)]">{title}</h3>
         {description && (
           <p className="mt-2 text-sm text-[var(--text-secondary)]">{description}</p>

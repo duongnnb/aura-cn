@@ -23,11 +23,24 @@ export function AuraSidebar({ items, collapsed = false, className }: AuraSidebar
   return (
     <aside
       className={cn(
-        "flex h-full flex-col gap-1 border-r border-[var(--card-border)] bg-[var(--card-bg)] p-3 transition-all",
+        "relative flex h-full flex-col gap-1 border-r border-[var(--card-border)] bg-[var(--card-bg)] p-3 transition-all",
         collapsed ? "w-16" : "w-60",
         className
       )}
     >
+      {/* Rim Light */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] z-[3]"
+        style={{
+          padding: "0.5px",
+          background:
+            "linear-gradient(to bottom, var(--rim-light), transparent 75%)",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          maskComposite: "exclude",
+          WebkitMaskComposite: "xor",
+        }}
+      />
       {items.map((item, i) => (
         <SidebarEntry key={i} item={item} collapsed={collapsed} />
       ))}
