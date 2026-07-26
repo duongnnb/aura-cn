@@ -1,0 +1,113 @@
+---
+title: Theming
+description: Customize aura-cn colors, light effects, and dark mode with CSS variables.
+---
+
+## Overview
+
+Every aura-cn component is styled with CSS variables — no JavaScript theming runtime. Override a variable and every component updates instantly.
+
+There are two token groups:
+
+1. **Aura tokens** — control the accent color and light effects (rim, wash, glow)
+2. **Surface tokens** — control backgrounds, text, borders, and shadows per light/dark mode
+
+## Aura Tokens
+
+The accent light system. Defined on `:root` (light) and `.dark`:
+
+```css
+:root {
+  --aura: oklch(0.623 0.214 259.815);          /* accent color */
+  --aura-glow: oklch(0.623 0.214 259.815 / 0.4); /* glow shadow */
+  --aura-rim: oklch(0.882 0.059 254.128 / 0.6);  /* rim light border */
+  --aura-wash: oklch(0.882 0.059 254.128 / 0.15); /* static top wash */
+  --aura-dynamic: oklch(0.882 0.059 254.128 / 0.25); /* cursor-following glow */
+}
+
+.dark {
+  --aura: oklch(0.707 0.165 254.624);
+  --aura-glow: oklch(0.707 0.165 254.624 / 0.5);
+  --aura-rim: oklch(0.882 0.059 254.128 / 0.7);
+  --aura-wash: oklch(0.882 0.059 254.128 / 0.1);
+  --aura-dynamic: oklch(0.882 0.059 254.128 / 0.35);
+}
+```
+
+### Changing the accent color
+
+To create a custom accent (e.g. teal), override the five aura tokens with your hue:
+
+```css
+:root {
+  --aura: oklch(0.7 0.15 180);
+  --aura-glow: oklch(0.7 0.15 180 / 0.4);
+  --aura-rim: oklch(0.88 0.06 180 / 0.6);
+  --aura-wash: oklch(0.88 0.06 180 / 0.15);
+  --aura-dynamic: oklch(0.88 0.06 180 / 0.25);
+}
+```
+
+Tip: keep lightness (first value) high and chroma (second value) low for `rim`, `wash`, and `dynamic` — they are light layers, not fills.
+
+## Surface Tokens
+
+Neutral tokens that flip between light and dark mode:
+
+| Variable | Light | Dark |
+|----------|-------|------|
+| `--bg-page` | `#ffffff` | `#0f0f0f` |
+| `--bg-surface` | `rgba(0,0,0,0.05)` | `rgba(255,255,255,0.1)` |
+| `--bg-surface-hover` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.18)` |
+| `--bg-surface-active` | `rgba(0,0,0,0.12)` | `rgba(255,255,255,0.25)` |
+| `--text-primary` | `#0f0f0f` | `#f1f1f1` |
+| `--text-secondary` | `rgba(0,0,0,0.6)` | `rgba(255,255,255,0.7)` |
+| `--rim-light` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.15)` |
+| `--wash-color` | `rgba(0,0,0,0.03)` | `rgba(255,255,255,0.04)` |
+| `--dynamic-light-color` | `rgba(0,0,0,0.1)` | `rgba(255,255,255,0.22)` |
+| `--inset-shadow` | `inset 0 2px 4px rgba(0,0,0,0.06)` | `inset 0 2px 4px rgba(0,0,0,0.3)` |
+| `--card-bg` | `rgba(0,0,0,0.03)` | `rgba(255,255,255,0.04)` |
+| `--card-border` | `rgba(0,0,0,0.08)` | `rgba(255,255,255,0.06)` |
+
+## Dark Mode
+
+Dark mode is class-based. Add `dark` to any ancestor (typically `<html>`):
+
+```tsx
+<html className="dark">
+```
+
+All surface and aura tokens swap automatically — components need no props or re-renders.
+
+## Theme Provider
+
+The `aura-theme` component ships a provider with 5 color presets (`blue`, `purple`, `green`, `orange`, `rose`) and a dark/light toggle:
+
+```tsx
+import {
+  AuraThemeProvider,
+  AuraThemeSwitcher,
+} from "@/registry/aura-cn/aura-theme"
+
+export default function App({ children }) {
+  return (
+    <AuraThemeProvider defaultTheme="purple" defaultDark>
+      <AuraThemeSwitcher />
+      {children}
+    </AuraThemeProvider>
+  )
+}
+```
+
+The provider sets the aura tokens inline, so it overrides your CSS defaults while mounted.
+
+## Scoped Themes
+
+Because everything is CSS variables, you can theme a subtree only:
+
+```tsx
+<div style={{ "--aura": "oklch(0.65 0.2 30)" } as React.CSSProperties}>
+  {/* every aura component inside is orange */}
+  <AuraButton variant="accent">Orange zone</AuraButton>
+</div>
+```

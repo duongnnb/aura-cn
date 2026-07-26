@@ -17,6 +17,14 @@ import { AuraProgress } from "@/registry/aura-cn/aura-progress";
 import { AuraBadge } from "@/registry/aura-cn/aura-badge";
 import { AuraChip } from "@/registry/aura-cn/aura-chip";
 import { AuraSkeleton } from "@/registry/aura-cn/aura-skeleton";
+import { AuraStatCard } from "@/registry/aura-cn/aura-stat-card";
+import { AuraOTPInput } from "@/registry/aura-cn/aura-otp-input";
+import { AuraTagInput } from "@/registry/aura-cn/aura-tag-input";
+import { AuraPagination } from "@/registry/aura-cn/aura-pagination";
+import { AuraTimeline } from "@/registry/aura-cn/aura-timeline";
+import { AuraAlert } from "@/registry/aura-cn/aura-alert";
+import { AuraNotificationBadge } from "@/registry/aura-cn/aura-notification-badge";
+import { AuraSwitchIcon } from "@/registry/aura-cn/aura-switch-icon";
 import {
   AuraThemeProvider,
   AuraThemeSwitcher,
@@ -57,7 +65,7 @@ export default function LandingPage() {
               Docs
             </Link>
             <a
-              href="https://github.com/user/aura-cn"
+              href="https://github.com/duongnnb/aura-cn"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -78,8 +86,8 @@ export default function LandingPage() {
               <span className="text-foreground">for Modern UI</span>
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Copy-paste React components with rim light, dynamic cursor glow, and
-              micro-interactions. Built for shadcn ecosystem.
+              46 copy-paste React components with rim light, dynamic cursor
+              glow, and micro-interactions. Built for shadcn ecosystem.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link href="/docs">
@@ -158,6 +166,82 @@ export default function LandingPage() {
               </div>
             </PreviewCard>
 
+            {/* Stat Card preview */}
+            <PreviewCard title="Stat Card" href="/docs/components/stat-card" span2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <AuraStatCard
+                  label="Total Revenue"
+                  value="$45,231"
+                  change="+20.1%"
+                  trend="up"
+                />
+                <AuraStatCard
+                  label="Active Users"
+                  value="2,350"
+                  change="-4.5%"
+                  trend="down"
+                />
+              </div>
+            </PreviewCard>
+
+            {/* OTP Input preview */}
+            <PreviewCard title="OTP Input" href="/docs/components/otp-input">
+              <AuraOTPInput length={4} value="42" />
+            </PreviewCard>
+
+            {/* Tag Input preview */}
+            <PreviewCard title="Tag Input" href="/docs/components/tag-input">
+              <AuraTagInput value={["react", "tailwind"]} />
+            </PreviewCard>
+
+            {/* Pagination preview */}
+            <PreviewCard title="Pagination" href="/docs/components/pagination">
+              <AuraPagination
+                currentPage={2}
+                totalPages={5}
+                onPageChange={() => {}}
+              />
+            </PreviewCard>
+
+            {/* Alert preview */}
+            <PreviewCard title="Alert" href="/docs/components/alert">
+              <AuraAlert variant="success" title="Deployed">
+                Your site is live.
+              </AuraAlert>
+            </PreviewCard>
+
+            {/* Notification Badge & Switch Icon preview */}
+            <PreviewCard
+              title="Badge & Switch Icon"
+              href="/docs/components/notification-badge"
+            >
+              <div className="flex items-center gap-6">
+                <AuraNotificationBadge count={5}>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
+                    🔔
+                  </span>
+                </AuraNotificationBadge>
+                <AuraNotificationBadge count={120}>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
+                    ✉️
+                  </span>
+                </AuraNotificationBadge>
+                <AuraSwitchIcon checked />
+                <AuraSwitchIcon />
+              </div>
+            </PreviewCard>
+
+            {/* Timeline preview */}
+            <PreviewCard title="Timeline" href="/docs/components/timeline">
+              <AuraTimeline
+                items={[
+                  { title: "Design", date: "Jan 2026", active: true },
+                  { title: "Develop", date: "Mar 2026" },
+                  { title: "Launch", date: "Jul 2026" },
+                ]}
+              />
+            </PreviewCard>
+
             {/* Card preview */}
             <PreviewCard title="Card" href="/docs/components/card" span2>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -165,7 +249,7 @@ export default function LandingPage() {
                   <AuraCardHeader>
                     <AuraCardTitle>Elevated</AuraCardTitle>
                     <AuraCardDescription>
-                      Light from above, like YouTube Shorts buttons.
+                      Light falls from above for natural 3D depth.
                     </AuraCardDescription>
                   </AuraCardHeader>
                 </AuraCard>
@@ -208,7 +292,7 @@ export default function LandingPage() {
           <p>
             Built with React, Tailwind CSS 4, and oklch.{" "}
             <a
-              href="https://github.com/user/aura-cn"
+              href="https://github.com/duongnnb/aura-cn"
               className="underline underline-offset-4 hover:text-foreground"
               target="_blank"
               rel="noopener noreferrer"

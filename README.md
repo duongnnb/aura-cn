@@ -2,6 +2,8 @@
 
 A visual-effects focused UI component library with **3D rim light**, **dynamic cursor glow**, and **micro-interactions**. Built for React, inspired by [shadcn/ui](https://ui.shadcn.com).
 
+![aura-cn homepage — 3D light effects for modern UI](.github/assets/home-hero.png)
+
 ## Features
 
 - **Rim Light** — Gradient border via `mask-composite: exclude`
@@ -32,6 +34,8 @@ npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/
 | **Data Display** | Table, Avatar, Stat Card, Tree View, Data List |
 | **Animation** | Motion (entrance presets), Stagger |
 | **Theming** | Theme provider with color presets |
+
+![Component showcase — stat card, OTP input, tag input, pagination, alert, timeline](.github/assets/components-dark.png)
 
 ## Quick Start
 
@@ -90,6 +94,10 @@ apps/
 ```
 
 ## Design System
+
+Every component adapts to light and dark mode automatically:
+
+![Documentation site in light mode](.github/assets/docs-light.png)
 
 All components use CSS variables that adapt to light/dark mode:
 
