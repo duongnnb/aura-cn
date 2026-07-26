@@ -1,5 +1,11 @@
 # aura-cn
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Components](https://img.shields.io/badge/Components-46-8b5cf6)](https://github.com/duongnnb/aura-cn#components-46)
+
 A visual-effects focused UI component library with **3D rim light**, **dynamic cursor glow**, and **micro-interactions**. Built for React, inspired by [shadcn/ui](https://ui.shadcn.com).
 
 ![aura-cn homepage — 3D light effects for modern UI](.github/assets/home-hero.png)
@@ -14,6 +20,8 @@ A visual-effects focused UI component library with **3D rim light**, **dynamic c
 - **Interactive Playground** — Props editor in documentation
 - **Zero Runtime** — Pure CSS + Tailwind, no JS overhead for styling
 - **shadcn-compatible** — Install via `npx shadcn@latest add` from registry
+
+![Dynamic cursor glow following the mouse across buttons](.github/assets/button-glow.gif)
 
 ## Installation
 
