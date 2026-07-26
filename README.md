@@ -69,7 +69,7 @@ export default function App() {
 # Install dependencies
 pnpm install
 
-# Start dev server (port 3001)
+# Start dev server (http://localhost:3000)
 pnpm --filter @aura-cn/www dev
 
 # Build
