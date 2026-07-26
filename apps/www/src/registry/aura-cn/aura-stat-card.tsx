@@ -11,6 +11,8 @@ interface AuraStatCardProps {
   change?: string;
   trend?: "up" | "down" | "neutral";
   icon?: React.ReactNode;
+  /** Enable the dynamic cursor-following glow effect */
+  enableGlow?: boolean;
   className?: string;
 }
 
@@ -20,13 +22,42 @@ export function AuraStatCard({
   change,
   trend = "neutral",
   icon,
+  enableGlow = true,
   className,
 }: AuraStatCardProps) {
+  const cardRef = React.useRef<HTMLDivElement | null>(null);
+
+  const handleMouseMove = React.useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!enableGlow) return;
+      const el = cardRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const glowSize = Math.max(rect.width, rect.height) * 1.5;
+      el.style.setProperty("--wash-x", `${x}px`);
+      el.style.setProperty("--wash-y", `${y}px`);
+      el.style.setProperty("--wash-size", `${glowSize}px`);
+      el.style.setProperty("--wash-opacity", "1");
+    },
+    [enableGlow]
+  );
+
+  const handleMouseLeave = React.useCallback(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.setProperty("--wash-opacity", "0");
+  }, []);
+
   const trendColor =
     trend === "up" ? "text-emerald-500" : trend === "down" ? "text-red-500" : "text-[var(--text-secondary)]";
 
   return (
     <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={cn(
         "relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition-shadow hover:shadow-lg",
         className
@@ -60,6 +91,29 @@ export function AuraStatCard({
           }}
         />
       </span>
+      {/* Dynamic Cursor Glow */}
+      {enableGlow && (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-[1]"
+        >
+          <span
+            className="absolute rounded-full transition-opacity duration-250 ease-out"
+            style={{
+              top: "50%",
+              left: "50%",
+              width: "var(--wash-size, 0px)",
+              height: "var(--wash-size, 0px)",
+              transform:
+                "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
+              background:
+                "radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%)",
+              opacity: "var(--wash-opacity, 0)",
+              filter: "blur(12px)",
+            }}
+          />
+        </span>
+      )}
       <div className="relative z-[2] flex items-center justify-between">
         <span className="text-sm text-[var(--text-secondary)]">{label}</span>
         {icon && <span className="h-5 w-5 text-[var(--text-secondary)]">{icon}</span>}

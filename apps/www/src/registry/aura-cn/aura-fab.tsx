@@ -48,16 +48,77 @@ interface AuraFABProps
     VariantProps<typeof fabVariants> {
   icon?: React.ReactNode;
   label?: string;
+  /** Enable the dynamic cursor-following glow effect */
+  enableGlow?: boolean;
 }
 
 export const AuraFAB = React.forwardRef<HTMLButtonElement, AuraFABProps>(
-  ({ className, size, variant, icon, label, children, ...props }, ref) => {
+  ({ className, size, variant, icon, label, enableGlow = true, children, ...props }, ref) => {
+    const fabRef = React.useRef<HTMLButtonElement | null>(null);
+
+    const handleMouseMove = React.useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (!enableGlow) return;
+        const el = fabRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        const glowSize = Math.max(rect.width, rect.height) * 1.5;
+        el.style.setProperty("--wash-x", `${x}px`);
+        el.style.setProperty("--wash-y", `${y}px`);
+        el.style.setProperty("--wash-size", `${glowSize}px`);
+        el.style.setProperty("--wash-opacity", "1");
+      },
+      [enableGlow]
+    );
+
+    const handleMouseLeave = React.useCallback(() => {
+      const el = fabRef.current;
+      if (!el) return;
+      el.style.setProperty("--wash-opacity", "0");
+    }, []);
+
+    const setRefs = React.useCallback(
+      (node: HTMLButtonElement | null) => {
+        fabRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+      },
+      [ref]
+    );
+
     return (
       <button
-        ref={ref}
+        ref={setRefs}
         className={cn(fabVariants({ size, variant }), className)}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         {...props}
       >
+        {/* Dynamic Cursor Glow */}
+        {enableGlow && (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-[1]"
+          >
+            <span
+              className="absolute rounded-full transition-opacity duration-250 ease-out"
+              style={{
+                top: "50%",
+                left: "50%",
+                width: "var(--wash-size, 0px)",
+                height: "var(--wash-size, 0px)",
+                transform:
+                  "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
+                background:
+                  "radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%)",
+                opacity: "var(--wash-opacity, 0)",
+                filter: "blur(12px)",
+              }}
+            />
+          </span>
+        )}
         <span className="relative z-10 flex items-center gap-2">
           {icon || children}
           {label && size === "extended" && (

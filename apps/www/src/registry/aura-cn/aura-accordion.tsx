@@ -62,9 +62,32 @@ export interface AuraAccordionItemProps {
 function AuraAccordionItem({ value, children, className }: AuraAccordionItemProps) {
   const { openItems } = React.useContext(AccordionContext);
   const isOpen = openItems.has(value);
+  const itemRef = React.useRef<HTMLDivElement | null>(null);
+
+  const handleMouseMove = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = itemRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const glowSize = Math.max(rect.width, rect.height) * 1.5;
+    el.style.setProperty("--wash-x", `${x}px`);
+    el.style.setProperty("--wash-y", `${y}px`);
+    el.style.setProperty("--wash-size", `${glowSize}px`);
+    el.style.setProperty("--wash-opacity", "1");
+  }, []);
+
+  const handleMouseLeave = React.useCallback(() => {
+    const el = itemRef.current;
+    if (!el) return;
+    el.style.setProperty("--wash-opacity", "0");
+  }, []);
 
   return (
     <div
+      ref={itemRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={cn(
         "relative overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)]",
         className
@@ -85,6 +108,27 @@ function AuraAccordionItem({ value, children, className }: AuraAccordionItemProp
           opacity: isOpen ? 1 : 0.5,
         }}
       />
+      {/* Dynamic Cursor Glow */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-[1]"
+      >
+        <span
+          className="absolute rounded-full transition-opacity duration-250 ease-out"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: "var(--wash-size, 0px)",
+            height: "var(--wash-size, 0px)",
+            transform:
+              "translate(-50%, -50%) translate(var(--wash-x, 0px), var(--wash-y, 0px))",
+            background:
+              "radial-gradient(circle, var(--dynamic-light-color) 0%, transparent 100%)",
+            opacity: "var(--wash-opacity, 0)",
+            filter: "blur(12px)",
+          }}
+        />
+      </span>
       <div className="relative z-10">{children}</div>
     </div>
   );
