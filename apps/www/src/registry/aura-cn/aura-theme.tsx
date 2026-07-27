@@ -72,28 +72,26 @@ export function AuraThemeProvider({
   const [theme, setTheme] = React.useState<AuraTheme>(defaultTheme);
   const [isDark, setIsDark] = React.useState(defaultDark);
 
+  // Keep <html> in sync: apps (e.g. next-themes) may set `dark` at the root,
+  // and root-level tokens would otherwise leak into this subtree.
   React.useEffect(() => {
     const root = document.documentElement;
-
-    // Apply aura color vars
-    const vars = THEME_PRESETS[theme];
-    for (const [key, value] of Object.entries(vars)) {
-      root.style.setProperty(key, value);
-    }
-
-    // Apply dark mode
-    if (isDark) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [theme, isDark]);
+    root.classList.toggle("dark", isDark);
+    root.style.colorScheme = isDark ? "dark" : "light";
+  }, [isDark]);
 
   const toggleDark = () => setIsDark((prev) => !prev);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, isDark, toggleDark }}>
-      {children}
+      {/* Vars are inline on the same element that carries the `dark` class, so they
+          always win over the `.dark { --aura: ... }` re-declarations in globals.css */}
+      <div
+        className={isDark ? "dark" : undefined}
+        style={THEME_PRESETS[theme] as React.CSSProperties}
+      >
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 }

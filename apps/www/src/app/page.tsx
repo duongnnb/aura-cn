@@ -33,7 +33,7 @@ import {
 export default function LandingPage() {
   return (
     <AuraThemeProvider defaultTheme="blue" defaultDark={true}>
-      <div className="dark relative min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
         {/* Animated background grid */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--aura-wash)_0%,transparent_60%)]" />
