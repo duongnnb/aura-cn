@@ -5,8 +5,11 @@
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Components](https://img.shields.io/badge/Components-46-8b5cf6)](https://github.com/duongnnb/aura-cn#components-46)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-aura--cn.vercel.app-000000?logo=vercel&logoColor=white)](https://aura-cn.vercel.app)
 
 A visual-effects focused UI component library with **3D rim light**, **dynamic cursor glow**, and **micro-interactions**. Built for React, inspired by [shadcn/ui](https://ui.shadcn.com).
+
+**Live demo & docs: [aura-cn.vercel.app](https://aura-cn.vercel.app)**
 
 ![aura-cn homepage — 3D light effects for modern UI](.github/assets/home-hero.png)
 

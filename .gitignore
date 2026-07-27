@@ -35,3 +35,4 @@ next-env.d.ts
 
 # GIF capture frames (temporary, assembled into .github/assets/*.gif)
 apps/www/.gif-frames/
+.vercel-tmp/
