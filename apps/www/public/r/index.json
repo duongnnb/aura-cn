@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "aura-cn",
-  "homepage": "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r",
+  "homepage": "https://aura-cn.vercel.app/r",
   "items": [
     {
       "name": "aura-button",

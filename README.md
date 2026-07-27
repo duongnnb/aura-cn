@@ -29,7 +29,7 @@ A visual-effects focused UI component library with **3D rim light**, **dynamic c
 ## Installation
 
 ```bash
-npx shadcn@latest add https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r/aura-button.json
+npx shadcn@latest add https://aura-cn.vercel.app/r/aura-button.json
 ```
 
 ## Components (46)

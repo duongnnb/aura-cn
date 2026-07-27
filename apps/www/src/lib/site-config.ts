@@ -5,8 +5,7 @@
 export const siteConfig = {
   name: "aura-cn",
   /** Base URL for the component registry JSON files */
-  registryBaseUrl:
-    "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r",
+  registryBaseUrl: "https://aura-cn.vercel.app/r",
 } as const;
 
 /** Helper: full URL for a component registry file */

@@ -9,8 +9,7 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 // ─── Registry base URL (single source of truth: src/lib/site-config.ts) ───
-const REGISTRY_BASE_URL =
-  "https://raw.githubusercontent.com/duongnnb/aura-cn/master/apps/www/public/r";
+const REGISTRY_BASE_URL = "https://aura-cn.vercel.app/r";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
