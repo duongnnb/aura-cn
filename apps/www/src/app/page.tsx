@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { getInstallCommand } from "@/lib/site-config";
 import { AuraButton } from "@/registry/aura-cn/aura-button";
 import {
@@ -16,10 +17,8 @@ import { AuraSlider } from "@/registry/aura-cn/aura-slider";
 import { AuraProgress } from "@/registry/aura-cn/aura-progress";
 import { AuraBadge } from "@/registry/aura-cn/aura-badge";
 import { AuraChip } from "@/registry/aura-cn/aura-chip";
-import { AuraSkeleton } from "@/registry/aura-cn/aura-skeleton";
 import { AuraStatCard } from "@/registry/aura-cn/aura-stat-card";
 import { AuraOTPInput } from "@/registry/aura-cn/aura-otp-input";
-import { AuraTagInput } from "@/registry/aura-cn/aura-tag-input";
 import { AuraPagination } from "@/registry/aura-cn/aura-pagination";
 import { AuraTimeline } from "@/registry/aura-cn/aura-timeline";
 import { AuraAlert } from "@/registry/aura-cn/aura-alert";
@@ -28,6 +27,8 @@ import { AuraSwitchIcon } from "@/registry/aura-cn/aura-switch-icon";
 import {
   AuraThemeProvider,
   AuraThemeSwitcher,
+  useAuraTheme,
+  type AuraTheme,
 } from "@/registry/aura-cn/aura-theme";
 
 export default function LandingPage() {
@@ -104,11 +105,55 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Interactive Preview Grid */}
+        {/* Live Bento Showcase */}
         <section className="relative z-10 mx-auto max-w-6xl px-6 py-16">
-          <div className="grid gap-4 md:grid-cols-3">
-            {/* Button preview */}
-            <PreviewCard title="Button" href="/docs/components/button">
+          <div className="mb-10 text-center">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--aura)]">
+              Live playground
+            </p>
+            <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
+              Every component, alive
+            </h2>
+            <p className="mx-auto max-w-xl text-muted-foreground">
+              Nothing below is a screenshot — click, type, and drag. Then pick
+              a color and watch the whole page follow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Dashboard — 2×2 */}
+            <BentoCell
+              index={0}
+              title="Dashboard"
+              href="/docs/components/stat-card"
+              className="md:col-span-2 lg:row-span-2"
+            >
+              <DashboardDemo />
+            </BentoCell>
+
+            {/* Sign-in — 1×2 */}
+            <BentoCell
+              index={1}
+              title="Sign in"
+              href="/docs/components/input"
+              className="lg:row-span-2"
+            >
+              <div className="space-y-3">
+                <AuraInput type="email" placeholder="you@example.com" />
+                <AuraInput type="password" placeholder="••••••••" />
+                <AuraButton variant="accent" className="w-full">
+                  Sign in
+                </AuraButton>
+              </div>
+            </BentoCell>
+
+            {/* OTP */}
+            <BentoCell index={2} title="OTP Input" href="/docs/components/otp-input">
+              <OTPDemo />
+            </BentoCell>
+
+            {/* Buttons */}
+            <BentoCell index={3} title="Buttons" href="/docs/components/button">
               <div className="flex flex-wrap gap-2">
                 <AuraButton size="sm">Default</AuraButton>
                 <AuraButton size="sm" variant="primary">
@@ -118,121 +163,59 @@ export default function LandingPage() {
                   Accent
                 </AuraButton>
               </div>
-            </PreviewCard>
+            </BentoCell>
 
-            {/* Input preview */}
-            <PreviewCard title="Input" href="/docs/components/input">
-              <AuraInput placeholder="Type something..." />
-            </PreviewCard>
+            {/* Controls */}
+            <BentoCell index={4} title="Controls" href="/docs/components/toggle">
+              <ControlsDemo />
+            </BentoCell>
 
-            {/* Toggle preview */}
-            <PreviewCard title="Toggle" href="/docs/components/toggle">
-              <div className="flex items-center gap-4">
-                <AuraToggle defaultChecked />
-                <AuraToggle />
-              </div>
-            </PreviewCard>
-
-            {/* Slider preview */}
-            <PreviewCard title="Slider" href="/docs/components/slider">
-              <AuraSlider defaultValue={65} />
-            </PreviewCard>
-
-            {/* Progress preview */}
-            <PreviewCard title="Progress" href="/docs/components/progress">
-              <div className="space-y-3">
-                <AuraProgress value={80} />
-                <AuraProgress value={45} />
-              </div>
-            </PreviewCard>
-
-            {/* Chips preview */}
-            <PreviewCard title="Chip & Badge" href="/docs/components/chip">
-              <div className="flex flex-wrap gap-2">
+            {/* Chips & Badge */}
+            <BentoCell index={5} title="Chips & Badge" href="/docs/components/chip">
+              <div className="flex flex-wrap items-center gap-2">
                 <AuraChip size="sm">React</AuraChip>
                 <AuraChip size="sm" variant="outline">
                   TypeScript
                 </AuraChip>
                 <AuraBadge>New</AuraBadge>
               </div>
-            </PreviewCard>
+            </BentoCell>
 
-            {/* Skeleton preview */}
-            <PreviewCard title="Skeleton" href="/docs/components/skeleton">
-              <div className="space-y-2">
-                <AuraSkeleton className="h-4 w-3/4" />
-                <AuraSkeleton className="h-4 w-1/2" />
-                <AuraSkeleton className="h-8 w-full" />
-              </div>
-            </PreviewCard>
-
-            {/* Stat Card preview */}
-            <PreviewCard title="Stat Card" href="/docs/components/stat-card" span2>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <AuraStatCard
-                  label="Total Revenue"
-                  value="$45,231"
-                  change="+20.1%"
-                  trend="up"
-                />
-                <AuraStatCard
-                  label="Active Users"
-                  value="2,350"
-                  change="-4.5%"
-                  trend="down"
-                />
-              </div>
-            </PreviewCard>
-
-            {/* OTP Input preview */}
-            <PreviewCard title="OTP Input" href="/docs/components/otp-input">
-              <AuraOTPInput length={4} value="42" />
-            </PreviewCard>
-
-            {/* Tag Input preview */}
-            <PreviewCard title="Tag Input" href="/docs/components/tag-input">
-              <AuraTagInput value={["react", "tailwind"]} />
-            </PreviewCard>
-
-            {/* Pagination preview */}
-            <PreviewCard title="Pagination" href="/docs/components/pagination">
-              <AuraPagination
-                currentPage={2}
-                totalPages={5}
-                onPageChange={() => {}}
-              />
-            </PreviewCard>
-
-            {/* Alert preview */}
-            <PreviewCard title="Alert" href="/docs/components/alert">
-              <AuraAlert variant="success" title="Deployed">
-                Your site is live.
-              </AuraAlert>
-            </PreviewCard>
-
-            {/* Notification Badge & Switch Icon preview */}
-            <PreviewCard
-              title="Badge & Switch Icon"
-              href="/docs/components/notification-badge"
+            {/* Feedback — 2×1 */}
+            <BentoCell
+              index={6}
+              title="Feedback"
+              href="/docs/components/alert"
+              className="md:col-span-2"
             >
-              <div className="flex items-center gap-6">
-                <AuraNotificationBadge count={5}>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
-                    🔔
-                  </span>
-                </AuraNotificationBadge>
-                <AuraNotificationBadge count={120}>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
-                    ✉️
-                  </span>
-                </AuraNotificationBadge>
-                <AuraSwitchIcon checked />
-                <AuraSwitchIcon />
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="flex-1">
+                  <AuraAlert variant="success" title="Deployed">
+                    Your site is live.
+                  </AuraAlert>
+                </div>
+                <div className="flex items-center gap-6 sm:pr-2">
+                  <AuraNotificationBadge count={5}>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
+                      🔔
+                    </span>
+                  </AuraNotificationBadge>
+                  <AuraNotificationBadge count={120}>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-lg">
+                      ✉️
+                    </span>
+                  </AuraNotificationBadge>
+                </div>
               </div>
-            </PreviewCard>
+            </BentoCell>
 
-            {/* Timeline preview */}
-            <PreviewCard title="Timeline" href="/docs/components/timeline">
+            {/* Theme — the wow moment */}
+            <BentoCell index={7} title="Theme" href="/docs/theming">
+              <ThemeDotsDemo />
+            </BentoCell>
+
+            {/* Timeline */}
+            <BentoCell index={8} title="Timeline" href="/docs/components/timeline">
               <AuraTimeline
                 items={[
                   { title: "Design", date: "Jan 2026", active: true },
@@ -240,10 +223,15 @@ export default function LandingPage() {
                   { title: "Launch", date: "Jul 2026" },
                 ]}
               />
-            </PreviewCard>
+            </BentoCell>
 
-            {/* Card preview */}
-            <PreviewCard title="Card" href="/docs/components/card" span2>
+            {/* Cards — 2×1 */}
+            <BentoCell
+              index={9}
+              title="Cards"
+              href="/docs/components/card"
+              className="md:col-span-2"
+            >
               <div className="grid gap-3 sm:grid-cols-2">
                 <AuraCard>
                   <AuraCardHeader>
@@ -262,7 +250,15 @@ export default function LandingPage() {
                   </AuraCardHeader>
                 </AuraCard>
               </div>
-            </PreviewCard>
+            </BentoCell>
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link href="/docs">
+              <AuraButton size="lg" variant="primary">
+                Browse all 46 components →
+              </AuraButton>
+            </Link>
           </div>
         </section>
 
@@ -308,29 +304,136 @@ export default function LandingPage() {
 
 /* ─────────── Sub-components ─────────── */
 
-function PreviewCard({
+function BentoCell({
   title,
   href,
+  className,
+  index,
   children,
-  span2,
 }: {
   title: string;
   href: string;
+  className?: string;
+  index: number;
   children: React.ReactNode;
-  span2?: boolean;
 }) {
   return (
-    <Link
-      href={href}
-      className={`group block rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm transition-all hover:border-[var(--aura-rim)] hover:bg-card/60 ${
-        span2 ? "md:col-span-2" : ""
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+      className={`group relative flex flex-col rounded-2xl border border-border bg-card/40 p-5 backdrop-blur-sm transition-colors hover:border-[var(--aura-rim)] hover:bg-card/60 ${
+        className || ""
       }`}
     >
-      <h3 className="mb-3 text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-        {title}
-      </h3>
-      <div className="pointer-events-none">{children}</div>
-    </Link>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+          {title}
+        </h3>
+        <Link
+          href={href}
+          aria-label={`${title} documentation`}
+          className="text-muted-foreground opacity-0 transition-all hover:text-foreground focus-visible:opacity-100 group-hover:opacity-100"
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M4.5 11.5l7-7M5.5 4.5h6v6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+      </div>
+      <div className="flex flex-1 flex-col justify-center">{children}</div>
+    </motion.div>
+  );
+}
+
+function DashboardDemo() {
+  const [page, setPage] = React.useState(2);
+
+  return (
+    <div className="flex flex-1 flex-col justify-between gap-4">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <AuraStatCard
+          label="Total Revenue"
+          value="$45,231"
+          change="+20.1%"
+          trend="up"
+        />
+        <AuraStatCard
+          label="Active Users"
+          value="2,350"
+          change="-4.5%"
+          trend="down"
+        />
+      </div>
+      <div className="space-y-3">
+        <AuraProgress value={80} />
+        <AuraProgress value={45} />
+      </div>
+      <AuraPagination currentPage={page} totalPages={5} onPageChange={setPage} />
+    </div>
+  );
+}
+
+function OTPDemo() {
+  const [otp, setOtp] = React.useState("42");
+
+  return <AuraOTPInput length={4} value={otp} onChange={setOtp} />;
+}
+
+function ControlsDemo() {
+  const [bell, setBell] = React.useState(true);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-4">
+        <AuraToggle defaultChecked />
+        <AuraToggle />
+        <AuraSwitchIcon checked={bell} onCheckedChange={setBell} />
+      </div>
+      <AuraSlider defaultValue={65} />
+    </div>
+  );
+}
+
+function ThemeDotsDemo() {
+  const { theme, setTheme } = useAuraTheme();
+
+  const themes: { key: AuraTheme; color: string }[] = [
+    { key: "blue", color: "#3b82f6" },
+    { key: "purple", color: "#a855f7" },
+    { key: "green", color: "#22c55e" },
+    { key: "orange", color: "#f97316" },
+    { key: "rose", color: "#f43f5e" },
+  ];
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-3">
+        {themes.map((t) => (
+          <button
+            key={t.key}
+            type="button"
+            onClick={() => setTheme(t.key)}
+            className={`h-8 w-8 rounded-full border-2 transition-all ${
+              theme === t.key
+                ? "border-foreground scale-110"
+                : "border-transparent opacity-60 hover:scale-105 hover:opacity-100"
+            }`}
+            style={{ backgroundColor: t.color }}
+            aria-label={`Switch to ${t.key} theme`}
+          />
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Pick a color — the whole page follows.
+      </p>
+    </div>
   );
 }
 
