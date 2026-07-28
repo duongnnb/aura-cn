@@ -114,6 +114,20 @@
   --card-border: rgba(255,255,255,0.06);
 }
 
+/* Mail example app: brighter charcoal palette (dark mode only) */
+.dark .mail-app {
+  --background: oklch(0.3 0.006 286);
+  --card: oklch(0.34 0.006 286);
+  --bg-page: #313237;
+  --border: oklch(0.4 0.006 286);
+  --bg-surface: rgba(255,255,255,0.08);
+  --bg-surface-hover: rgba(255,255,255,0.13);
+  --bg-surface-active: rgba(255,255,255,0.18);
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.1);
+  --rim-light: rgba(255,255,255,0.22);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
