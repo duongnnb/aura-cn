@@ -95,7 +95,24 @@ export default function MailExamplePage() {
 
   return (
     <AuraThemeProvider defaultTheme="blue" defaultDark={true}>
-      <div className="flex h-screen overflow-hidden bg-background text-foreground">
+      <div
+        className="flex h-screen overflow-hidden bg-background text-foreground"
+        style={
+          {
+            /* Brighter charcoal palette for this app (reference-matched) */
+            "--background": "oklch(0.3 0.006 286)",
+            "--card": "oklch(0.34 0.006 286)",
+            "--bg-page": "#313237",
+            "--border": "oklch(0.4 0.006 286)",
+            "--bg-surface": "rgba(255,255,255,0.08)",
+            "--bg-surface-hover": "rgba(255,255,255,0.13)",
+            "--bg-surface-active": "rgba(255,255,255,0.18)",
+            "--card-bg": "rgba(255,255,255,0.06)",
+            "--card-border": "rgba(255,255,255,0.1)",
+            "--rim-light": "rgba(255,255,255,0.22)",
+          } as React.CSSProperties
+        }
+      >
         {/* Sidebar (desktop) */}
         <aside className="hidden w-64 shrink-0 flex-col border-r border-border lg:flex">
           <SidebarNav />
