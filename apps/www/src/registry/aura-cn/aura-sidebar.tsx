@@ -54,13 +54,43 @@ function SidebarEntry({ item, collapsed }: { item: SidebarItem; collapsed: boole
   const content = (
     <div
       className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors cursor-pointer",
+        "relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all cursor-pointer",
         item.active
-          ? "bg-[var(--bg-surface-active)] text-[var(--text-primary)] font-medium"
+          ? "text-[var(--text-primary)] font-medium shadow-[0_6px_16px_rgba(0,0,0,0.25)]"
           : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]"
       )}
+      style={
+        item.active
+          ? {
+              background:
+                "linear-gradient(to bottom, var(--bg-surface-hover), var(--bg-surface))",
+            }
+          : undefined
+      }
       onClick={() => item.children && setOpen(!open)}
     >
+      {item.active && (
+        <>
+          {/* Rim Light (top-lit border) */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            style={{
+              padding: "1px",
+              background:
+                "linear-gradient(to bottom, var(--rim-light), transparent 60%)",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
+          {/* Accent indicator (right edge) */}
+          <span
+            aria-hidden="true"
+            className="absolute right-1 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-[var(--aura)] shadow-[0_0_8px_var(--aura-glow)]"
+          />
+        </>
+      )}
       {item.icon && <span className="shrink-0 h-5 w-5">{item.icon}</span>}
       {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
       {!collapsed && item.children && (

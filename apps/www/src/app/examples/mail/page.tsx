@@ -397,8 +397,20 @@ function SidebarNav() {
         trigger={
           <button
             type="button"
-            className="flex w-full items-center gap-2 rounded-lg border border-border bg-card/40 px-3 py-2 text-sm font-medium transition-colors hover:bg-card/60"
+            className="relative flex w-full items-center gap-2 rounded-xl bg-[var(--bg-surface)] px-3 py-2.5 text-sm font-medium shadow-[0_6px_16px_rgba(0,0,0,0.25)] transition-all hover:bg-[var(--bg-surface-hover)]"
           >
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 rounded-[inherit]"
+              style={{
+                padding: "1px",
+                background:
+                  "linear-gradient(to bottom, var(--rim-light), transparent 60%)",
+                mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                maskComposite: "exclude",
+                WebkitMaskComposite: "xor",
+              }}
+            />
             <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[var(--aura)] text-xs font-bold text-white">
               A
             </span>
@@ -452,7 +464,19 @@ function SidebarNav() {
         >
           ← Back to aura-cn
         </Link>
-        <div className="flex items-center gap-3 rounded-lg border border-border bg-card/40 p-3">
+        <div className="relative flex items-center gap-3 rounded-xl bg-[var(--bg-surface)] p-3 shadow-[0_6px_16px_rgba(0,0,0,0.25)]">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            style={{
+              padding: "1px",
+              background:
+                "linear-gradient(to bottom, var(--rim-light), transparent 60%)",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
           <AuraAvatar fallback="RK" />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">Richard Kyle</p>
@@ -478,13 +502,43 @@ function SidebarLink({
   return (
     <button
       type="button"
-      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+      className={`relative flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all ${
         active
-          ? "border border-border bg-card/60 font-medium text-foreground"
-          : "text-muted-foreground hover:bg-card/40 hover:text-foreground"
+          ? "font-medium text-foreground shadow-[0_6px_16px_rgba(0,0,0,0.25)]"
+          : "text-muted-foreground hover:bg-[var(--bg-surface)] hover:text-foreground"
       }`}
+      style={
+        active
+          ? {
+              background:
+                "linear-gradient(to bottom, var(--bg-surface-hover), var(--bg-surface))",
+            }
+          : undefined
+      }
     >
-      <span className="text-muted-foreground">{icon}</span>
+      {active && (
+        <>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-[inherit]"
+            style={{
+              padding: "1px",
+              background:
+                "linear-gradient(to bottom, var(--rim-light), transparent 60%)",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
+          <span
+            aria-hidden="true"
+            className="absolute right-1.5 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-[var(--aura)] shadow-[0_0_8px_var(--aura-glow)]"
+          />
+        </>
+      )}
+      <span className={active ? "text-foreground" : "text-muted-foreground"}>
+        {icon}
+      </span>
       {label}
     </button>
   );
