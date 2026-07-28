@@ -65,6 +65,12 @@ export default function LandingPage() {
             >
               Docs
             </Link>
+            <Link
+              href="/examples/mail"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Examples
+            </Link>
             <a
               href="https://github.com/duongnnb/aura-cn"
               target="_blank"
